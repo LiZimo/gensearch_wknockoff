@@ -1,0 +1,13 @@
+-i data/iris_samples.csv -l data/iris_labels.csv -o output/output.txt -n 2 -s 20 -k 5 -m 2 
+-i data/iris_samples_gimped.csv -l data/iris_labels.csv -o output/iris_outputSVM.txt -n 2 -s 20 -k 5 -m 2
+-i data/iris_samples_gimped.csv -l data/iris_labels.csv -o output/iris_outputLogis.txt -n 2 -s 20 -k 5 -m 2
+-i data/iris_samples_gimped.csv -l data/iris_labels.csv -o output/iris_outputLogis2wcoeffs.txt -n 2 -s 20 -k 5 -m 1
+
+-i data/iris_samples_gimped.csv -l data/iris_labels.csv -o output/iris_output_knockoff.txt -n 2 -s 20 -k 5 -m 3
+
+-i data/random_samples_gimped.csv -l data/random_labels.csv -o output/output.txt -n 2 -s 20 -k 5 -m 2 
+-i data/random_samples_gimped.csv -l data/random_labels.csv -o output/random_output_logis_Wknockoff.txt -n 2 -s 20 -k 5 -m 3 
+-i data/random_samples.csv -l data/random_labels.csv -o output/output.txt -n 2 -s 20 -k 5 -m 2 
+
+-i data/golub_samples_gimped.csv -l data/golub_labels.csv -o output/golub_output_svm.txt -n 2 -s 20 -k 5 -m 2
+-i data/golub_samples_gimped.csv -l data/golub_labels.csv -o output/golub_output_knockoff.txt -n 2 -s 20 -k 5 -m 3

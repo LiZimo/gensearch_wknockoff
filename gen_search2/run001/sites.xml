@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns="http://www.ci.uchicago.edu/swift/SwiftSites">
+
+<pool handle="osgconnect">
+<filesystem provider="local"/>
+<profile namespace="globus" key="jobsPerNode">40</profile>
+<profile namespace="globus" key="jobType">nonshared</profile>
+<profile namespace="karajan" key="jobThrottle">0.39</profile>
+<profile namespace="karajan" key="initialScore">10000</profile>
+<profile namespace="globus" key="maxwalltime">00:05:00</profile>
+<profile namespace="globus" key="condor.+projectname">Swift</profile>
+<workdirectory>/tmp/swiftwork</workdirectory>
+<profile namespace="globus" key="nodeGranularity">1</profile>
+<execution provider="coaster" jobmanager="ssh-cl:condor" url="login.osgconnect.net"/>
+</pool>
+
+<pool handle="local">
+<filesystem provider="local"/>
+<profile namespace="karajan" key="jobThrottle">0.03</profile>
+<workdirectory>/tmp/swiftwork</workdirectory>
+<execution provider="coaster" jobmanager="local:local"/>
+<profile namespace="globus" key="jobsPerNode">4</profile>
+<profile namespace="karajan" key="initialScore">10000</profile>
+</pool>
+
+</config>

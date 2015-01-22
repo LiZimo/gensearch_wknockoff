@@ -1,0 +1,5 @@
+[params]
+n: 2
+nsteps: 20
+k: 5
+method: 2

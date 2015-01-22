@@ -1,0 +1,834 @@
+checking for paramfile
+no paramfile: using command line arguments
+Progress  2014-07-02 16:07:25.557782688-0500  LOG_START
+
+_____________________________________________________________________________
+
+        Wrapper (_swiftwrap.staging)
+_____________________________________________________________________________
+
+bash -out results/search_0048.out -err results/search_0048.err -i -d results -if python_wrapper.sh|gen_search.py|data/miRNA_samples.csv|data/miRNA_labels.csv|output/miRNA_48.split|classifier.py -of results/search_0048.csv|results/search_0048.out|results/search_0048.err -k -cdmfile -status provider -a python_wrapper.sh gen_search.py -i data/miRNA_samples.csv -l data/miRNA_labels.csv -p output/miRNA_48.split -n 2 -s 20 -k 5 -m 2 -o results/search_0048.csv
+PWD=/tmp/swiftwork/gen_search-run001/jobs/e/bash-e7pj3ysl
+EXEC=/bin/bash
+STDIN=
+STDOUT=results/search_0048.out
+STDERR=results/search_0048.err
+DIRS=results
+INF=python_wrapper.sh|gen_search.py|data/miRNA_samples.csv|data/miRNA_labels.csv|output/miRNA_48.split|classifier.py
+OUTF=results/search_0048.csv|results/search_0048.out|results/search_0048.err
+KICKSTART=
+ARGS=python_wrapper.sh gen_search.py -i data/miRNA_samples.csv -l data/miRNA_labels.csv -p output/miRNA_48.split -n 2 -s 20 -k 5 -m 2 -o results/search_0048.csv
+ARGC=18
+Progress  2014-07-02 16:07:25.562125724-0500  CREATE_INPUTDIR
+Created output directory: results
+Progress  2014-07-02 16:07:25.564292032-0500  EXECUTE
+Progress  2014-07-02 16:07:25.896284682-0500  EXECUTE_DONE
+Job ran successfully
+The following output files were not created by the application: results/search_0048.csv
+
+_____________________________________________________________________________
+
+        uname -a
+_____________________________________________________________________________
+
+Linux login01.osgconnect.net 3.11.0-UL1.el6 #1 SMP Wed Sep 11 13:47:29 CDT 2013 x86_64 x86_64 x86_64 GNU/Linux
+
+_____________________________________________________________________________
+
+        id
+_____________________________________________________________________________
+
+uid=10811(yadunand) gid=1000(users) groups=1000(users),5532(@connect),5782(@osg),7021(@ConnectTrain),8872(@Swift)
+
+_____________________________________________________________________________
+
+        env
+_____________________________________________________________________________
+
+EXEC=/bin/bash
+_ModuleTable003_=bG9hZE9yZGVyIl09Myxwcm9wVD17fSxbInNob3J0Il09ImxhcGFjayIsWyJzdGF0dXMiXT0iYWN0aXZlIix9LHB5dGhvbj17WyJGTiJdPSIvY3ZtZnMvb2FzaXMub3BlbnNjaWVuY2VncmlkLm9yZy9vc2cvbW9kdWxlcy9tb2R1bGVmaWxlcy9Db3JlL3B5dGhvbi8yLjcubHVhIixbImRlZmF1bHQiXT0wLFsiZnVsbE5hbWUiXT0icHl0aG9uLzIuNyIsWyJsb2FkT3JkZXIiXT0xLHByb3BUPXt9LFsic2hvcnQiXT0icHl0aG9uIixbInN0YXR1cyJdPSJhY3RpdmUiLH0sfSxtcGF0aEE9eyIvY3ZtZnMvb2FzaXMub3BlbnNjaWVuY2VncmlkLm9yZy9vc2cvbW9kdWxlcy9tb2R1bGVmaWxlcy9QeXRob24vMi43LjciLCIvY3ZtZnMvb2FzaXMub3BlbnNjaWVuY2VncmlkLm9yZy9vc2cv
+HOSTNAME=login01.osgconnect.net
+LMOD_FAMILY_LAPACK=lapack
+SHELL=/bin/bash
+TERM=xterm
+HISTSIZE=1000
+MODULEPATH_ROOT=/cvmfs/oasis.opensciencegrid.org/osg/modules/modulefiles/
+SSH_CLIENT=128.135.250.235 40395 22
+LMOD_DEFAULT_MODULEPATH=/cvmfs/oasis.opensciencegrid.org/osg/modules/modulefiles/Core
+TACC_FAMILY_LAPACK=lapack
+LMOD_PKG=/cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/lmod
+QTDIR=/usr/lib64/qt-3.3
+QTINC=/usr/lib64/qt-3.3/include
+SSH_TTY=/dev/pts/38
+USER=yadunand
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.tbz=01;31:*.tbz2=01;31:*.bz=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.axa=01;36:*.oga=01;36:*.spx=01;36:*.xspf=01;36:
+LD_LIBRARY_PATH=/cvmfs/oasis.opensciencegrid.org/osg/modules/lapack/3.50.1/lib64:/cvmfs/oasis.opensciencegrid.org/osg/modules/atlas/3.10.1/lib64/atlas
+LMOD_FAMILY_ATLAS=atlas
+_ModuleTable004_=bW9kdWxlcy9tb2R1bGVmaWxlcy9weXRob24vMi43LjciLCIvY3ZtZnMvb2FzaXMub3BlbnNjaWVuY2VncmlkLm9yZy9vc2cvbW9kdWxlcy9tb2R1bGVmaWxlcy9Db3JlIix9LFsic3lzdGVtQmFzZU1QQVRIIl09Ii9jdm1mcy9vYXNpcy5vcGVuc2NpZW5jZWdyaWQub3JnL29zZy9tb2R1bGVzL21vZHVsZWZpbGVzL0NvcmUiLFsidmVyc2lvbiJdPTIsfQ==
+SSH_AUTH_SOCK=/tmp/ssh-wNcJM12867/agent.12867
+__LMOD_STACK_VIRTUAL_ENV=L2N2bWZzL29hc2lzLm9wZW5zY2llbmNlZ3JpZC5vcmcvb3NnL21vZHVsZXMvdmlydHVhbGVudi0yLjcvYWxs
+COBBLER_SERVER=128.135.158.203
+ORIGEXEC=bash
+VIRTUAL_ENV=/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all
+TACC_FAMILY_PYTHON=python
+NLSPATH=/usr/dt/lib/nls/msg/%L/%N.cat
+_ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJhY3RpdmVTaXplIl09NCxiYXNlTXBhdGhBPXsiL2N2bWZzL29hc2lzLm9wZW5zY2llbmNlZ3JpZC5vcmcvb3NnL21vZHVsZXMvbW9kdWxlZmlsZXMvQ29yZSIsfSxbImNfcmVidWlsZFRpbWUiXT1mYWxzZSxbImNfc2hvcnRUaW1lIl09ZmFsc2UsZmFtaWx5PXtbImF0bGFzIl09ImF0bGFzIixbImxhcGFjayJdPSJsYXBhY2siLFsicHl0aG9uIl09InB5dGhvbiIsfSxpbmFjdGl2ZT17fSxtVD17WyJhbGwtcGtncyJdPXtbIkZOIl09Ii9jdm1mcy9vYXNpcy5vcGVuc2NpZW5jZWdyaWQub3JnL29zZy9tb2R1bGVzL21vZHVsZWZpbGVzL3B5dGhvbi8yLjcuNy9hbGwtcGtncy5sdWEiLFsiZGVmYXVsdCJdPTAsWyJmdWxsTmFtZSJdPSJhbGwtcGtncyIs
+PATH=/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/bin:/cvmfs/oasis.opensciencegrid.org/osg/modules/python-2.7.7/bin:/cvmfs/oasis.opensciencegrid.org/osg/modules/lua/bin:/cvmfs/oasis.opensciencegrid.org/osg/modules/lua/bin:/home/yadunand/bin/swift-0.95-RC6/bin:/home/yadunand/bin/jdk1.7.0_51/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/dell/srvadmin/bin:/usr/local/swift/stable/bin:/home/yadunand/bin:/sbin:/bin:/usr/bin
+MAIL=/var/spool/mail/yadunand
+PWD=/tmp/swiftwork/gen_search-run001/jobs/e/bash-e7pj3ysl
+TACC_FAMILY_ATLAS=atlas
+_LMFILES_=/cvmfs/oasis.opensciencegrid.org/osg/modules/modulefiles/Core/python/2.7.lua:/cvmfs/oasis.opensciencegrid.org/osg/modules/modulefiles/Core/atlas.lua:/cvmfs/oasis.opensciencegrid.org/osg/modules/modulefiles/Core/lapack.lua:/cvmfs/oasis.opensciencegrid.org/osg/modules/modulefiles/python/2.7.7/all-pkgs.lua
+LANG=C
+MODULEPATH=/cvmfs/oasis.opensciencegrid.org/osg/modules/modulefiles/Python/2.7.7:/cvmfs/oasis.opensciencegrid.org/osg/modules/modulefiles/python/2.7.7:/cvmfs/oasis.opensciencegrid.org/osg/modules/modulefiles/Core
+LOADEDMODULES=python/2.7:atlas:lapack:all-pkgs
+_ModuleTable_Sz_=4
+PYTHONHOME=/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all
+XFILESEARCHPATH=/usr/dt/app-defaults/%L/Dt
+LMOD_CMD=/cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/lmod/libexec/lmod
+HISTCONTROL=ignoredups
+WORKER_LOGGING_LEVEL=NONE
+LMOD_FAMILY_PYTHON=python
+HOME=/home/yadunand
+SHLVL=4
+SWIFT_WORKER_PID=9450
+_ModuleTable002_=WyJsb2FkT3JkZXIiXT00LHByb3BUPXt9LFsic2hvcnQiXT0iYWxsLXBrZ3MiLFsic3RhdHVzIl09ImFjdGl2ZSIsfSxhdGxhcz17WyJGTiJdPSIvY3ZtZnMvb2FzaXMub3BlbnNjaWVuY2VncmlkLm9yZy9vc2cvbW9kdWxlcy9tb2R1bGVmaWxlcy9Db3JlL2F0bGFzLmx1YSIsWyJkZWZhdWx0Il09MCxbImZ1bGxOYW1lIl09ImF0bGFzIixbImxvYWRPcmRlciJdPTIscHJvcFQ9e30sWyJzaG9ydCJdPSJhdGxhcyIsWyJzdGF0dXMiXT0iYWN0aXZlIix9LGxhcGFjaz17WyJGTiJdPSIvY3ZtZnMvb2FzaXMub3BlbnNjaWVuY2VncmlkLm9yZy9vc2cvbW9kdWxlcy9tb2R1bGVmaWxlcy9Db3JlL2xhcGFjay5sdWEiLFsiZGVmYXVsdCJdPTAsWyJmdWxsTmFtZSJdPSJsYXBhY2siLFsi
+__LMOD_STACK_PYTHONHOME=L2N2bWZzL29hc2lzLm9wZW5zY2llbmNlZ3JpZC5vcmcvb3NnL21vZHVsZXMvdmlydHVhbGVudi0yLjcvYWxs
+LOGNAME=yadunand
+SWIFT_JOB_SLOT=2
+QTLIB=/usr/lib64/qt-3.3/lib
+CVS_RSH=ssh
+SSH_CONNECTION=128.135.250.235 40395 192.170.227.195 22
+MODULESHOME=/cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/lmod
+LESSOPEN=|/usr/bin/lesspipe.sh %s
+SWIFT_SITE_CONF=/home/yadunand/bin/swift-0.95-RC6/etc/templates
+LMOD_DIR=/cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/lmod/libexec/
+G_BROKEN_FILENAMES=1
+_=/bin/env
+
+_____________________________________________________________________________
+
+        df
+_____________________________________________________________________________
+
+Filesystem           1K-blocks      Used Available Use% Mounted on
+/dev/sda2            936288240 434921620 453782828  49% /
+tmpfs                 24773292         0  24773292   0% /dev/shm
+/dev/sda1                99150     73427     20603  79% /boot
+/dev/sdb             2927242752 1642296580 1284946172  57% /home
+/dev/rbd1            21472749568 8003768428 13468981140  38% /rbd/user/wcatino
+/dev/rbd2            2620160000 2543023136  77136864  98% /rbd/knowledgelab/ieee
+192.170.227.123:/stash
+                     452929241088 145785786368 307143454720  33% /stash
+192.170.227.175:/    43923193856 909053952 43014139904   3% /mnt/ceph/testbed
+/dev/rbd3            1842300000 1586486344 255813656  87% /rbd/hathi/english
+cvmfs2                40960000   1997878  38962123   5% /cvmfs/oasis.opensciencegrid.org
+cvmfs2                40960000   1997878  38962123   5% /cvmfs/atlas.cern.ch
+
+_____________________________________________________________________________
+
+        /proc/cpuinfo
+_____________________________________________________________________________
+
+processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 44
+model name	: Intel(R) Xeon(R) CPU           X5660  @ 2.80GHz
+stepping	: 2
+microcode	: 0x15
+cpu MHz		: 2793.144
+cache size	: 12288 KB
+physical id	: 1
+siblings	: 12
+core id		: 0
+cpu cores	: 6
+apicid		: 32
+initial apicid	: 32
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm ida arat dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5586.28
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 1
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 44
+model name	: Intel(R) Xeon(R) CPU           X5660  @ 2.80GHz
+stepping	: 2
+microcode	: 0x15
+cpu MHz		: 2793.144
+cache size	: 12288 KB
+physical id	: 0
+siblings	: 12
+core id		: 0
+cpu cores	: 6
+apicid		: 0
+initial apicid	: 0
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm ida arat dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5585.77
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 2
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 44
+model name	: Intel(R) Xeon(R) CPU           X5660  @ 2.80GHz
+stepping	: 2
+microcode	: 0x15
+cpu MHz		: 2793.144
+cache size	: 12288 KB
+physical id	: 1
+siblings	: 12
+core id		: 1
+cpu cores	: 6
+apicid		: 34
+initial apicid	: 34
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm ida arat dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5586.28
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 3
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 44
+model name	: Intel(R) Xeon(R) CPU           X5660  @ 2.80GHz
+stepping	: 2
+microcode	: 0x15
+cpu MHz		: 2793.144
+cache size	: 12288 KB
+physical id	: 0
+siblings	: 12
+core id		: 1
+cpu cores	: 6
+apicid		: 2
+initial apicid	: 2
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm ida arat dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5585.77
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 4
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 44
+model name	: Intel(R) Xeon(R) CPU           X5660  @ 2.80GHz
+stepping	: 2
+microcode	: 0x15
+cpu MHz		: 2793.144
+cache size	: 12288 KB
+physical id	: 1
+siblings	: 12
+core id		: 2
+cpu cores	: 6
+apicid		: 36
+initial apicid	: 36
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm ida arat dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5586.28
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 5
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 44
+model name	: Intel(R) Xeon(R) CPU           X5660  @ 2.80GHz
+stepping	: 2
+microcode	: 0x15
+cpu MHz		: 2793.144
+cache size	: 12288 KB
+physical id	: 0
+siblings	: 12
+core id		: 2
+cpu cores	: 6
+apicid		: 4
+initial apicid	: 4
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm ida arat dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5585.77
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 6
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 44
+model name	: Intel(R) Xeon(R) CPU           X5660  @ 2.80GHz
+stepping	: 2
+microcode	: 0x15
+cpu MHz		: 2793.144
+cache size	: 12288 KB
+physical id	: 1
+siblings	: 12
+core id		: 8
+cpu cores	: 6
+apicid		: 48
+initial apicid	: 48
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm ida arat dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5586.28
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 7
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 44
+model name	: Intel(R) Xeon(R) CPU           X5660  @ 2.80GHz
+stepping	: 2
+microcode	: 0x15
+cpu MHz		: 2793.144
+cache size	: 12288 KB
+physical id	: 0
+siblings	: 12
+core id		: 8
+cpu cores	: 6
+apicid		: 16
+initial apicid	: 16
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm ida arat dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5585.77
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 8
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 44
+model name	: Intel(R) Xeon(R) CPU           X5660  @ 2.80GHz
+stepping	: 2
+microcode	: 0x15
+cpu MHz		: 2793.144
+cache size	: 12288 KB
+physical id	: 1
+siblings	: 12
+core id		: 9
+cpu cores	: 6
+apicid		: 50
+initial apicid	: 50
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm ida arat dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5586.28
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 9
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 44
+model name	: Intel(R) Xeon(R) CPU           X5660  @ 2.80GHz
+stepping	: 2
+microcode	: 0x15
+cpu MHz		: 2793.144
+cache size	: 12288 KB
+physical id	: 0
+siblings	: 12
+core id		: 9
+cpu cores	: 6
+apicid		: 18
+initial apicid	: 18
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm ida arat dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5585.77
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 10
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 44
+model name	: Intel(R) Xeon(R) CPU           X5660  @ 2.80GHz
+stepping	: 2
+microcode	: 0x15
+cpu MHz		: 2793.144
+cache size	: 12288 KB
+physical id	: 1
+siblings	: 12
+core id		: 10
+cpu cores	: 6
+apicid		: 52
+initial apicid	: 52
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm ida arat dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5586.28
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 11
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 44
+model name	: Intel(R) Xeon(R) CPU           X5660  @ 2.80GHz
+stepping	: 2
+microcode	: 0x15
+cpu MHz		: 2793.144
+cache size	: 12288 KB
+physical id	: 0
+siblings	: 12
+core id		: 10
+cpu cores	: 6
+apicid		: 20
+initial apicid	: 20
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm ida arat dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5585.77
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 12
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 44
+model name	: Intel(R) Xeon(R) CPU           X5660  @ 2.80GHz
+stepping	: 2
+microcode	: 0x15
+cpu MHz		: 2793.144
+cache size	: 12288 KB
+physical id	: 1
+siblings	: 12
+core id		: 0
+cpu cores	: 6
+apicid		: 33
+initial apicid	: 33
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm ida arat dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5586.28
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 13
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 44
+model name	: Intel(R) Xeon(R) CPU           X5660  @ 2.80GHz
+stepping	: 2
+microcode	: 0x15
+cpu MHz		: 2793.144
+cache size	: 12288 KB
+physical id	: 0
+siblings	: 12
+core id		: 0
+cpu cores	: 6
+apicid		: 1
+initial apicid	: 1
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm ida arat dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5585.77
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 14
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 44
+model name	: Intel(R) Xeon(R) CPU           X5660  @ 2.80GHz
+stepping	: 2
+microcode	: 0x15
+cpu MHz		: 2793.144
+cache size	: 12288 KB
+physical id	: 1
+siblings	: 12
+core id		: 1
+cpu cores	: 6
+apicid		: 35
+initial apicid	: 35
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm ida arat dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5586.28
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 15
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 44
+model name	: Intel(R) Xeon(R) CPU           X5660  @ 2.80GHz
+stepping	: 2
+microcode	: 0x15
+cpu MHz		: 2793.144
+cache size	: 12288 KB
+physical id	: 0
+siblings	: 12
+core id		: 1
+cpu cores	: 6
+apicid		: 3
+initial apicid	: 3
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm ida arat dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5585.77
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 16
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 44
+model name	: Intel(R) Xeon(R) CPU           X5660  @ 2.80GHz
+stepping	: 2
+microcode	: 0x15
+cpu MHz		: 2793.144
+cache size	: 12288 KB
+physical id	: 1
+siblings	: 12
+core id		: 2
+cpu cores	: 6
+apicid		: 37
+initial apicid	: 37
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm ida arat dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5586.28
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 17
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 44
+model name	: Intel(R) Xeon(R) CPU           X5660  @ 2.80GHz
+stepping	: 2
+microcode	: 0x15
+cpu MHz		: 2793.144
+cache size	: 12288 KB
+physical id	: 0
+siblings	: 12
+core id		: 2
+cpu cores	: 6
+apicid		: 5
+initial apicid	: 5
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm ida arat dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5585.77
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 18
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 44
+model name	: Intel(R) Xeon(R) CPU           X5660  @ 2.80GHz
+stepping	: 2
+microcode	: 0x15
+cpu MHz		: 2793.144
+cache size	: 12288 KB
+physical id	: 1
+siblings	: 12
+core id		: 8
+cpu cores	: 6
+apicid		: 49
+initial apicid	: 49
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm ida arat dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5586.28
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 19
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 44
+model name	: Intel(R) Xeon(R) CPU           X5660  @ 2.80GHz
+stepping	: 2
+microcode	: 0x15
+cpu MHz		: 2793.144
+cache size	: 12288 KB
+physical id	: 0
+siblings	: 12
+core id		: 8
+cpu cores	: 6
+apicid		: 17
+initial apicid	: 17
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm ida arat dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5585.77
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 20
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 44
+model name	: Intel(R) Xeon(R) CPU           X5660  @ 2.80GHz
+stepping	: 2
+microcode	: 0x15
+cpu MHz		: 2793.144
+cache size	: 12288 KB
+physical id	: 1
+siblings	: 12
+core id		: 9
+cpu cores	: 6
+apicid		: 51
+initial apicid	: 51
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm ida arat dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5586.28
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 21
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 44
+model name	: Intel(R) Xeon(R) CPU           X5660  @ 2.80GHz
+stepping	: 2
+microcode	: 0x15
+cpu MHz		: 2793.144
+cache size	: 12288 KB
+physical id	: 0
+siblings	: 12
+core id		: 9
+cpu cores	: 6
+apicid		: 19
+initial apicid	: 19
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm ida arat dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5585.77
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 22
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 44
+model name	: Intel(R) Xeon(R) CPU           X5660  @ 2.80GHz
+stepping	: 2
+microcode	: 0x15
+cpu MHz		: 2793.144
+cache size	: 12288 KB
+physical id	: 1
+siblings	: 12
+core id		: 10
+cpu cores	: 6
+apicid		: 53
+initial apicid	: 53
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm ida arat dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5586.28
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 23
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 44
+model name	: Intel(R) Xeon(R) CPU           X5660  @ 2.80GHz
+stepping	: 2
+microcode	: 0x15
+cpu MHz		: 2793.144
+cache size	: 12288 KB
+physical id	: 0
+siblings	: 12
+core id		: 10
+cpu cores	: 6
+apicid		: 21
+initial apicid	: 21
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 popcnt aes lahf_lm ida arat dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5585.77
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+
+_____________________________________________________________________________
+
+        /proc/meminfo
+_____________________________________________________________________________
+
+MemTotal:       49546584 kB
+MemFree:        12713728 kB
+Buffers:          148796 kB
+Cached:         30585788 kB
+SwapCached:         9676 kB
+Active:         23644628 kB
+Inactive:       10259320 kB
+Active(anon):    2874644 kB
+Inactive(anon):   295936 kB
+Active(file):   20769984 kB
+Inactive(file):  9963384 kB
+Unevictable:           0 kB
+Mlocked:               0 kB
+SwapTotal:      24772604 kB
+SwapFree:       24511268 kB
+Dirty:              3912 kB
+Writeback:             0 kB
+AnonPages:       3162192 kB
+Mapped:            58156 kB
+Shmem:                92 kB
+Slab:            2098724 kB
+SReclaimable:    1788408 kB
+SUnreclaim:       310316 kB
+KernelStack:       14544 kB
+PageTables:       315712 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:    49545896 kB
+Committed_AS:    9957084 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:      399344 kB
+VmallocChunk:   34334150656 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:    686080 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:       11748 kB
+DirectMap2M:     2072576 kB
+DirectMap1G:    48234496 kB
+
+_____________________________________________________________________________
+
+        command line
+_____________________________________________________________________________
+
+-e bash -out results/search_0048.out -err results/search_0048.err -i -d results -if python_wrapper.sh gen_search.py data/miRNA_samples.csv data/miRNA_labels.csv output/miRNA_48.split classifier.py -of results/search_0048.csv results/search_0048.out results/search_0048.err -k -cdmfile -status provider -a python_wrapper.sh gen_search.py -i data/miRNA_samples.csv -l data/miRNA_labels.csv -p output/miRNA_48.split -n 2 -s 20 -k 5 -m 2 -o results/search_0048.csv
+
+_____________________________________________________________________________
+
+        stdout
+_____________________________________________________________________________
+
+total 40K
+-rw-r--r-- 1 yadunand   83 Jul  2 16:07 classifier.py
+-rw-r--r-- 1 yadunand 5.9K Jul  2 16:07 gen_search.py
+drwxr-xr-x 2 yadunand 4.0K Jul  2 16:07 output
+drwxr-xr-x 2 yadunand 4.0K Jul  2 16:07 data
+-rw-r--r-- 1 yadunand 6.0K Jul  2 16:07 _swiftwrap.staging
+-rw-r--r-- 1 yadunand  216 Jul  2 16:07 python_wrapper.sh
+-rw-r--r-- 1 yadunand    0 Jul  2 16:07 3
+-rw-r--r-- 1 yadunand 1.5K Jul  2 16:07 wrapper.log
+drwxr-xr-x 2 yadunand 4.0K Jul  2 16:07 results
+Launching : python gen_search.py -i data/miRNA_samples.csv -l data/miRNA_labels.csv -p output/miRNA_48.split -n 2 -s 20 -k 5 -m 2 -o results/search_0048.csv
+
+_____________________________________________________________________________
+
+        stderr
+_____________________________________________________________________________
+
