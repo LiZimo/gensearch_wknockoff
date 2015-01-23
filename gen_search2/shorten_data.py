@@ -29,10 +29,10 @@ def shorten_samples(csv_sample_file, scaling_factor, output): ## how much is wha
     output = open(output_file_name, 'w')
     for row in listform:
         
-        for element in row:
-            entry = element + ','
-            if element == row[len(row)-1]:
-                entry = element
+        for i in range(len(row)):
+            entry = row[i] + ','
+            if i == len(row)-1:
+                entry = row[i]
             output.write(entry)
             
         output.write('\n')
@@ -40,4 +40,4 @@ def shorten_samples(csv_sample_file, scaling_factor, output): ## how much is wha
     f.close()
 
 
-shorten_samples('data/iris_samples.csv', 3, 'data/iris_samples_gimped.csv');
+shorten_samples('data/golub_samples.csv', 100, 'data/golub_samples_gimped.csv');

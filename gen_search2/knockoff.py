@@ -106,14 +106,20 @@ def Orthogonal_to(X): ## assumes numrows >= numcolumns
                 final_output.remove(item)
                 break
                 
-    return final_output[1:len(X[0])+1]
-    return final_output[len(final_output):len(final_output)-len(X[0])]
+    #return final_output[1:len(X[0])+1]
+    return final_output[len(final_output)-1:len(final_output)-len(X[0])-1:-1]
     
 def normalize_columns(X):
     output = []
     column_list = transpose(matrix(X)).tolist()
     for column in column_list:
         new_column = array(column)/math.sqrt(np.inner(column, column))
+#        column_mean = np.mean(column)
+#        column_std = np.std(column)
+#        new_column = []
+#        for element in column:
+#            new_elm = (element - column_mean)/column_std
+#            new_column.append(new_elm)
         output.append(new_column)
     output = transpose(matrix(output)).tolist()
     return output
@@ -124,6 +130,8 @@ def perform_knockoff(M, s): ## s is a vector or 1-D array, X is the data matrix,
     X = normalize_columns(M)
     num_columns = len(X[0]);
     gram = transpose(matrix(X))*matrix(X);  
+#    print gram, "gram"
+#    raw_input()
     gram_inverse = inv(gram);
     
     I = [1]*num_columns;
@@ -133,29 +141,47 @@ def perform_knockoff(M, s): ## s is a vector or 1-D array, X is the data matrix,
 
     U = transpose(matrix(Orthogonal_to(X)))
     
-    A = 2*diag_s - diag_s * gram_inverse*diag_s;
-    A = array(A)
+    A = 2*diag_s - diag_s*gram_inverse*diag_s;
+    #A = array(A)
     
     C = matrix(linalg.cholesky(A))
     
     output = matrix(X)*(I - gram_inverse*diag_s) + U*C
-    #print color.BOLD + "\n===============the original gram matrix ===============\n\n" + color.END, gram
-    #print color.BOLD + "\n===============transpose(knockoff) x knockoff; should be same as gram matrix ===============\n\n" + color.END, transpose(output)*output 
-    #print color.BOLD +"\n===============transpose(knockoff) x original matrix; should differ only on diagonal by s===============\n\n" + color.END, transpose(output)*matrix(X)
+#    print color.BOLD + "\n===============the original gram matrix ===============\n\n" + color.END, gram
+#    print color.BOLD + "\n===============transpose(knockoff) x knockoff; should be same as gram matrix ===============\n\n" + color.END, transpose(output)*output 
+#    print color.BOLD +"\n===============transpose(knockoff) x original matrix; should differ only on diagonal by s===============\n\n" + color.END, transpose(output)*matrix(X)
 #    print "got a knockoff"
 #    raw_input()
     return output.tolist();
 #==============================================================================
 # 
-
+#
 #X = []
-#for j in range(25):
+#for j in range(45):
 #    first = float(randint(0, 15))
 #    second = float(randint(0,15))
 #    third = float(randint(0,15))
-#    new_row = [first, second, third]
+#    fourth = float(randint(0,15))
+#    fifth = float(randint(0,15))
+#
+#    new_row = [first, second, third, fourth, fifth]
 #    X.append(new_row)
 #
 #
 ##K = [[1.,3.,1.],[3.,2.,6.],[5.,1.,8.],[1.,3.,9.],[1.,1.,2.],[4.,1.,1.]]
-#X_tilde = perform_knockoff(X, 0.1)
+#X = [[ 3.16885162 , 2.88860441],[ 3.09953752 , 2.95355167],[ 2.99976541 , 2.99976541],[ 3.28898209 , 3.03971766],[ 3.19367609 , 3.21721046],[ 3.49404657 , 3.49404657],[ 3.0658405  , 3.10677575],[ 2.64622355 , 2.03278481],[ 2.8409916  , 2.81650375],[ 3.45407205 , 3.45407205],[ 3.3136573  , 3.3136573 ],[ 3.89821831 , 3.89821831],[ 2.79831436 , 2.76286532],[ 3.28764889 , 2.99666491],[ 3.08083138 , 2.9699706 ],[ 3.04060904 , 3.21635719],[ 2.72396157 , 2.54882779],[ 3.68131148 , 3.68131148],[ 3.37292641 , 3.49006333],[ 2.33296074 , 2.18525055],[-0.48271206 ,-1.06220892],[ 3.55606819 , 3.3615511 ],[ 3.70836959 , 3.70836959],[ 2.95446596 , 2.86503476],[ 3.45335107 , 3.45161081],[ 2.57602737 , 2.81348551],[ 3.09344039 , 2.81872963],[ 3.18634522 , 2.95821007],[ 3.56216758 , 3.64076143],[ 2.89050114 , 2.79373191],[ 3.27934473 , 3.25932539],[ 3.06642134 , 2.84412463],[ 2.88575959 , 2.7472807 ],[ 3.30283328 , 3.17150411],[ 3.30750982 , 2.91009709],[ 2.81781214 , 2.81781214],[ 3.01414246 , 2.96104422],[ 3.2756409  , 3.21914079]]
+#X = normalize_columns(X)
+#X_tilde = perform_knockoff(X, 0.003)
+#print X_tilde
+
+#gram_inverse = inv(transpose(matrix(X))*matrix(X))
+##
+#diag = matrix([[.1,0.0],[0.0, .1]])
+##
+#A = 2*diag - diag*gram_inverse*diag
+#C = linalg.cholesky(array(A))
+##
+##print gram_inverse
+#print A, "A"
+#print gram_inverse, "gram inverse"
+##print C

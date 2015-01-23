@@ -155,9 +155,8 @@ if __name__ == '__main__':
     results = []
     mydict = {}
     for i in range(numSets):
-        X_reg = inputs[list(sets[i])].values
-        X_tilde = knockoff.perform_knockoff(X_reg,0.1)
-        X = np.concatenate((X_reg,X_tilde), axis = 1)
+        X = inputs[list(sets[i])].values
+
         if method == 1:
             acc = run(X, y, classifier.clf)
             coeffs = return_coeff(X,y,classifier.clf)          
@@ -165,6 +164,21 @@ if __name__ == '__main__':
             acc = kfold_multi_run(X, y, classifier.clf, k, nsteps)
             coeffs = return_coeff(X,y,classifier.clf).tolist()
         if method == 3:
+            X_reg = inputs[list(sets[i])].values
+            got_knockoff = False
+            s = 1.0
+            while got_knockoff == False:
+            
+                try: 
+                    X_tilde = knockoff.perform_knockoff(list(X_reg),s)
+                    got_knockoff = True
+                    break
+                except: 
+                    s = s*(0.75)
+                    continue
+            
+            
+            X = np.concatenate((X_reg,X_tilde), axis = 1)
 
             our_clf = classifier.clf
             feat1_done = False
@@ -233,6 +247,7 @@ if __name__ == '__main__':
     #Rank results by highest accuracy:
     if method!=3:
         results.sort(key=lambda x: x[0], reverse=True)
+
     if method == 3:
         results = sorted(mydict.items(), key=operator.itemgetter(1), reverse=True)
         percentages = []
