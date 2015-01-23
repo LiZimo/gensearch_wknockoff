@@ -166,7 +166,7 @@ if __name__ == '__main__':
         if method == 3:
             X_reg = inputs[list(sets[i])].values
             got_knockoff = False
-            s = 1.0
+            s = 1
             while got_knockoff == False:
             
                 try: 
@@ -178,7 +178,7 @@ if __name__ == '__main__':
                     continue
             
             
-            X = np.concatenate((X_reg,X_tilde), axis = 1)
+            X = np.concatenate((knockoff.normalize_columns(X_reg),X_tilde), axis = 1)
 
             our_clf = classifier.clf
             feat1_done = False
@@ -187,15 +187,16 @@ if __name__ == '__main__':
             
             while feat1_done == False:
                 coeffs = our_clf.fit(X,y).coef_.tolist()[0]
-#                print "got new coeffs"
-#                print coeffs
-#                raw_input()
+#                coeffs_round = list(round(x, ) for x in coeffs)
+#                coeffs = coeffs_round
+                
+
                 if coeffs[0]==0.0 and coeffs[2]==0.00:
-                    regul = regul + 0.03
+                    regul = regul + 0.01
 #                    print "increased regularization 0"
 #                    raw_input()
                 elif coeffs[0]!=0.0 and coeffs[2]==0.00:
-                    try: mydict[inputs[list(sets[i])].columns[0]] = mydict[inputs[list(sets[i])].columns[0]] + 1
+                    try: mydict[inputs[list(sets[i])].columns[0]] += 1
                     except: mydict[inputs[list(sets[i])].columns[0]] = 1
                     feat1_done = True
 #                    print "feat1 came before knockoff"
@@ -205,7 +206,7 @@ if __name__ == '__main__':
 #                    print "feat 1 came after knockoff"
 #                    raw_input()
                 elif coeffs[0]!=0.0 and coeffs[2]!=0.00:
-                    regul = regul - 0.03
+                    regul = regul - 0.01
 #                    print "decreased regularization 0"
 #                    raw_input()
                 our_clf.set_params(C = regul)
@@ -216,7 +217,7 @@ if __name__ == '__main__':
 #                print coeffs
 #                raw_input()
                 if coeffs[1]==0.0 and coeffs[3]==0.00:
-                    regul = regul + 0.03
+                    regul = regul + 0.01
 #                    print "increased regularization 1"
 #                    raw_input()
                 elif coeffs[1]!=0.0 and coeffs[3]==0.00:
@@ -230,7 +231,7 @@ if __name__ == '__main__':
 #                    print "feat 2 came after knockoff"
 #                    raw_input()
                 elif coeffs[1]!=0.0 and coeffs[3]!=0.00:
-                    regul = regul - 0.03
+                    regul = regul - 0.01
 #                    print "decreased regularization 1"
 #                    raw_input()
                 our_clf.set_params(C = regul)
@@ -250,12 +251,12 @@ if __name__ == '__main__':
 
     if method == 3:
         results = sorted(mydict.items(), key=operator.itemgetter(1), reverse=True)
-        percentages = []
-        for entry in results:
-            new_entry = list(entry)
-            new_entry[1]=float(new_entry[1]/inputs.shape[1])
-            percentages.append(new_entry)
-        results = percentages
+#        percentages = []
+#        for entry in results:
+#            new_entry = list(entry)
+#            new_entry[1]=float(new_entry[1]/inputs.shape[1])
+#            percentages.append(new_entry)
+#        results = percentages
     fp = open(outfile, 'wb')
     w = csv.writer(fp)
     print '\n{s:{c}^{n}}\n'.format(s='Writing Results',n=106,c='-')

@@ -7,7 +7,7 @@ Created on Thu Jan 22 18:02:38 2015
 import operator
 import csv
 
-def cutoff(pair_list, percentage): ## pair_list is a list where each entry is: [percentage, feature1, feature2]
+def cutoff(pair_list, percentage, output_file): ## pair_list is a list where each entry is: [percentage, feature1, feature2]
     f= open(pair_list, 'r+')
     reader = csv.reader(f)
     listform = list(reader)
@@ -26,7 +26,13 @@ def cutoff(pair_list, percentage): ## pair_list is a list where each entry is: [
     
     outputlist = sorted(dict_count.items(), key = operator.itemgetter(1), reverse = True)
     
+    out = open(output_file, 'w')
+    
+    for entry in outputlist:
+        out.write(str(entry))
+        out.write('\n')
+    
+    out.close()
     return outputlist
 
-x = cutoff("output/random_outputWknockoff.txt", 0.53)
-print x
+x = cutoff("output/random_outputWknockoff.txt", 0.52, "output/random_feature_list.txt")
