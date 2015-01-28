@@ -178,13 +178,15 @@ if __name__ == '__main__':
                     continue
             
             
-            X = np.concatenate((knockoff.normalize_columns(X_reg),X_tilde), axis = 1)
+            X = np.concatenate((knockoff.normalize_columns(X_tilde),(knockoff.normalize_columns(X_reg))), axis = 1)
 
             our_clf = classifier.clf
             feat1_done = False
             feat2_done = False
-            regul = 0.2
+            regul = 11.0
             
+            step = 2.0
+            last_change = 0
             while feat1_done == False:
                 coeffs = our_clf.fit(X,y).coef_.tolist()[0]
 #                coeffs_round = list(round(x, ) for x in coeffs)
@@ -192,54 +194,73 @@ if __name__ == '__main__':
                 
 
                 if coeffs[0]==0.0 and coeffs[2]==0.00:
-                    regul = regul + 0.01
-#                    print "increased regularization 0"
+                    if last_change == -1:
+                        step = step/2
+                    regul = regul + step
+                    last_change = 1
+                    print "increased regularization 0"
 #                    raw_input()
                 elif coeffs[0]!=0.0 and coeffs[2]==0.00:
                     try: mydict[inputs[list(sets[i])].columns[0]] += 1
                     except: mydict[inputs[list(sets[i])].columns[0]] = 1
                     feat1_done = True
+                    print "done 0"
 #                    print "feat1 came before knockoff"
 #                    raw_input()
                 elif coeffs[0]==0.0 and coeffs[2]!=0.00:
                     feat1_done = True
+                    print "done 0"
 #                    print "feat 1 came after knockoff"
 #                    raw_input()
                 elif coeffs[0]!=0.0 and coeffs[2]!=0.00:
-                    regul = regul - 0.01
-#                    print "decreased regularization 0"
+                    if last_change == 1:
+                        step = step/2
+                    regul = regul - step
+                    last_change = -1
+                    print "decreased regularization 0"
 #                    raw_input()
                 our_clf.set_params(C = regul)
             
+            regul = 11.0
+            step = 2.0
+            last_change = 0
             while feat2_done == False:
                 coeffs = our_clf.fit(X,y).coef_.tolist()[0]
 #                print "got new coeffs"
 #                print coeffs
 #                raw_input()
                 if coeffs[1]==0.0 and coeffs[3]==0.00:
-                    regul = regul + 0.01
-#                    print "increased regularization 1"
+                    if last_change == -1:
+                        step = step/2
+                    regul = regul + step
+                    last_change = 1
+                    print "increased regularization 1"
 #                    raw_input()
                 elif coeffs[1]!=0.0 and coeffs[3]==0.00:
                     try: mydict[inputs[list(sets[i])].columns[1]] = mydict[inputs[list(sets[i])].columns[1]] + 1
                     except: mydict[inputs[list(sets[i])].columns[1]] = 1
                     feat2_done = True
+                    print "done 1"
 #                    print "feat2 came before knockoff"
 #                    raw_input()
                 elif coeffs[1]==0.0 and coeffs[3]!=0.00:
                     feat2_done = True
+                    print "done 1"
 #                    print "feat 2 came after knockoff"
 #                    raw_input()
                 elif coeffs[1]!=0.0 and coeffs[3]!=0.00:
-                    regul = regul - 0.01
-#                    print "decreased regularization 1"
+                    if last_change == 1:
+                        step = step/2
+                    regul = regul - step
+                    last_change = -1
+                    print "decreased regularization 1"
 #                    raw_input()
                 our_clf.set_params(C = regul)
             
         if method!=3:
             results.append([round(acc,2)] + [x for x in inputs[list(sets[i])].columns] + coeffs)
         if i/numSets >= percentDone:
-            sys.stdout.write('.')
+            sys.stdout.write('.'+str(percentDone))
             sys.stdout.flush()
             percentDone += 0.01
     sys.stdout.write('100%\n')

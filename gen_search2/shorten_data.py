@@ -59,18 +59,15 @@ def get_target_columns(csv_sample_file, column_names, add_noisy_columns = 0): ##
     output = []
     for j in column_indices:
         output.append(np.array(listform)[:,j].tolist())
-        
     for i in range(add_noisy_columns):
         noisy_col = []
-        for j in range(len(output[0])):
-            noisy_col.append(random.randint(1,10))
+        for j in range(len(listform)):
+            noisy_col.append(random.uniform(1,5))
         output.append(noisy_col) 
+    f.close()
     return transpose(output)
 
 names = ['sepal length','sepal width','petal length','petal width']
-newlist = get_target_columns('data/iris_samples.csv', names)
+#newlist = get_target_columns('data/iris_samples.csv', names)
 
-
-
-
-shorten_samples('data/iris_samples.csv', 100, 'data/iris_samples_gimped.csv', names, 10);
+shorten_samples('data/iris_samples.csv', 100, 'iris_knockoff/data/pure_random_uniform1to5.csv', [], 20);
