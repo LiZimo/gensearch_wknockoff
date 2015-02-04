@@ -26,9 +26,9 @@ def shorten_samples(csv_sample_file, scaling_factor, out, desired_columns, num_n
     print len(listform)
     print len(listform[0])
     
-    
-    desired = get_target_columns(csv_sample_file, desired_columns, num_noisy_columns)    
-    listform = np.concatenate((listform, desired), axis = 1)
+    if len(desired_columns)!=0:
+        desired = get_target_columns(csv_sample_file, desired_columns, num_noisy_columns)    
+        listform = np.concatenate((listform, desired), axis = 1)
     
     output_file_name = out
     output = open(output_file_name, 'w')
@@ -70,4 +70,4 @@ def get_target_columns(csv_sample_file, column_names, add_noisy_columns = 0): ##
 names = ['sepal length','sepal width','petal length','petal width']
 #newlist = get_target_columns('data/iris_samples.csv', names)
 
-shorten_samples('data/iris_samples.csv', 100, 'iris_knockoff/data/pure_random_uniform1to5.csv', [], 20);
+shorten_samples('data/iris_samples.csv', 100, 'iris_knockoff/data/50uniform1to5.csv', names, 50);

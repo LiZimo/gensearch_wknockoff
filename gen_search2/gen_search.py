@@ -31,6 +31,8 @@ import knockoff
 import operator
 import pickle
 
+
+
 #Read in feature and label files
 def read_csv(csv_file):
     data = pd.read_csv(csv_file, sep=',', header=0, index_col=0)
@@ -155,7 +157,10 @@ if __name__ == '__main__':
     results = []
     mydict = {}
     for i in range(numSets):
+    
+        
         X = inputs[list(sets[i])].values
+
 
         if method == 1:
             acc = run(X, y, classifier.clf)
@@ -178,7 +183,7 @@ if __name__ == '__main__':
                     continue
             
             
-            X = np.concatenate((knockoff.normalize_columns(X_tilde),(knockoff.normalize_columns(X_reg))), axis = 1)
+            X = np.concatenate(((knockoff.normalize_columns(X_reg)),knockoff.normalize_columns(X_tilde)), axis = 1)
 
             our_clf = classifier.clf
             feat1_done = False
@@ -258,7 +263,7 @@ if __name__ == '__main__':
                 our_clf.set_params(C = regul)
             
         if method!=3:
-            results.append([round(acc,2)] + [x for x in inputs[list(sets[i])].columns] + coeffs)
+            results.append([round(acc,2)] + [x for x in inputs[list(sets[i])].columns]+ coeffs)
         if i/numSets >= percentDone:
             sys.stdout.write('.'+str(percentDone))
             sys.stdout.flush()
@@ -275,7 +280,7 @@ if __name__ == '__main__':
 #        percentages = []
 #        for entry in results:
 #            new_entry = list(entry)
-#            new_entry[1]=float(new_entry[1]/inputs.shape[1])
+#            new_entry[1]=float(new_entry[1]/((inputs.shape[1])-1))
 #            percentages.append(new_entry)
 #        results = percentages
     fp = open(outfile, 'wb')

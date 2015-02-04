@@ -35,4 +35,4 @@ def cutoff(pair_list, percentage, output_file): ## pair_list is a list where eac
     out.close()
     return outputlist
 
-x = cutoff("output/random_outputWknockoff.txt", 0.52, "output/random_feature_list.txt")
+x = cutoff("SVMvLogis/LOGISgolub.csv", 0.70, "SVMvLogis/LOGISgolub70cutoff.csv")
