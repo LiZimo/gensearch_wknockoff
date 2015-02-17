@@ -265,7 +265,7 @@ if __name__ == '__main__':
         if method!=3:
             results.append([round(acc,2)] + [x for x in inputs[list(sets[i])].columns]+ coeffs)
         if i/numSets >= percentDone:
-            sys.stdout.write('.'+str(percentDone))
+            sys.stdout.write('...'+ str(percentDone*100))
             sys.stdout.flush()
             percentDone += 0.01
     sys.stdout.write('100%\n')

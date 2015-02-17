@@ -1,15 +1,15 @@
 #!/bin/bash
 
 
-SAMPLES=data/miRNA_samples.csv
-LABELS=data/miRNA_labels.csv
+SAMPLES=Iris_knockoff/data/100uniform1to5.csv
+LABELS=data/iris_labels.csv
 N=2
 STEPS=20
 K=5
 METHOD=2
 SPLITNUM=100
 # This must be set as a directory/prefix
-OUTPUT_PREFIX=output/miRNA
+OUTPUT_PREFIX=output/Iris_knockoff
 
 source python_wrapper.sh
 
