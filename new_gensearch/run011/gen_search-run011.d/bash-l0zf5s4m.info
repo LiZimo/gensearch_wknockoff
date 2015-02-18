@@ -1,0 +1,828 @@
+checking for paramfile
+no paramfile: using command line arguments
+Progress  2015-02-18 16:53:32.882181027-0500  LOG_START
+
+_____________________________________________________________________________
+
+        Wrapper (_swiftwrap.staging)
+_____________________________________________________________________________
+
+/bin/bash -out results/search_0016.out -err results/search_0016.err -i -d data|results|output -if python_wrapper.sh|data/miRNA_samples.csv|classifier.py|output/miRNA_16.split|gen_search.py|data/miRNA_labels.csv -of results/search_0016.err|results/search_0016.csv|results/search_0016.out -cf -cdmfile -status provider -a python_wrapper.sh gen_search.py -i data/miRNA_samples.csv -l data/miRNA_labels.csv -p output/miRNA_16.split -n 2 -s 20 -k 5 -m 2 -o results/search_0016.csv
+PWD=/var/lib/condor/execute/dir_36208/glide_UvpkSV/execute/dir_9348/gen_search-run011/jobs/b/bash-l0zf5s4m
+EXEC=/bin/bash
+STDIN=
+STDOUT=results/search_0016.out
+STDERR=results/search_0016.err
+DIRS=data|results|output
+INF=python_wrapper.sh|data/miRNA_samples.csv|classifier.py|output/miRNA_16.split|gen_search.py|data/miRNA_labels.csv
+OUTF=results/search_0016.err|results/search_0016.csv|results/search_0016.out
+COLLECT=
+ARGS=python_wrapper.sh gen_search.py -i data/miRNA_samples.csv -l data/miRNA_labels.csv -p output/miRNA_16.split -n 2 -s 20 -k 5 -m 2 -o results/search_0016.csv
+ARGC=18
+Progress  2015-02-18 16:53:32.885523327-0500  CREATE_INPUTDIR
+Created output directory: data
+Created output directory: results
+Created output directory: output
+Progress  2015-02-18 16:53:32.889372327-0500  EXECUTE
+Application /bin/bash failed with an exit code of 1
+
+_____________________________________________________________________________
+
+        uname -a
+_____________________________________________________________________________
+
+Linux CRUSH-OSG-10-5-110-93 2.6.32-431.29.2.el6.x86_64 #1 SMP Tue Sep 9 21:36:05 UTC 2014 x86_64 x86_64 x86_64 GNU/Linux
+
+_____________________________________________________________________________
+
+        id
+_____________________________________________________________________________
+
+uid=99(nobody) gid=99(nobody) groups=99(nobody)
+
+_____________________________________________________________________________
+
+        env
+_____________________________________________________________________________
+
+GLIDEIN_ResourceName=SU-OG
+_CONDOR_JOB_PIDS=
+GRIDMAP=/var/lib/condor/execute/dir_36208/glide_UvpkSV/grid-mapfile
+GLIDEIN_REQUIRE_GLEXEC_USE=False
+OSG_GLEXEC_LOCATION=None
+CVMFS_atlas_cern_ch_REVISION=7555
+HAS_FILE_usr_lib64_libgsl_so_0=False
+TMPDIR=/var/lib/condor/execute/dir_36208/glide_UvpkSV/execute/dir_9348
+GLOBUS_LOCATION=/usr
+MODULEPATH_ROOT=/cvmfs/oasis.opensciencegrid.org/osg/modules/modulefiles/
+GLIDECLIENT_Signature=d8a8703fab9628beebee4a339af2c7a3567627b8
+LMOD_PACKAGE_PATH=/cvmfs/oasis.opensciencegrid.org/osg/modules/modulefiles/Core
+HAS_FILE_usr_lib64_libglib_2_0_so=False
+_CONDOR_SCRATCH_DIR=/var/lib/condor/execute/dir_36208/glide_UvpkSV/execute/dir_9348
+LMOD_PKG=/cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/lmod
+OSG_WN_TMP=None
+X509_CERT_DIR=/etc/grid-security/certificates/
+OSGVO_PILOT_DF=11869408
+OSGVO_OS_VERSION=Unknown
+OSG_SQUID_LOCATION=10.5.0.41:3128
+GLIDEIN_REQUIRE_VOMS=False
+OSG_SITE_WRITE=None
+_CHIRP_DELAYED_UPDATE_PREFIX=Chirp*
+TEMP=/var/lib/condor/execute/dir_36208/glide_UvpkSV/execute/dir_9348
+LD_LIBRARY_PATH=
+CONDOR_PARENT_ID=CRUSH-OSG-10-5-110-93:9348:1424296411
+GLIDEIN_Entry_Name=Glow_US_Syracuse_condor
+HAS_CVMFS_icecube_opensciencegrid_org=True
+OSGVO_Data_EIC_A1=False
+GLIDEIN_Name=gfactory_instance
+VO_CMS_SW_DIR=/cvmfs/cms.cern.ch
+BATCH_SYSTEM=HTCondor
+OSGVO_PROJECT_NAME=ExhaustiveSearch
+_CONDOR_CHIRP_CONFIG=/var/lib/condor/execute/dir_36208/glide_UvpkSV/execute/dir_9348/.chirp_config
+CVMFS_oasis_opensciencegrid_org_TIMESTAMP=1423861861
+CVMFS_icecube_opensciencegrid_org_REVISION=37
+HAS_R=False
+OSG_SITE_READ=None
+GLIDEIN_Entry_Signature=3ff263ec41875487ff61725be2aa1d95016a1b69
+OSGVO_BENCH_STATUS=Skipped
+CONDOR_PROCD_ADDRESS_BASE=/var/lib/condor/execute/dir_36208/glide_UvpkSV/log/procd_address
+PYTHON_VERSION=2.6.6
+GLIDEIN_Site=SU-OG
+GLIDECLIENT_Name=osg-flock-grid-iu-edu_OSG_gWMSFrontend.main
+PATH=/cvmfs/oasis.opensciencegrid.org/osg/modules/lua/bin:/bin:/usr/bin:/sbin:/usr/sbin:/bin:/usr/bin
+HAS_CVMFS_oasis_opensciencegrid_org=True
+HOLD_GRACE_TIME=0
+HAS_FILE_lib64_libglib_2_0_so_0=True
+HAS_NUMPY=False
+OSG_DATA=/osg/data_dir
+CONDOR_CONFIG=/var/lib/condor/execute/dir_36208/glide_UvpkSV/condor_config
+PWD=/var/lib/condor/execute/dir_36208/glide_UvpkSV/execute/dir_9348/gen_search-run011/jobs/b/bash-l0zf5s4m
+OSG_APP=/osg/app_dir
+HAS_TCSH=False
+HAS_SQUID=True
+X509_USER_CERT=/var/lib/condor/execute/dir_36208/glide_UvpkSV/hostcert.pem
+HAS_BLAST=False
+LANG=C
+_CONDOR_WRAPPER_ERROR_FILE=/var/lib/condor/execute/dir_36208/glide_UvpkSV/execute/dir_9348/.job_wrapper_failure
+GLIDEIN_Country=US
+MODULEPATH=/cvmfs/oasis.opensciencegrid.org/osg/modules/modulefiles/Core
+GLIDEIN_Gatekeeper=its-condor-ce.syr.edu its-condor-ce.syr.edu:9619
+HAS_FILE_usr_lib64_libstdc___so_6=True
+_CONDOR_SLOT=
+HAS_JAVA=True
+OSG_GRID=/etc/osg/wn-client/
+GLIDEIN_Tmp_Dir=/var/lib/condor/execute/dir_36208/glide_UvpkSV/tmp
+GLIDEIN_Proxy_URL=10.5.0.41:3128
+GLIDEIN_GridType=condor
+GLIDEIN_Factory=SDSC
+LMOD_CMD=/cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/lmod/libexec/lmod
+_CONDOR_ANCESTOR_42571=9348:1424296410:187451423
+HAS_CVMFS_PALMS=True
+HAS_FILE_usr_lib64_libgfortran_so_3=False
+GLIDECLIENT_Group=main
+OSG_HOSTNAME=its-condor-ce.syr.edu
+WORKER_LOGGING_LEVEL=NONE
+PREEMPT_GRACE_TIME=10000000
+_CONDOR_EXECUTE=/var/lib/condor/execute/dir_36208/glide_UvpkSV/execute
+GLIDEIN_Expose_Grid_Env=True
+OSGVO_Data_EIC1=False
+HAS_CVMFS_cms_cern_ch=True
+GLIDECLIENT_Group_Signature=1f11ec241b7e9f597bc8cccaf536d2bdbeec98a6
+HOME=/var/lib/condor/execute/dir_36208/glide_UvpkSV/execute/dir_9348
+SHLVL=3
+OSGVO_OS_NAME=Unknown
+_CONDOR_MACHINE_AD=/var/lib/condor/execute/dir_36208/glide_UvpkSV/execute/dir_9348/.machine.ad
+OSG_STORAGE_ELEMENT=False
+_CONDOR_ANCESTOR_9348=9361:1424296412:359251140
+OSGVO_OS_STRING=Unknown Unknown
+GSI_AUTHZ_CONF=/dev/null
+X509_USER_PROXY=/var/lib/condor/execute/dir_36208/glide_UvpkSV/ticket/myproxy
+SWIFT_WORKER_PID=9361
+_CONDOR_ANCESTOR_42568=42571:1424293474:1585396782
+CVMFS_oasis_opensciencegrid_org_REVISION=3372
+GLIDEIN_Signature=d08ef2cd89205249fd4b6f65fa48f9c044c6098f
+GLIDEIN_Schedd=schedd_glideins9@gfactory-1.t2.ucsd.edu
+OSG_DEFAULT_SE=None
+TMP=/var/lib/condor/execute/dir_36208/glide_UvpkSV/execute/dir_9348
+GLIDEIN_Glexec_Use=NEVER
+OSG_GLIDEIN_VERSION=76
+OSGVO_Data_EIC_A40=False
+SWIFT_JOB_SLOT=0
+CVMFS_cms_cern_ch_REVISION=7356
+OSGVO_SUBMITTER=zimo@login01.osgconnect.net
+OSG_SITE_NAME=SU-OG-CE
+GLIDEIN_Monitoring_Enabled=False
+HAS_PHSW=False
+GLIDEIN_ProcId=9
+GLIDEIN_ClusterId=2800121
+MODULESHOME=/cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/lmod
+HAS_TIMEOUT=True
+_CONDOR_JOB_AD=/var/lib/condor/execute/dir_36208/glide_UvpkSV/execute/dir_9348/.job.ad
+OSGVO_CPU_MODEL=Intel(R) Xeon(R) CPU           X5570  @ 2.93GHz
+HAS_FILE_usr_lib64_libgslcblas_so_0=False
+HAS_CVMFS_atlas_cern_ch=True
+GLIDEIN_LOCAL_TMP_DIR=/tmp/glide_nobody_2JqUUW
+GLIDECLIENT_OSG_VO=OSG
+LMOD_DIR=/cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/lmod/libexec/
+_CONDOR_JOB_IWD=/var/lib/condor/execute/dir_36208/glide_UvpkSV/execute/dir_9348
+X509_USER_KEY=/var/lib/condor/execute/dir_36208/glide_UvpkSV/hostkey.pem
+CONDOR_PROCD_ADDRESS=/var/lib/condor/execute/dir_36208/glide_UvpkSV/log/procd_address
+BASH_FUNC__module_not_yet_loaded()=() {  comm -23 <(_module_avail|sort) <(_module_loaded_modules|sort)
+}
+BASH_FUNC__ml()=() {  local cur="$2" prev="$3" cmds opts found;
+ COMPREPLY=();
+ cmds="add avail delete help keyword list load purge rm restore save sl show spider swap unload         unuse update use whatis";
+ opts="-d -D -h -q -t -v -w --expert --quiet --help  --quiet --terse --version --default --Verbose --width -r --regexp --mt";
+ case "$prev" in 
+ spider)
+ COMPREPLY=($(compgen -W "$(_module_spider)" -- "$cur"))
+ ;;
+ rm | remove | unload | swap)
+ COMPREPLY=($(compgen -W "$(_module_loaded_modules)" -- "$cur"))
+ ;;
+ unuse)
+ COMPREPLY=($(IFS=: compgen -W "${MODULEPATH}" -- "$cur"))
+ ;;
+ use | *-a*)
+
+ ;;
+ help | show | whatis)
+ COMPREPLY=($(compgen -W "$(_module_avail)" -- "$cur"))
+ ;;
+ *)
+ case "$cur" in 
+ -*)
+ if [ $COMP_CWORD -eq 1 ]; then
+ COMPREPLY=($(compgen -W "$opts $(_module_loaded_modules_negated)" -- "$cur"));
+ else
+ COMPREPLY=($(compgen -W "      $(_module_loaded_modules_negated)" -- "$cur"));
+ fi
+ ;;
+ *)
+ if [ $COMP_CWORD -eq 1 ]; then
+ case "$cur" in 
+ ls)
+ COMPREPLY="list"
+ ;;
+ sw*)
+ COMPREPLY="swap"
+ ;;
+ *)
+ COMPREPLY=($(compgen -W "$cmds $(_module_avail)" -- "$cur"))
+ ;;
+ esac;
+ else
+ if [[ ${COMP_WORDS[COMP_CWORD-2]} == sw* ]]; then
+ COMPREPLY=($(compgen -W "$(_module_not_yet_loaded)" -- "$cur"));
+ else
+ for ((i = COMP_CWORD - 1; i > 0; i--))
+ do
+ case ${COMP_WORDS[$i]} in 
+ show | whatis)
+ COMPREPLY=($(compgen -W "$(_module_avail)" -- "$cur"));
+ found=1;
+ break
+ ;;
+ rm | remove | unload)
+ COMPREPLY=($(compgen -W "$(_module_loaded_modules)" -- "$cur"));
+ found=1;
+ break
+ ;;
+ spider)
+ COMPREPLY=($(compgen -W "$(_module_spider)" -- "$cur"));
+ found=1;
+ break
+ ;;
+ esac;
+ done;
+ if [ -z "$found" ]; then
+ COMPREPLY=($(compgen -W "$(_module_avail)" -- "$cur"));
+ fi;
+ fi;
+ fi
+ ;;
+ esac
+ ;;
+ esac
+}
+BASH_FUNC_module()=() {  eval $($LMOD_CMD bash "$@");
+ [ $? = 0 ] && eval $(${LMOD_SETTARG_CMD:-:} -s sh)
+}
+BASH_FUNC__module_loaded_modules()=() {  /cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/lmod/libexec/lmod bash -t list 2>&1 > /dev/null | sed ' /^ *$/d; /:$/d; s#/*$##g;'
+}
+BASH_FUNC__module_avail()=() {  /cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/lmod/libexec/lmod bash -t avail 2>&1 > /dev/null | sed ' /:$/d; s#/*$##g;'
+}
+BASH_FUNC__module_loaded_modules_negated()=() {  /cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/lmod/libexec/lmod bash -t list 2>&1 > /dev/null | sed ' /^ *$/d; /:$/d; s#/*$##g; s|^|-|g;'
+}
+BASH_FUNC__module_spider()=() {  /cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/lmod/libexec/lmod bash -t spider 2>&1 > /dev/null
+}
+BASH_FUNC__module_long_arg_list()=() {  local cur="$1" i;
+ if [[ ${COMP_WORDS[COMP_CWORD-2]} == sw* ]]; then
+ COMPREPLY=($(compgen -W "$(_module_not_yet_loaded)" -- "$cur"));
+ return;
+ fi;
+ for ((i = COMP_CWORD - 1; i > 0; i--))
+ do
+ case ${COMP_WORDS[$i]} in 
+ add | load)
+ COMPREPLY=($(compgen -W "$(_module_not_yet_loaded)" -- "$cur"));
+ break
+ ;;
+ rm | remove | unload | switch | swap)
+ COMPREPLY=($(compgen -W "$(_module_loaded_modules)" -- "$cur"));
+ break
+ ;;
+ esac;
+ done
+}
+BASH_FUNC_clearMT()=() {  eval $($LMOD_DIR/clearMT_cmd bash)
+}
+BASH_FUNC__module()=() {  local cur="$2" prev="$3" cmds opts;
+ COMPREPLY=();
+ cmds="add avail delete help keyword list load purge rm restore save show spider swap 	      unload unuse update use whatis";
+ opts="-d -D -h -q -t -v -w --expert --quiet --help  --quiet --terse --version --default --width -r --regexp --mt";
+ case "$prev" in 
+ add | load | try-load)
+ COMPREPLY=($(compgen -W "$(_module_not_yet_loaded)" -- "$cur"))
+ ;;
+ spider)
+ COMPREPLY=($(compgen -W "$(_module_spider)" -- "$cur"))
+ ;;
+ rm | remove | unload | switch | swap)
+ COMPREPLY=($(      compgen -W "$(_module_loaded_modules)" -- "$cur"))
+ ;;
+ unuse)
+ COMPREPLY=($(IFS=: compgen -W "${MODULEPATH}" -- "$cur"))
+ ;;
+ use | *-a*)
+
+ ;;
+ help | show | whatis)
+ COMPREPLY=($(compgen -W "$(_module_avail)" -- "$cur"))
+ ;;
+ *)
+ if test $COMP_CWORD -gt 2; then
+ _module_long_arg_list "$cur";
+ else
+ case "$cur" in 
+ ls)
+ COMPREPLY="list"
+ ;;
+ sw*)
+ COMPREPLY="swap"
+ ;;
+ -*)
+ COMPREPLY=($(compgen -W "$opts" -- "$cur"))
+ ;;
+ *)
+ COMPREPLY=($(compgen -W "$cmds" -- "$cur"))
+ ;;
+ esac;
+ fi
+ ;;
+ esac
+}
+BASH_FUNC_ml()=() {  eval $($LMOD_DIR/ml_cmd "$@")
+}
+_=/bin/env
+
+_____________________________________________________________________________
+
+        df
+_____________________________________________________________________________
+
+Filesystem           1K-blocks     Used Available Use% Mounted on
+/dev/mapper/VolGroup-lv_root
+                      37825192 23125268  12778492  65% /
+tmpfs                 20614656        0  20614656   0% /dev/shm
+/dev/sda1               495844    54331    415913  12% /boot
+cvmfs2                20480000 18671855   1808146  92% /cvmfs/oasis.opensciencegrid.org
+
+_____________________________________________________________________________
+
+        /proc/cpuinfo
+_____________________________________________________________________________
+
+processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 26
+model name	: Intel(R) Xeon(R) CPU           X5570  @ 2.93GHz
+stepping	: 5
+cpu MHz		: 2933.414
+cache size	: 8192 KB
+physical id	: 0
+siblings	: 8
+core id		: 0
+cpu cores	: 8
+apicid		: 0
+initial apicid	: 0
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx lm constant_tsc rep_good unfair_spinlock pni ssse3 cx16 sse4_1 sse4_2 popcnt hypervisor lahf_lm
+bogomips	: 5866.82
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 1
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 26
+model name	: Intel(R) Xeon(R) CPU           X5570  @ 2.93GHz
+stepping	: 5
+cpu MHz		: 2933.414
+cache size	: 8192 KB
+physical id	: 0
+siblings	: 8
+core id		: 1
+cpu cores	: 8
+apicid		: 1
+initial apicid	: 1
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx lm constant_tsc rep_good unfair_spinlock pni ssse3 cx16 sse4_1 sse4_2 popcnt hypervisor lahf_lm
+bogomips	: 5866.82
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 2
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 26
+model name	: Intel(R) Xeon(R) CPU           X5570  @ 2.93GHz
+stepping	: 5
+cpu MHz		: 2933.414
+cache size	: 8192 KB
+physical id	: 0
+siblings	: 8
+core id		: 2
+cpu cores	: 8
+apicid		: 2
+initial apicid	: 2
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx lm constant_tsc rep_good unfair_spinlock pni ssse3 cx16 sse4_1 sse4_2 popcnt hypervisor lahf_lm
+bogomips	: 5866.82
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 3
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 26
+model name	: Intel(R) Xeon(R) CPU           X5570  @ 2.93GHz
+stepping	: 5
+cpu MHz		: 2933.414
+cache size	: 8192 KB
+physical id	: 0
+siblings	: 8
+core id		: 3
+cpu cores	: 8
+apicid		: 3
+initial apicid	: 3
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx lm constant_tsc rep_good unfair_spinlock pni ssse3 cx16 sse4_1 sse4_2 popcnt hypervisor lahf_lm
+bogomips	: 5866.82
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 4
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 26
+model name	: Intel(R) Xeon(R) CPU           X5570  @ 2.93GHz
+stepping	: 5
+cpu MHz		: 2933.414
+cache size	: 8192 KB
+physical id	: 0
+siblings	: 8
+core id		: 4
+cpu cores	: 8
+apicid		: 4
+initial apicid	: 4
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx lm constant_tsc rep_good unfair_spinlock pni ssse3 cx16 sse4_1 sse4_2 popcnt hypervisor lahf_lm
+bogomips	: 5866.82
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 5
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 26
+model name	: Intel(R) Xeon(R) CPU           X5570  @ 2.93GHz
+stepping	: 5
+cpu MHz		: 2933.414
+cache size	: 8192 KB
+physical id	: 0
+siblings	: 8
+core id		: 5
+cpu cores	: 8
+apicid		: 5
+initial apicid	: 5
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx lm constant_tsc rep_good unfair_spinlock pni ssse3 cx16 sse4_1 sse4_2 popcnt hypervisor lahf_lm
+bogomips	: 5866.82
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 6
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 26
+model name	: Intel(R) Xeon(R) CPU           X5570  @ 2.93GHz
+stepping	: 5
+cpu MHz		: 2933.414
+cache size	: 8192 KB
+physical id	: 0
+siblings	: 8
+core id		: 6
+cpu cores	: 8
+apicid		: 6
+initial apicid	: 6
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx lm constant_tsc rep_good unfair_spinlock pni ssse3 cx16 sse4_1 sse4_2 popcnt hypervisor lahf_lm
+bogomips	: 5866.82
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 7
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 26
+model name	: Intel(R) Xeon(R) CPU           X5570  @ 2.93GHz
+stepping	: 5
+cpu MHz		: 2933.414
+cache size	: 8192 KB
+physical id	: 0
+siblings	: 8
+core id		: 7
+cpu cores	: 8
+apicid		: 7
+initial apicid	: 7
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx lm constant_tsc rep_good unfair_spinlock pni ssse3 cx16 sse4_1 sse4_2 popcnt hypervisor lahf_lm
+bogomips	: 5866.82
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 8
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 26
+model name	: Intel(R) Xeon(R) CPU           X5570  @ 2.93GHz
+stepping	: 5
+cpu MHz		: 2933.414
+cache size	: 8192 KB
+physical id	: 1
+siblings	: 8
+core id		: 0
+cpu cores	: 8
+apicid		: 8
+initial apicid	: 8
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx lm constant_tsc rep_good unfair_spinlock pni ssse3 cx16 sse4_1 sse4_2 popcnt hypervisor lahf_lm
+bogomips	: 5866.72
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 9
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 26
+model name	: Intel(R) Xeon(R) CPU           X5570  @ 2.93GHz
+stepping	: 5
+cpu MHz		: 2933.414
+cache size	: 8192 KB
+physical id	: 1
+siblings	: 8
+core id		: 1
+cpu cores	: 8
+apicid		: 9
+initial apicid	: 9
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx lm constant_tsc rep_good unfair_spinlock pni ssse3 cx16 sse4_1 sse4_2 popcnt hypervisor lahf_lm
+bogomips	: 5866.72
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 10
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 26
+model name	: Intel(R) Xeon(R) CPU           X5570  @ 2.93GHz
+stepping	: 5
+cpu MHz		: 2933.414
+cache size	: 8192 KB
+physical id	: 1
+siblings	: 8
+core id		: 2
+cpu cores	: 8
+apicid		: 10
+initial apicid	: 10
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx lm constant_tsc rep_good unfair_spinlock pni ssse3 cx16 sse4_1 sse4_2 popcnt hypervisor lahf_lm
+bogomips	: 5866.72
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 11
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 26
+model name	: Intel(R) Xeon(R) CPU           X5570  @ 2.93GHz
+stepping	: 5
+cpu MHz		: 2933.414
+cache size	: 8192 KB
+physical id	: 1
+siblings	: 8
+core id		: 3
+cpu cores	: 8
+apicid		: 11
+initial apicid	: 11
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx lm constant_tsc rep_good unfair_spinlock pni ssse3 cx16 sse4_1 sse4_2 popcnt hypervisor lahf_lm
+bogomips	: 5866.72
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 12
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 26
+model name	: Intel(R) Xeon(R) CPU           X5570  @ 2.93GHz
+stepping	: 5
+cpu MHz		: 2933.414
+cache size	: 8192 KB
+physical id	: 1
+siblings	: 8
+core id		: 4
+cpu cores	: 8
+apicid		: 12
+initial apicid	: 12
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx lm constant_tsc rep_good unfair_spinlock pni ssse3 cx16 sse4_1 sse4_2 popcnt hypervisor lahf_lm
+bogomips	: 5866.72
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 13
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 26
+model name	: Intel(R) Xeon(R) CPU           X5570  @ 2.93GHz
+stepping	: 5
+cpu MHz		: 2933.414
+cache size	: 8192 KB
+physical id	: 1
+siblings	: 8
+core id		: 5
+cpu cores	: 8
+apicid		: 13
+initial apicid	: 13
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx lm constant_tsc rep_good unfair_spinlock pni ssse3 cx16 sse4_1 sse4_2 popcnt hypervisor lahf_lm
+bogomips	: 5866.72
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 14
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 26
+model name	: Intel(R) Xeon(R) CPU           X5570  @ 2.93GHz
+stepping	: 5
+cpu MHz		: 2933.414
+cache size	: 8192 KB
+physical id	: 1
+siblings	: 8
+core id		: 6
+cpu cores	: 8
+apicid		: 14
+initial apicid	: 14
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx lm constant_tsc rep_good unfair_spinlock pni ssse3 cx16 sse4_1 sse4_2 popcnt hypervisor lahf_lm
+bogomips	: 5866.72
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+processor	: 15
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 26
+model name	: Intel(R) Xeon(R) CPU           X5570  @ 2.93GHz
+stepping	: 5
+cpu MHz		: 2933.414
+cache size	: 8192 KB
+physical id	: 1
+siblings	: 8
+core id		: 7
+cpu cores	: 8
+apicid		: 15
+initial apicid	: 15
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx lm constant_tsc rep_good unfair_spinlock pni ssse3 cx16 sse4_1 sse4_2 popcnt hypervisor lahf_lm
+bogomips	: 5866.72
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+
+_____________________________________________________________________________
+
+        /proc/meminfo
+_____________________________________________________________________________
+
+MemTotal:       41229312 kB
+MemFree:        17137488 kB
+Buffers:         2257736 kB
+Cached:         18127800 kB
+SwapCached:         1868 kB
+Active:          6042032 kB
+Inactive:       16947128 kB
+Active(anon):    2600544 kB
+Inactive(anon):     2772 kB
+Active(file):    3441488 kB
+Inactive(file): 16944356 kB
+Unevictable:           0 kB
+Mlocked:               0 kB
+SwapTotal:       2064380 kB
+SwapFree:        2056928 kB
+Dirty:            161000 kB
+Writeback:             0 kB
+AnonPages:       2602228 kB
+Mapped:           132356 kB
+Shmem:                 4 kB
+Slab:             771040 kB
+SReclaimable:     725976 kB
+SUnreclaim:        45064 kB
+KernelStack:        5904 kB
+PageTables:        24820 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:    22679036 kB
+Committed_AS:    3080772 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:      128944 kB
+VmallocChunk:   34359605756 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:   2404352 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:        8128 kB
+DirectMap2M:    42022912 kB
+
+_____________________________________________________________________________
+
+        command line
+_____________________________________________________________________________
+
+-e /bin/bash -out results/search_0016.out -err results/search_0016.err -i -d data results output -if python_wrapper.sh data/miRNA_samples.csv classifier.py output/miRNA_16.split gen_search.py data/miRNA_labels.csv -of results/search_0016.err results/search_0016.csv results/search_0016.out -cf -cdmfile -status provider -a python_wrapper.sh gen_search.py -i data/miRNA_samples.csv -l data/miRNA_labels.csv -p output/miRNA_16.split -n 2 -s 20 -k 5 -m 2 -o results/search_0016.csv
+
+_____________________________________________________________________________
+
+        stdout
+_____________________________________________________________________________
+
+total 44K
+-rw-r--r-- 1 nobody 6.2K Feb 18 16:53 _swiftwrap.staging
+drwxr-xr-x 2 nobody 4.0K Feb 18 16:53 data
+drwxr-xr-x 2 nobody 4.0K Feb 18 16:53 output
+-rw-r--r-- 1 nobody  239 Feb 18 16:53 python_wrapper.sh
+-rw-r--r-- 1 nobody  283 Feb 18 16:53 classifier.py
+-rw-r--r-- 1 nobody  11K Feb 18 16:53 gen_search.py
+-rw-r--r-- 1 nobody 1.6K Feb 18 16:53 wrapper.log
+drwxr-xr-x 2 nobody 4.0K Feb 18 16:53 results
+Launching : python gen_search.py -i data/miRNA_samples.csv -l data/miRNA_labels.csv -p output/miRNA_16.split -n 2 -s 20 -k 5 -m 2 -o results/search_0016.csv
+
+_____________________________________________________________________________
+
+        stderr
+_____________________________________________________________________________
+
+/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/pandas/io/excel.py:626: UserWarning: Installed openpyxl is not supported at this time. Use >=1.6.1 and <2.0.0.
+  .format(openpyxl_compat.start_ver, openpyxl_compat.stop_ver))
+Traceback (most recent call last):
+  File "gen_search.py", line 30, in <module>
+    import knockoff
+ImportError: No module named knockoff

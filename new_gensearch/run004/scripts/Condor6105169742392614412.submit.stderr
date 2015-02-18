@@ -1,0 +1,5 @@
+Use of uninitialized value $logname in concatenation (.) or string at cscript8424306448629904562.pl line 338.
+Use of uninitialized value $SOFT_IMAGE_JOB_ID in numeric eq (==) at cscript8424306448629904562.pl line 2234.
+Use of uninitialized value in concatenation (.) or string at cscript8424306448629904562.pl line 387.
+Use of uninitialized value $SOFT_IMAGE_JOB_ID in numeric eq (==) at cscript8424306448629904562.pl line 2234.
+send: Cannot determine peer address at cscript8424306448629904562.pl line 527

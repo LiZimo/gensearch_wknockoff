@@ -1,0 +1,18 @@
+/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/pandas/io/excel.py:626: UserWarning: Installed openpyxl is not supported at this time. Use >=1.6.1 and <2.0.0.
+  .format(openpyxl_compat.start_ver, openpyxl_compat.stop_ver))
+Traceback (most recent call last):
+  File "gen_search.py", line 31, in <module>
+    import knockoff
+  File "/tmp/rcc_syracuse/rcc.KqF0b8y9T4/execute.10.5.38.54-1088/dir_1270/gen_search-run016/jobs/b/bash-l0vq9s4m/knockoff.py", line 24, in <module>
+    import matplotlib.pylab as plt;
+  File "/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/matplotlib/pylab.py", line 269, in <module>
+    from matplotlib.pyplot import *
+  File "/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/matplotlib/pyplot.py", line 98, in <module>
+    _backend_mod, new_figure_manager, draw_if_interactive, _show = pylab_setup()
+  File "/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/matplotlib/backends/__init__.py", line 28, in pylab_setup
+    globals(),locals(),[backend_name],0)
+  File "/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/matplotlib/backends/backend_tkagg.py", line 8, in <module>
+    import Tkinter as Tk, FileDialog
+  File "/cvmfs/oasis.opensciencegrid.org/osg/modules/python-2.7.7/lib/python2.7/lib-tk/Tkinter.py", line 39, in <module>
+    import _tkinter # If this fails your Python may not be configured for Tk
+ImportError: libtk8.5.so: cannot open shared object file: No such file or directory

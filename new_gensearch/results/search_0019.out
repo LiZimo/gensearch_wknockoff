@@ -1,0 +1,11 @@
+total 52K
+-rw-r--r-- 1 osgconnect 6.2K Feb 18 18:41 _swiftwrap.staging
+drwxr-xr-x 2 osgconnect 4.0K Feb 18 18:41 data
+drwxr-xr-x 2 osgconnect 4.0K Feb 18 18:41 output
+-rw-r--r-- 1 osgconnect 5.2K Feb 18 18:41 knockoff.py
+-rw-r--r-- 1 osgconnect  239 Feb 18 18:41 python_wrapper.sh
+-rw-r--r-- 1 osgconnect  283 Feb 18 18:41 classifier.py
+-rw-r--r-- 1 osgconnect  11K Feb 18 18:41 gen_search.py
+-rw-r--r-- 1 osgconnect 1.6K Feb 18 18:41 wrapper.log
+drwxr-xr-x 2 osgconnect 4.0K Feb 18 18:41 results
+Launching : python gen_search.py -i data/miRNA_samples.csv -l data/miRNA_labels.csv -p output/miRNA_19.split -n 2 -s 20 -k 5 -m 2 -o results/search_0019.csv

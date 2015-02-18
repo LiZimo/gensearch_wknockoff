@@ -1,0 +1,954 @@
+2015-02-12 18:14:34,935-0600 INFO  Loader JAVA Oracle Corporation Java HotSpot(TM) 64-Bit Server VM 1.7.0_51
+2015-02-12 18:14:34,937-0600 INFO  Loader VERSION Swift trunk git-rev: 4ee10d1ecb417577f3eaae14606a10ac15b44b54 heads/master 6183 (modified locally)
+2015-02-12 18:14:34,937-0600 INFO  Loader RUN_ID run003
+2015-02-12 18:14:34,937-0600 INFO  Loader ARGUMENTS [-runid, run003, -logfile, /home/yadunand/zimo/run003/swift.log, gen_search.swift, -n=2, -nsteps=20, -kfold=5, -method=2, -folder=output, -prefix=miRNA, -sample=data/miRNA_samples.csv, -labels=data/miRNA_labels.csv]
+2015-02-12 18:14:34,938-0600 INFO  Loader MAX_HEAP 954728448
+2015-02-12 18:14:34,938-0600 INFO  Loader GLOBUS_HOSTNAME login01.osgconnect.net
+2015-02-12 18:14:34,938-0600 INFO  Loader CWD /home/yadunand/zimo/.
+2015-02-12 18:14:34,939-0600 DEBUG Loader SWIFT_CONFIGURATION 
+[D] /home/yadunand/bin/swift-k/dist/swift-svn/etc/swift.conf
+[R] swift.conf
+[C] <Command Line>
+{
+	TCPPortRange: "50000,51000"                                # [R] line 35
+	alwaysTransferWrapperLog: true                             # [R] line 40
+	executionRetries: 0                                        # [R] line 37
+	fileOperationsThrottle: 8                                  # [D] line 121
+	fileTransfersThrottle: 4                                   # [D] line 107
+	hostJobSubmitThrottle: 2                                   # [D] line 95
+	jobSubmitThrottle: 4                                       # [D] line 83
+	keepSiteDir: true                                          # [R] line 38
+	lazyErrors: false                                          # [R] line 36
+	logProvenance: false                                       # [D] line 200
+	maxForeachThreads: 16384                                   # [D] line 194
+	providerStagingPinSwiftFiles: false                        # [R] line 39
+	replicationEnabled: false                                  # [D] line 146
+	replicationLimit: 3                                        # [D] line 157
+	replicationMinQueueTime: 60                                # [D] line 153
+	site {
+		local {
+			app.ALL.executable: "*"                                  # [D] line 232
+			execution.type: "local"                                  # [D] line 223
+			filesystem.type: "local"                                 # [D] line 226
+			workDirectory: "swiftwork"                               # [D] line 229
+		}
+		osgc {
+			app.date {
+				executable: "/bin/date"                                 # [R] line 27
+				maxWallTime: "00:30:00"                                 # [R] line 28
+			}
+			execution {
+				URL: "login01.osgconnect.net"                           # [R] line 4
+				jobManager: "local:condor"                              # [R] line 5
+				options {
+					highOverallocation: 100                                # [R] line 11
+					jobOptions.condor.projectname: "Swift"                 # [R] line 16
+					lowOverallocation: 100                                 # [R] line 13
+					maxJobTime: "02:00:00"                                 # [R] line 12
+					maxJobs: 1                                             # [R] line 10
+					maxNodesPerJob: 1                                      # [R] line 9
+					nodeGranularity: 1                                     # [R] line 8
+					softImage: "/home/yadunand/genomics/common_data/fetch_common.tar.gz /tmp/yadunand/softimage"# [R] line 18
+					tasksPerNode: 1                                        # [R] line 19
+				}
+				type: "coaster"                                         # [R] line 3
+			}
+			initialParallelTasks: 999                                # [R] line 25
+			maxParallelTasks: 1001                                   # [R] line 24
+			staging: "local"                                         # [R] line 22
+			workDirectory: "."                                       # [R] line 23
+		}
+	}
+	sites: [osgc]                                              # [R] line 33
+	staging: "local"                                           # [R] line 41
+	tracingEnabled: false                                      # [D] line 51
+}
+
+2015-02-12 18:14:34,941-0600 DEBUG textfiles BEGIN SWIFTSCRIPT:
+type file;
+
+app (file out, file log, file err) search (file wrapper, file pyscript, file samples, file labels, file set, int n, int nsteps, int k, int method, file extra)
+{
+    bash @wrapper @pyscript "-i" @samples "-l" @labels "-p" @set "-n" n "-s" nsteps "-k" k "-m" method "-o" @out stdout=@log stderr=@err;
+}
+
+
+app (file result, file err) sort (file script, file parts[])
+{
+    bash @script @parts stdout=@result stderr=@err;
+}
+
+int n      = @toInt(@arg("n",       "2"));
+int nsteps = @toInt(@arg("nsteps",  "20"));
+int kval   = @toInt(@arg("kfold",   "5"));
+int method = @toInt(@arg("method",  "2"));
+
+file samples <single_file_mapper; file=@arg("sample", "data/miRNA_samples.csv")>;
+file labels  <single_file_mapper; file=@arg("labels", "data/miRNA_labels.csv" )>;
+
+string input_folder=@arg("folder", "test");
+string input_prefix=@arg("prefix", "miRNA");
+
+file splits[] <filesys_mapper; location=input_folder, prefix=input_prefix>;
+
+
+file wrapper  <"python_wrapper.sh">;
+file pyscript <"gen_search.py">;
+file extra    <"classifier.py">;
+
+file out[] <simple_mapper; prefix="results/search_", suffix=".csv">;
+file log[] <simple_mapper; prefix="results/search_", suffix=".out">;
+file err[] <simple_mapper; prefix="results/search_", suffix=".err">;
+
+//foreach split,index in splits{
+foreach f_split, index in splits
+{
+    tracef("@Filename  = %s \n", @filename(f_split));
+    (out[index], log[index], err[index]) = search(wrapper, pyscript, samples, labels, f_split, n,nsteps, kval, method, extra);
+}
+
+
+file final <"final.out">;
+file f_err <"final.err">;
+file postscript <"postprocess.sh">;
+(final, f_err) = sort (postscript, out);
+
+
+2015-02-12 18:14:34,941-0600 DEBUG textfiles END SWIFTSCRIPT:
+2015-02-12 18:14:34,942-0600 INFO  Loader gen_search.swift: source file is new. Recompiling.
+2015-02-12 18:14:35,676-0600 INFO  Warnings Warning: The @ syntax for function invocation is deprecated
+2015-02-12 18:14:36,411-0600 INFO  Loader RUN_START
+2015-02-12 18:14:36,414-0600 INFO  SwiftExecutor swift.home = /home/yadunand/bin/swift-k/dist/swift-svn
+2015-02-12 18:14:36,491-0600 INFO  AbstractScheduler Setting resources to: {osgc=osgc}
+2015-02-12 18:14:36,514-0600 INFO  GlobalSubmitQueue No global submit throttle set. Using default (1024)
+2015-02-12 18:14:36,541-0600 INFO  LateBindingScheduler jobs queued: 0
+2015-02-12 18:14:36,550-0600 INFO  LateBindingScheduler jobs queued: 0
+2015-02-12 18:14:36,559-0600 INFO  LateBindingScheduler jobs queued: 0
+2015-02-12 18:14:36,580-0600 INFO  RuntimeStats$ProgressTicker HeapMax: 954728448, CrtHeap: 759693312, UsedHeap: 114988912, JVMThreads: 16
+2015-02-12 18:14:36,581-0600 INFO  RuntimeStats$ProgressTicker 
+2015-02-12 18:14:36,641-0600 DEBUG swift PROCEDURE line=9 thread=R-15 name=sort
+2015-02-12 18:14:36,714-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-0
+2015-02-12 18:14:36,714-0600 DEBUG swift SCOPE thread=R-14-0
+2015-02-12 18:14:36,727-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-1
+2015-02-12 18:14:36,727-0600 DEBUG swift SCOPE thread=R-14-1
+2015-02-12 18:14:36,747-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-2
+2015-02-12 18:14:36,747-0600 DEBUG swift SCOPE thread=R-14-2
+2015-02-12 18:14:36,761-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-3
+2015-02-12 18:14:36,761-0600 DEBUG swift SCOPE thread=R-14-3
+2015-02-12 18:14:36,791-0600 DEBUG swift INTERNALPROC_START thread=R-14-1-0 name=tracef
+2015-02-12 18:14:36,791-0600 DEBUG swift INTERNALPROC_START thread=R-14-0x2 name=tracef
+2015-02-12 18:14:36,792-0600 DEBUG swift INTERNALPROC_START thread=R-14-2-0 name=tracef
+2015-02-12 18:14:36,797-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-4
+2015-02-12 18:14:36,797-0600 DEBUG swift SCOPE thread=R-14-4
+2015-02-12 18:14:36,797-0600 DEBUG swift INTERNALPROC_START thread=R-14-4-0 name=tracef
+2015-02-12 18:14:36,798-0600 DEBUG swift INTERNALPROC_START thread=R-14-3-0 name=tracef
+2015-02-12 18:14:36,799-0600 DEBUG swift PROCEDURE line=3 thread=R-14-2-1 name=search
+2015-02-12 18:14:36,799-0600 DEBUG swift PROCEDURE line=3 thread=R-14-3-1 name=search
+2015-02-12 18:14:36,799-0600 DEBUG swift PROCEDURE line=3 thread=R-14-1x2 name=search
+2015-02-12 18:14:36,799-0600 DEBUG swift PROCEDURE line=3 thread=R-14-4-1 name=search
+2015-02-12 18:14:36,799-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-5
+2015-02-12 18:14:36,799-0600 DEBUG swift PROCEDURE line=3 thread=R-14-0-1 name=search
+2015-02-12 18:14:36,799-0600 DEBUG swift SCOPE thread=R-14-5
+2015-02-12 18:14:36,800-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-6
+2015-02-12 18:14:36,800-0600 DEBUG swift SCOPE thread=R-14-6
+2015-02-12 18:14:36,800-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-7
+2015-02-12 18:14:36,800-0600 DEBUG swift SCOPE thread=R-14-7
+2015-02-12 18:14:36,800-0600 DEBUG swift INTERNALPROC_START thread=R-14-5-0 name=tracef
+2015-02-12 18:14:36,800-0600 DEBUG swift INTERNALPROC_START thread=R-14-7-0 name=tracef
+2015-02-12 18:14:36,800-0600 DEBUG swift INTERNALPROC_START thread=R-14-6-0 name=tracef
+2015-02-12 18:14:36,800-0600 DEBUG swift PROCEDURE line=3 thread=R-14-5-1 name=search
+2015-02-12 18:14:36,800-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-9
+2015-02-12 18:14:36,800-0600 DEBUG swift PROCEDURE line=3 thread=R-14-7-1 name=search
+2015-02-12 18:14:36,800-0600 DEBUG swift SCOPE thread=R-14-9
+2015-02-12 18:14:36,800-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-10
+2015-02-12 18:14:36,800-0600 DEBUG swift SCOPE thread=R-14-10
+2015-02-12 18:14:36,800-0600 DEBUG swift PROCEDURE line=3 thread=R-14-6-1 name=search
+2015-02-12 18:14:36,800-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-8
+2015-02-12 18:14:36,800-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-11
+2015-02-12 18:14:36,800-0600 DEBUG swift SCOPE thread=R-14-8
+2015-02-12 18:14:36,800-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-12
+2015-02-12 18:14:36,800-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-13
+2015-02-12 18:14:36,800-0600 DEBUG swift SCOPE thread=R-14-12
+2015-02-12 18:14:36,800-0600 DEBUG swift SCOPE thread=R-14-13
+2015-02-12 18:14:36,800-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14x2
+2015-02-12 18:14:36,800-0600 DEBUG swift SCOPE thread=R-14-11
+2015-02-12 18:14:36,800-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-15
+2015-02-12 18:14:36,800-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-16
+2015-02-12 18:14:36,800-0600 DEBUG swift SCOPE thread=R-14-15
+2015-02-12 18:14:36,800-0600 DEBUG swift SCOPE thread=R-14-16
+2015-02-12 18:14:36,800-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-17
+2015-02-12 18:14:36,800-0600 DEBUG swift SCOPE thread=R-14-17
+2015-02-12 18:14:36,800-0600 DEBUG swift SCOPE thread=R-14x2
+2015-02-12 18:14:36,800-0600 DEBUG swift INTERNALPROC_START thread=R-14-9-0 name=tracef
+2015-02-12 18:14:36,800-0600 DEBUG swift INTERNALPROC_START thread=R-14-10-0 name=tracef
+2015-02-12 18:14:36,800-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-19
+2015-02-12 18:14:36,800-0600 DEBUG swift SCOPE thread=R-14-19
+2015-02-12 18:14:36,801-0600 DEBUG swift INTERNALPROC_START thread=R-14-15-0 name=tracef
+2015-02-12 18:14:36,800-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-18
+2015-02-12 18:14:36,801-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-29
+2015-02-12 18:14:36,801-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-31
+2015-02-12 18:14:36,801-0600 DEBUG swift SCOPE thread=R-14-18
+2015-02-12 18:14:36,801-0600 DEBUG swift INTERNALPROC_START thread=R-14-16-0 name=tracef
+2015-02-12 18:14:36,801-0600 DEBUG swift PROCEDURE line=3 thread=R-14-11-1 name=search
+2015-02-12 18:14:36,801-0600 DEBUG swift INTERNALPROC_START thread=R-14-17-0 name=tracef
+2015-02-12 18:14:36,801-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-32
+2015-02-12 18:14:36,801-0600 DEBUG swift SCOPE thread=R-14-32
+2015-02-12 18:14:36,801-0600 DEBUG swift INTERNALPROC_START thread=R-14x2-0 name=tracef
+2015-02-12 18:14:36,801-0600 DEBUG swift JOB_INIT jobid=bash-zgtmfi4m tr=bash
+2015-02-12 18:14:36,801-0600 DEBUG swift JOB_INIT jobid=bash-2htmfi4m tr=bash
+2015-02-12 18:14:36,801-0600 DEBUG swift JOB_INIT jobid=bash-4htmfi4m tr=bash
+2015-02-12 18:14:36,801-0600 DEBUG swift PROCEDURE line=3 thread=R-14-15-1 name=search
+2015-02-12 18:14:36,801-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-33
+2015-02-12 18:14:36,801-0600 DEBUG swift PROCEDURE line=3 thread=R-14-16-1 name=search
+2015-02-12 18:14:36,801-0600 DEBUG swift SCOPE thread=R-14-33
+2015-02-12 18:14:36,801-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-34
+2015-02-12 18:14:36,801-0600 DEBUG swift PROCEDURE line=3 thread=R-14-17-1 name=search
+2015-02-12 18:14:36,801-0600 DEBUG swift JOB_INIT jobid=bash-5htmfi4m tr=bash
+2015-02-12 18:14:36,801-0600 DEBUG swift PROCEDURE line=3 thread=R-14x2-1 name=search
+2015-02-12 18:14:36,801-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-35
+2015-02-12 18:14:36,801-0600 DEBUG swift SCOPE thread=R-14-35
+2015-02-12 18:14:36,801-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-36
+2015-02-12 18:14:36,801-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-37
+2015-02-12 18:14:36,801-0600 DEBUG swift SCOPE thread=R-14-36
+2015-02-12 18:14:36,801-0600 DEBUG swift SCOPE thread=R-14-37
+2015-02-12 18:14:36,801-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-4htmfi4m
+2015-02-12 18:14:36,801-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-zgtmfi4m
+2015-02-12 18:14:36,801-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-2htmfi4m
+2015-02-12 18:14:36,801-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-40
+2015-02-12 18:14:36,801-0600 DEBUG swift SCOPE thread=R-14-40
+2015-02-12 18:14:36,801-0600 DEBUG swift JOB_INIT jobid=bash-8htmfi4m tr=bash
+2015-02-12 18:14:36,801-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-41
+2015-02-12 18:14:36,801-0600 DEBUG swift SCOPE thread=R-14-41
+2015-02-12 18:14:36,801-0600 DEBUG swift JOB_INIT jobid=bash-9htmfi4m tr=bash
+2015-02-12 18:14:36,801-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-42
+2015-02-12 18:14:36,801-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-43
+2015-02-12 18:14:36,801-0600 DEBUG swift SCOPE thread=R-14-42
+2015-02-12 18:14:36,802-0600 DEBUG swift SCOPE thread=R-14-43
+2015-02-12 18:14:36,802-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-8htmfi4m
+2015-02-12 18:14:36,802-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-47
+2015-02-12 18:14:36,802-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-48
+2015-02-12 18:14:36,801-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-30
+2015-02-12 18:14:36,802-0600 DEBUG swift SCOPE thread=R-14-48
+2015-02-12 18:14:36,802-0600 DEBUG swift SCOPE thread=R-14-30
+2015-02-12 18:14:36,802-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-51
+2015-02-12 18:14:36,802-0600 DEBUG swift JOB_INIT jobid=bash-ahtmfi4m tr=bash
+2015-02-12 18:14:36,802-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-53
+2015-02-12 18:14:36,802-0600 DEBUG swift SCOPE thread=R-14-53
+2015-02-12 18:14:36,802-0600 DEBUG swift JOB_INIT jobid=bash-0htmfi4m tr=bash
+2015-02-12 18:14:36,801-0600 DEBUG swift PROCEDURE line=3 thread=R-14-12-1 name=search
+2015-02-12 18:14:36,801-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-28
+2015-02-12 18:14:36,802-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-ahtmfi4m
+2015-02-12 18:14:36,802-0600 DEBUG swift SCOPE thread=R-14-28
+2015-02-12 18:14:36,801-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-27
+2015-02-12 18:14:36,802-0600 INFO  Tracef @Filename  = output/miRNA_3.split 
+
+2015-02-12 18:14:36,802-0600 DEBUG swift SCOPE thread=R-14-27
+2015-02-12 18:14:36,802-0600 INFO  Tracef @Filename  = output/miRNA_7.split 
+
+2015-02-12 18:14:36,801-0600 DEBUG swift PROCEDURE line=3 thread=R-14-13-1 name=search
+2015-02-12 18:14:36,802-0600 DEBUG swift JOB_INIT jobid=bash-bhtmfi4m tr=bash
+2015-02-12 18:14:36,802-0600 INFO  Tracef @Filename  = output/miRNA_4.split 
+
+2015-02-12 18:14:36,802-0600 DEBUG swift INTERNALPROC_END thread=R-14-7-0 name=tracef
+2015-02-12 18:14:36,801-0600 DEBUG swift INTERNALPROC_START thread=R-14-11-0 name=tracef
+2015-02-12 18:14:36,801-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-26
+2015-02-12 18:14:36,802-0600 DEBUG swift SCOPE thread=R-14-26
+2015-02-12 18:14:36,801-0600 DEBUG swift INTERNALPROC_START thread=R-14-13-0 name=tracef
+2015-02-12 18:14:36,802-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-bhtmfi4m
+2015-02-12 18:14:36,801-0600 DEBUG swift INTERNALPROC_START thread=R-14-12-0 name=tracef
+2015-02-12 18:14:36,801-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-25
+2015-02-12 18:14:36,802-0600 DEBUG swift SCOPE thread=R-14-25
+2015-02-12 18:14:36,802-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-58
+2015-02-12 18:14:36,802-0600 DEBUG swift JOB_INIT jobid=bash-chtmfi4m tr=bash
+2015-02-12 18:14:36,802-0600 DEBUG swift SCOPE thread=R-14-58
+2015-02-12 18:14:36,801-0600 DEBUG swift PROCEDURE line=3 thread=R-14-8-1 name=search
+2015-02-12 18:14:36,802-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-59
+2015-02-12 18:14:36,802-0600 DEBUG swift SCOPE thread=R-14-59
+2015-02-12 18:14:36,801-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-24
+2015-02-12 18:14:36,802-0600 DEBUG swift SCOPE thread=R-14-24
+2015-02-12 18:14:36,802-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-chtmfi4m
+2015-02-12 18:14:36,801-0600 DEBUG swift PROCEDURE line=3 thread=R-14-10-1 name=search
+2015-02-12 18:14:36,800-0600 DEBUG swift PROCEDURE line=3 thread=R-14-9-1 name=search
+2015-02-12 18:14:36,802-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-61
+2015-02-12 18:14:36,802-0600 DEBUG swift JOB_INIT jobid=bash-ehtmfi4m tr=bash
+2015-02-12 18:14:36,802-0600 DEBUG swift SCOPE thread=R-14-61
+2015-02-12 18:14:36,802-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-62
+2015-02-12 18:14:36,800-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-23
+2015-02-12 18:14:36,802-0600 DEBUG swift SCOPE thread=R-14-23
+2015-02-12 18:14:36,803-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-ehtmfi4m
+2015-02-12 18:14:36,803-0600 INFO  Tracef @Filename  = output/miRNA_5.split 
+
+2015-02-12 18:14:36,800-0600 DEBUG swift INTERNALPROC_START thread=R-14-8-0 name=tracef
+2015-02-12 18:14:36,803-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-63
+2015-02-12 18:14:36,800-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-21
+2015-02-12 18:14:36,803-0600 DEBUG swift INTERNALPROC_END thread=R-14-4-0 name=tracef
+2015-02-12 18:14:36,803-0600 DEBUG swift SCOPE thread=R-14-21
+2015-02-12 18:14:36,803-0600 DEBUG swift JOB_INIT jobid=bash-ghtmfi4m tr=bash
+2015-02-12 18:14:36,803-0600 DEBUG swift INTERNALPROC_START thread=R-14-18-0 name=tracef
+2015-02-12 18:14:36,803-0600 INFO  Tracef @Filename  = output/miRNA_6.split 
+
+2015-02-12 18:14:36,803-0600 DEBUG swift INTERNALPROC_END thread=R-14-6-0 name=tracef
+2015-02-12 18:14:36,803-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-ghtmfi4m
+2015-02-12 18:14:36,803-0600 DEBUG swift PROCEDURE line=3 thread=R-14-18-1 name=search
+2015-02-12 18:14:36,803-0600 INFO  Tracef @Filename  = output/miRNA_0.split 
+
+2015-02-12 18:14:36,803-0600 DEBUG swift INTERNALPROC_END thread=R-14-0x2 name=tracef
+2015-02-12 18:14:36,803-0600 DEBUG swift INTERNALPROC_START thread=R-14-32-0 name=tracef
+2015-02-12 18:14:36,803-0600 INFO  Tracef @Filename  = output/miRNA_9.split 
+
+2015-02-12 18:14:36,803-0600 DEBUG swift PROCEDURE line=3 thread=R-14-32-1 name=search
+2015-02-12 18:14:36,803-0600 DEBUG swift INTERNALPROC_END thread=R-14-9-0 name=tracef
+2015-02-12 18:14:36,803-0600 DEBUG swift JOB_INIT jobid=bash-hhtmfi4m tr=bash
+2015-02-12 18:14:36,803-0600 DEBUG swift INTERNALPROC_START thread=R-14-33-0 name=tracef
+2015-02-12 18:14:36,803-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-hhtmfi4m
+2015-02-12 18:14:36,803-0600 DEBUG swift PROCEDURE line=3 thread=R-14-33-1 name=search
+2015-02-12 18:14:36,803-0600 DEBUG swift JOB_INIT jobid=bash-ihtmfi4m tr=bash
+2015-02-12 18:14:36,800-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-22
+2015-02-12 18:14:36,803-0600 DEBUG swift SCOPE thread=R-14-22
+2015-02-12 18:14:36,800-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-20
+2015-02-12 18:14:36,803-0600 DEBUG swift SCOPE thread=R-14-20
+2015-02-12 18:14:36,803-0600 DEBUG swift JOB_INIT jobid=bash-fhtmfi4m tr=bash
+2015-02-12 18:14:36,803-0600 DEBUG swift JOB_INIT jobid=bash-jhtmfi4m tr=bash
+2015-02-12 18:14:36,803-0600 DEBUG swift SCOPE thread=R-14-63
+2015-02-12 18:14:36,803-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-64
+2015-02-12 18:14:36,804-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-fhtmfi4m
+2015-02-12 18:14:36,804-0600 DEBUG swift SCOPE thread=R-14-64
+2015-02-12 18:14:36,803-0600 DEBUG swift INTERNALPROC_END thread=R-14-5-0 name=tracef
+2015-02-12 18:14:36,804-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-jhtmfi4m
+2015-02-12 18:14:36,802-0600 DEBUG swift SCOPE thread=R-14-62
+2015-02-12 18:14:36,804-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-65
+2015-02-12 18:14:36,804-0600 DEBUG swift SCOPE thread=R-14-65
+2015-02-12 18:14:36,804-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-66
+2015-02-12 18:14:36,804-0600 DEBUG swift SCOPE thread=R-14-66
+2015-02-12 18:14:36,804-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-67
+2015-02-12 18:14:36,804-0600 DEBUG swift SCOPE thread=R-14-67
+2015-02-12 18:14:36,802-0600 DEBUG swift PROCEDURE line=3 thread=R-14-19-1 name=search
+2015-02-12 18:14:36,804-0600 DEBUG swift INTERNALPROC_START thread=R-14-35-0 name=tracef
+2015-02-12 18:14:36,804-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-68
+2015-02-12 18:14:36,804-0600 DEBUG swift SCOPE thread=R-14-68
+2015-02-12 18:14:36,802-0600 DEBUG swift JOB_INIT jobid=bash-dhtmfi4m tr=bash
+2015-02-12 18:14:36,802-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-60
+2015-02-12 18:14:36,802-0600 DEBUG swift INTERNALPROC_START thread=R-14-19-0 name=tracef
+2015-02-12 18:14:36,802-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-57
+2015-02-12 18:14:36,804-0600 DEBUG swift SCOPE thread=R-14-57
+2015-02-12 18:14:36,802-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-56
+2015-02-12 18:14:36,804-0600 DEBUG swift PROCEDURE line=3 thread=R-14-35-1 name=search
+2015-02-12 18:14:36,804-0600 DEBUG swift JOB_INIT jobid=bash-khtmfi4m tr=bash
+2015-02-12 18:14:36,802-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-55
+2015-02-12 18:14:36,804-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-71
+2015-02-12 18:14:36,804-0600 DEBUG swift SCOPE thread=R-14-55
+2015-02-12 18:14:36,804-0600 DEBUG swift SCOPE thread=R-14-71
+2015-02-12 18:14:36,802-0600 DEBUG swift INTERNALPROC_END thread=R-14-3-0 name=tracef
+2015-02-12 18:14:36,804-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-khtmfi4m
+2015-02-12 18:14:36,802-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-0htmfi4m
+2015-02-12 18:14:36,804-0600 DEBUG swift INTERNALPROC_START thread=R-14-37-0 name=tracef
+2015-02-12 18:14:36,802-0600 INFO  Tracef @Filename  = output/miRNA_2.split 
+
+2015-02-12 18:14:36,804-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-72
+2015-02-12 18:14:36,804-0600 DEBUG swift INTERNALPROC_END thread=R-14-2-0 name=tracef
+2015-02-12 18:14:36,804-0600 DEBUG swift SCOPE thread=R-14-72
+2015-02-12 18:14:36,802-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-54
+2015-02-12 18:14:36,804-0600 DEBUG swift PROCEDURE line=3 thread=R-14-36-1 name=search
+2015-02-12 18:14:36,804-0600 DEBUG swift SCOPE thread=R-14-54
+2015-02-12 18:14:36,802-0600 DEBUG swift JOB_INIT jobid=bash-1htmfi4m tr=bash
+2015-02-12 18:14:36,804-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-74
+2015-02-12 18:14:36,804-0600 DEBUG swift PROCEDURE line=3 thread=R-14-37-1 name=search
+2015-02-12 18:14:36,804-0600 DEBUG swift SCOPE thread=R-14-74
+2015-02-12 18:14:36,804-0600 DEBUG swift INTERNALPROC_START thread=R-14-40-0 name=tracef
+2015-02-12 18:14:36,802-0600 DEBUG swift SCOPE thread=R-14-51
+2015-02-12 18:14:36,802-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-52
+2015-02-12 18:14:36,804-0600 DEBUG swift SCOPE thread=R-14-52
+2015-02-12 18:14:36,802-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-9htmfi4m
+2015-02-12 18:14:36,804-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-75
+2015-02-12 18:14:36,804-0600 DEBUG swift SCOPE thread=R-14-75
+2015-02-12 18:14:36,804-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-1htmfi4m
+2015-02-12 18:14:36,802-0600 DEBUG swift SCOPE thread=R-14-47
+2015-02-12 18:14:36,805-0600 DEBUG swift PROCEDURE line=3 thread=R-14-40-1 name=search
+2015-02-12 18:14:36,802-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-49
+2015-02-12 18:14:36,805-0600 DEBUG swift JOB_INIT jobid=bash-nhtmfi4m tr=bash
+2015-02-12 18:14:36,805-0600 DEBUG swift SCOPE thread=R-14-49
+2015-02-12 18:14:36,802-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-50
+2015-02-12 18:14:36,805-0600 DEBUG swift SCOPE thread=R-14-50
+2015-02-12 18:14:36,805-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-77
+2015-02-12 18:14:36,802-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-46
+2015-02-12 18:14:36,805-0600 DEBUG swift PROCEDURE line=3 thread=R-14-41-1 name=search
+2015-02-12 18:14:36,805-0600 DEBUG swift JOB_INIT jobid=bash-ohtmfi4m tr=bash
+2015-02-12 18:14:36,805-0600 DEBUG swift SCOPE thread=R-14-46
+2015-02-12 18:14:36,802-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-45
+2015-02-12 18:14:36,801-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-44
+2015-02-12 18:14:36,805-0600 DEBUG swift SCOPE thread=R-14-44
+2015-02-12 18:14:36,805-0600 DEBUG swift INTERNALPROC_START thread=R-14-42-0 name=tracef
+2015-02-12 18:14:36,801-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-5htmfi4m
+2015-02-12 18:14:36,805-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-ohtmfi4m
+2015-02-12 18:14:36,805-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-80
+2015-02-12 18:14:36,805-0600 DEBUG swift SCOPE thread=R-14-80
+2015-02-12 18:14:36,805-0600 DEBUG swift JOB_INIT jobid=bash-phtmfi4m tr=bash
+2015-02-12 18:14:36,805-0600 DEBUG swift INTERNALPROC_START thread=R-14-43-0 name=tracef
+2015-02-12 18:14:36,805-0600 DEBUG swift PROCEDURE line=3 thread=R-14-42-1 name=search
+2015-02-12 18:14:36,805-0600 DEBUG swift INTERNALPROC_START thread=R-14-48-0 name=tracef
+2015-02-12 18:14:36,805-0600 DEBUG swift INTERNALPROC_START thread=R-14-30-0 name=tracef
+2015-02-12 18:14:36,805-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-83
+2015-02-12 18:14:36,801-0600 DEBUG swift JOB_INIT jobid=bash-7htmfi4m tr=bash
+2015-02-12 18:14:36,805-0600 DEBUG swift SCOPE thread=R-14-83
+2015-02-12 18:14:36,805-0600 DEBUG swift INTERNALPROC_START thread=R-14-53-0 name=tracef
+2015-02-12 18:14:36,805-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-86
+2015-02-12 18:14:36,801-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-39
+2015-02-12 18:14:36,805-0600 DEBUG swift SCOPE thread=R-14-86
+2015-02-12 18:14:36,805-0600 DEBUG swift SCOPE thread=R-14-39
+2015-02-12 18:14:36,805-0600 DEBUG swift PROCEDURE line=3 thread=R-14-30-1 name=search
+2015-02-12 18:14:36,805-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-87
+2015-02-12 18:14:36,805-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-89
+2015-02-12 18:14:36,805-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-7htmfi4m
+2015-02-12 18:14:36,805-0600 DEBUG swift SCOPE thread=R-14-89
+2015-02-12 18:14:36,805-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-91
+2015-02-12 18:14:36,801-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-38
+2015-02-12 18:14:36,805-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-92
+2015-02-12 18:14:36,805-0600 DEBUG swift SCOPE thread=R-14-38
+2015-02-12 18:14:36,805-0600 DEBUG swift SCOPE thread=R-14-92
+2015-02-12 18:14:36,805-0600 DEBUG swift INTERNALPROC_START thread=R-14-28-0 name=tracef
+2015-02-12 18:14:36,801-0600 DEBUG swift JOB_INIT jobid=bash-6htmfi4m tr=bash
+2015-02-12 18:14:36,805-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-94
+2015-02-12 18:14:36,805-0600 DEBUG swift JOB_INIT jobid=bash-qhtmfi4m tr=bash
+2015-02-12 18:14:36,805-0600 DEBUG swift SCOPE thread=R-14-94
+2015-02-12 18:14:36,805-0600 DEBUG swift PROCEDURE line=3 thread=R-14-28-1 name=search
+2015-02-12 18:14:36,805-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-95
+2015-02-12 18:14:36,805-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-96
+2015-02-12 18:14:36,805-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-97
+2015-02-12 18:14:36,805-0600 DEBUG swift SCOPE thread=R-14-96
+2015-02-12 18:14:36,806-0600 DEBUG swift SCOPE thread=R-14-97
+2015-02-12 18:14:36,806-0600 DEBUG swift INTERNALPROC_START thread=R-14-27-0 name=tracef
+2015-02-12 18:14:36,806-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-qhtmfi4m
+2015-02-12 18:14:36,806-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-6htmfi4m
+2015-02-12 18:14:36,801-0600 DEBUG swift SCOPE thread=R-14-34
+2015-02-12 18:14:36,801-0600 DEBUG swift JOB_INIT jobid=bash-3htmfi4m tr=bash
+2015-02-12 18:14:36,806-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-98
+2015-02-12 18:14:36,806-0600 DEBUG swift SCOPE thread=R-14-98
+2015-02-12 18:14:36,801-0600 DEBUG swift SCOPE thread=R-14-31
+2015-02-12 18:14:36,801-0600 DEBUG swift SCOPE thread=R-14-29
+2015-02-12 18:14:36,806-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-100
+2015-02-12 18:14:36,806-0600 DEBUG swift INTERNALPROC_START thread=R-14-26-0 name=tracef
+2015-02-12 18:14:36,806-0600 DEBUG swift PROCEDURE line=3 thread=R-14-27-1 name=search
+2015-02-12 18:14:36,806-0600 DEBUG swift INTERNALPROC_START thread=R-14-25-0 name=tracef
+2015-02-12 18:14:36,806-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-3htmfi4m
+2015-02-12 18:14:36,806-0600 DEBUG swift JOB_INIT jobid=bash-rhtmfi4m tr=bash
+2015-02-12 18:14:36,806-0600 DEBUG swift INTERNALPROC_START thread=R-14-58-0 name=tracef
+2015-02-12 18:14:36,806-0600 DEBUG swift INTERNALPROC_START thread=R-14-59-0 name=tracef
+2015-02-12 18:14:36,806-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-99
+2015-02-12 18:14:36,806-0600 DEBUG swift SCOPE thread=R-14-99
+2015-02-12 18:14:36,806-0600 DEBUG swift PROCEDURE line=3 thread=R-14-26-1 name=search
+2015-02-12 18:14:36,806-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-rhtmfi4m
+2015-02-12 18:14:36,806-0600 DEBUG swift INTERNALPROC_START thread=R-14-61-0 name=tracef
+2015-02-12 18:14:36,806-0600 DEBUG swift PROCEDURE line=3 thread=R-14-25-1 name=search
+2015-02-12 18:14:36,806-0600 DEBUG swift INTERNALPROC_START thread=R-14-23-0 name=tracef
+2015-02-12 18:14:36,806-0600 DEBUG swift JOB_INIT jobid=bash-shtmfi4m tr=bash
+2015-02-12 18:14:36,806-0600 DEBUG swift PROCEDURE line=3 thread=R-14-58-1 name=search
+2015-02-12 18:14:36,806-0600 DEBUG swift PROCEDURE line=3 thread=R-14-24-1 name=search
+2015-02-12 18:14:36,806-0600 DEBUG swift INTERNALPROC_START thread=R-14-21-0 name=tracef
+2015-02-12 18:14:36,806-0600 DEBUG swift PROCEDURE line=3 thread=R-14-59-1 name=search
+2015-02-12 18:14:36,806-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-shtmfi4m
+2015-02-12 18:14:36,806-0600 INFO  Tracef @Filename  = output/miRNA_17.split 
+
+2015-02-12 18:14:36,806-0600 DEBUG swift PROCEDURE line=3 thread=R-14-61-1 name=search
+2015-02-12 18:14:36,806-0600 DEBUG swift PROCEDURE line=3 thread=R-14-23-1 name=search
+2015-02-12 18:14:36,806-0600 DEBUG swift INTERNALPROC_END thread=R-14-16-0 name=tracef
+2015-02-12 18:14:36,806-0600 INFO  Tracef @Filename  = output/miRNA_14.split 
+
+2015-02-12 18:14:36,806-0600 DEBUG swift PROCEDURE line=3 thread=R-14-21-1 name=search
+2015-02-12 18:14:36,806-0600 DEBUG swift JOB_INIT jobid=bash-thtmfi4m tr=bash
+2015-02-12 18:14:36,806-0600 DEBUG swift INTERNALPROC_START thread=R-14-22-0 name=tracef
+2015-02-12 18:14:36,806-0600 DEBUG swift JOB_INIT jobid=bash-vhtmfi4m tr=bash
+2015-02-12 18:14:36,806-0600 DEBUG swift JOB_INIT jobid=bash-xhtmfi4m tr=bash
+2015-02-12 18:14:36,806-0600 DEBUG swift INTERNALPROC_START thread=R-14-20-0 name=tracef
+2015-02-12 18:14:36,806-0600 DEBUG swift JOB_INIT jobid=bash-yhtmfi4m tr=bash
+2015-02-12 18:14:36,806-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-thtmfi4m
+2015-02-12 18:14:36,806-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-vhtmfi4m
+2015-02-12 18:14:36,806-0600 DEBUG swift JOB_INIT jobid=bash-zhtmfi4m tr=bash
+2015-02-12 18:14:36,806-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-xhtmfi4m
+2015-02-12 18:14:36,805-0600 DEBUG swift SCOPE thread=R-14-95
+2015-02-12 18:14:36,807-0600 DEBUG swift JOB_INIT jobid=bash-0itmfi4m tr=bash
+2015-02-12 18:14:36,807-0600 INFO  Tracef @Filename  = output/miRNA_15.split 
+
+2015-02-12 18:14:36,807-0600 DEBUG swift INTERNALPROC_START thread=R-14-63-0 name=tracef
+2015-02-12 18:14:36,807-0600 DEBUG swift JOB_INIT jobid=bash-2itmfi4m tr=bash
+2015-02-12 18:14:36,807-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-zhtmfi4m
+2015-02-12 18:14:36,807-0600 DEBUG swift INTERNALPROC_END thread=R-14-15-0 name=tracef
+2015-02-12 18:14:36,807-0600 DEBUG swift PROCEDURE line=3 thread=R-14-20-1 name=search
+2015-02-12 18:14:36,807-0600 DEBUG swift INTERNALPROC_START thread=R-14-64-0 name=tracef
+2015-02-12 18:14:36,807-0600 DEBUG swift INTERNALPROC_START thread=R-14-62-0 name=tracef
+2015-02-12 18:14:36,807-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-0itmfi4m
+2015-02-12 18:14:36,805-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-93
+2015-02-12 18:14:36,810-0600 DEBUG swift SCOPE thread=R-14-93
+2015-02-12 18:14:36,805-0600 DEBUG swift SCOPE thread=R-14-91
+2015-02-12 18:14:36,810-0600 DEBUG swift INTERNALPROC_START thread=R-14-66-0 name=tracef
+2015-02-12 18:14:36,805-0600 DEBUG swift PROCEDURE line=3 thread=R-14-53-1 name=search
+2015-02-12 18:14:36,805-0600 DEBUG swift SCOPE thread=R-14-87
+2015-02-12 18:14:36,810-0600 DEBUG swift INTERNALPROC_START thread=R-14-67-0 name=tracef
+2015-02-12 18:14:36,805-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-90
+2015-02-12 18:14:36,810-0600 DEBUG swift SCOPE thread=R-14-90
+2015-02-12 18:14:36,805-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-88
+2015-02-12 18:14:36,810-0600 DEBUG swift SCOPE thread=R-14-88
+2015-02-12 18:14:36,810-0600 DEBUG swift INTERNALPROC_START thread=R-14-68-0 name=tracef
+2015-02-12 18:14:36,805-0600 DEBUG swift PROCEDURE line=3 thread=R-14-48-1 name=search
+2015-02-12 18:14:36,805-0600 DEBUG swift PROCEDURE line=3 thread=R-14-43-1 name=search
+2015-02-12 18:14:36,810-0600 DEBUG swift PROCEDURE line=3 thread=R-14-66-1 name=search
+2015-02-12 18:14:36,810-0600 DEBUG swift PROCEDURE line=3 thread=R-14-67-1 name=search
+2015-02-12 18:14:36,805-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-85
+2015-02-12 18:14:36,810-0600 DEBUG swift PROCEDURE line=3 thread=R-14-68-1 name=search
+2015-02-12 18:14:36,805-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-phtmfi4m
+2015-02-12 18:14:36,810-0600 DEBUG swift JOB_INIT jobid=bash-4itmfi4m tr=bash
+2015-02-12 18:14:36,805-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-84
+2015-02-12 18:14:36,805-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-82
+2015-02-12 18:14:36,810-0600 DEBUG swift SCOPE thread=R-14-82
+2015-02-12 18:14:36,805-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-81
+2015-02-12 18:14:36,810-0600 DEBUG swift PROCEDURE line=3 thread=R-14-57-1 name=search
+2015-02-12 18:14:36,810-0600 DEBUG swift SCOPE thread=R-14-81
+2015-02-12 18:14:36,810-0600 DEBUG swift INTERNALPROC_START thread=R-14-71-0 name=tracef
+2015-02-12 18:14:36,805-0600 DEBUG swift SCOPE thread=R-14-45
+2015-02-12 18:14:36,810-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-4itmfi4m
+2015-02-12 18:14:36,810-0600 DEBUG swift JOB_INIT jobid=bash-6itmfi4m tr=bash
+2015-02-12 18:14:36,805-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-79
+2015-02-12 18:14:36,810-0600 DEBUG swift JOB_INIT jobid=bash-7itmfi4m tr=bash
+2015-02-12 18:14:36,810-0600 DEBUG swift INTERNALPROC_START thread=R-14-72-0 name=tracef
+2015-02-12 18:14:36,810-0600 DEBUG swift JOB_INIT jobid=bash-9itmfi4m tr=bash
+2015-02-12 18:14:36,811-0600 DEBUG swift INTERNALPROC_START thread=R-14-54-0 name=tracef
+2015-02-12 18:14:36,805-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-78
+2015-02-12 18:14:36,811-0600 DEBUG swift SCOPE thread=R-14-78
+2015-02-12 18:14:36,805-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-nhtmfi4m
+2015-02-12 18:14:36,811-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-9itmfi4m
+2015-02-12 18:14:36,805-0600 DEBUG swift SCOPE thread=R-14-77
+2015-02-12 18:14:36,811-0600 DEBUG swift PROCEDURE line=3 thread=R-14-71-1 name=search
+2015-02-12 18:14:36,811-0600 DEBUG swift PROCEDURE line=3 thread=R-14-72-1 name=search
+2015-02-12 18:14:36,811-0600 DEBUG swift JOB_INIT jobid=bash-aitmfi4m tr=bash
+2015-02-12 18:14:36,805-0600 DEBUG swift INTERNALPROC_START thread=R-14-41-0 name=tracef
+2015-02-12 18:14:36,811-0600 DEBUG swift PROCEDURE line=3 thread=R-14-54-1 name=search
+2015-02-12 18:14:36,811-0600 DEBUG swift INTERNALPROC_START thread=R-14-51-0 name=tracef
+2015-02-12 18:14:36,804-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-76
+2015-02-12 18:14:36,811-0600 DEBUG swift INTERNALPROC_START thread=R-14-52-0 name=tracef
+2015-02-12 18:14:36,811-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-aitmfi4m
+2015-02-12 18:14:36,811-0600 DEBUG swift SCOPE thread=R-14-76
+2015-02-12 18:14:36,811-0600 DEBUG swift INTERNALPROC_START thread=R-14-75-0 name=tracef
+2015-02-12 18:14:36,804-0600 DEBUG swift JOB_INIT jobid=bash-mhtmfi4m tr=bash
+2015-02-12 18:14:36,811-0600 DEBUG swift PROCEDURE line=3 thread=R-14-51-1 name=search
+2015-02-12 18:14:36,811-0600 DEBUG swift INTERNALPROC_START thread=R-14-47-0 name=tracef
+2015-02-12 18:14:36,811-0600 DEBUG swift INTERNALPROC_START thread=R-14-49-0 name=tracef
+2015-02-12 18:14:36,804-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-73
+2015-02-12 18:14:36,811-0600 DEBUG swift PROCEDURE line=3 thread=R-14-52-1 name=search
+2015-02-12 18:14:36,811-0600 DEBUG swift SCOPE thread=R-14-73
+2015-02-12 18:14:36,811-0600 DEBUG swift JOB_INIT jobid=bash-bitmfi4m tr=bash
+2015-02-12 18:14:36,811-0600 DEBUG swift INTERNALPROC_START thread=R-14-50-0 name=tracef
+2015-02-12 18:14:36,804-0600 DEBUG swift JOB_INIT jobid=bash-lhtmfi4m tr=bash
+2015-02-12 18:14:36,811-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-mhtmfi4m
+2015-02-12 18:14:36,811-0600 DEBUG swift PROCEDURE line=3 thread=R-14-47-1 name=search
+2015-02-12 18:14:36,804-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-dhtmfi4m
+2015-02-12 18:14:36,811-0600 DEBUG swift JOB_INIT jobid=bash-ditmfi4m tr=bash
+2015-02-12 18:14:36,811-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-bitmfi4m
+2015-02-12 18:14:36,804-0600 DEBUG swift SCOPE thread=R-14-56
+2015-02-12 18:14:36,804-0600 DEBUG swift INTERNALPROC_START thread=R-14-36-0 name=tracef
+2015-02-12 18:14:36,804-0600 DEBUG swift SCOPE thread=R-14-60
+2015-02-12 18:14:36,811-0600 DEBUG swift PROCEDURE line=3 thread=R-14-50-1 name=search
+2015-02-12 18:14:36,811-0600 DEBUG swift JOB_INIT jobid=bash-eitmfi4m tr=bash
+2015-02-12 18:14:36,811-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-ditmfi4m
+2015-02-12 18:14:36,811-0600 DEBUG swift JOB_INIT jobid=bash-fitmfi4m tr=bash
+2015-02-12 18:14:36,811-0600 DEBUG swift INTERNALPROC_START thread=R-14-80-0 name=tracef
+2015-02-12 18:14:36,804-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-70
+2015-02-12 18:14:36,811-0600 DEBUG swift PROCEDURE line=3 thread=R-14-46-1 name=search
+2015-02-12 18:14:36,811-0600 DEBUG swift JOB_INIT jobid=bash-gitmfi4m tr=bash
+2015-02-12 18:14:36,811-0600 DEBUG swift SCOPE thread=R-14-70
+2015-02-12 18:14:36,804-0600 DEBUG swift FOREACH_IT_START line=37 thread=R-14-69
+2015-02-12 18:14:36,811-0600 DEBUG swift INTERNALPROC_START thread=R-14-83-0 name=tracef
+2015-02-12 18:14:36,811-0600 DEBUG swift SCOPE thread=R-14-69
+2015-02-12 18:14:36,804-0600 INFO  Tracef @Filename  = output/miRNA_10.split 
+
+2015-02-12 18:14:36,811-0600 DEBUG swift PROCEDURE line=3 thread=R-14-80-1 name=search
+2015-02-12 18:14:36,811-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-gitmfi4m
+2015-02-12 18:14:36,811-0600 DEBUG swift INTERNALPROC_START thread=R-14-39-0 name=tracef
+2015-02-12 18:14:36,811-0600 DEBUG swift INTERNALPROC_END thread=R-14-10-0 name=tracef
+2015-02-12 18:14:36,811-0600 DEBUG swift JOB_INIT jobid=bash-hitmfi4m tr=bash
+2015-02-12 18:14:36,803-0600 INFO  Tracef @Filename  = output/miRNA_1.split 
+
+2015-02-12 18:14:36,812-0600 DEBUG swift JOB_INIT jobid=bash-iitmfi4m tr=bash
+2015-02-12 18:14:36,812-0600 DEBUG swift INTERNALPROC_START thread=R-14-89-0 name=tracef
+2015-02-12 18:14:36,812-0600 DEBUG swift PROCEDURE line=3 thread=R-14-83-1 name=search
+2015-02-12 18:14:36,803-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-ihtmfi4m
+2015-02-12 18:14:36,812-0600 DEBUG swift INTERNALPROC_END thread=R-14-1-0 name=tracef
+2015-02-12 18:14:36,812-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-hitmfi4m
+2015-02-12 18:14:36,812-0600 DEBUG swift INTERNALPROC_START thread=R-14-38-0 name=tracef
+2015-02-12 18:14:36,811-0600 DEBUG swift INTERNALPROC_START thread=R-14-86-0 name=tracef
+2015-02-12 18:14:36,812-0600 DEBUG swift INTERNALPROC_START thread=R-14-92-0 name=tracef
+2015-02-12 18:14:36,812-0600 DEBUG swift PROCEDURE line=3 thread=R-14-39-1 name=search
+2015-02-12 18:14:36,811-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-fitmfi4m
+2015-02-12 18:14:36,812-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-iitmfi4m
+2015-02-12 18:14:36,812-0600 DEBUG swift INTERNALPROC_START thread=R-14-94-0 name=tracef
+2015-02-12 18:14:36,811-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-eitmfi4m
+2015-02-12 18:14:36,812-0600 DEBUG swift PROCEDURE line=3 thread=R-14-38-1 name=search
+2015-02-12 18:14:36,812-0600 DEBUG swift INTERNALPROC_START thread=R-14-96-0 name=tracef
+2015-02-12 18:14:36,812-0600 DEBUG swift JOB_INIT jobid=bash-jitmfi4m tr=bash
+2015-02-12 18:14:36,812-0600 DEBUG swift INTERNALPROC_START thread=R-14-97-0 name=tracef
+2015-02-12 18:14:36,811-0600 DEBUG swift PROCEDURE line=3 thread=R-14-44-1 name=search
+2015-02-12 18:14:36,811-0600 DEBUG swift INTERNALPROC_START thread=R-14-44-0 name=tracef
+2015-02-12 18:14:36,812-0600 DEBUG swift PROCEDURE line=3 thread=R-14-92-1 name=search
+2015-02-12 18:14:36,811-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-lhtmfi4m
+2015-02-12 18:14:36,811-0600 DEBUG swift PROCEDURE line=3 thread=R-14-49-1 name=search
+2015-02-12 18:14:36,812-0600 DEBUG swift PROCEDURE line=3 thread=R-14-94-1 name=search
+2015-02-12 18:14:36,812-0600 DEBUG swift JOB_INIT jobid=bash-litmfi4m tr=bash
+2015-02-12 18:14:36,812-0600 DEBUG swift PROCEDURE line=3 thread=R-14-96-1 name=search
+2015-02-12 18:14:36,812-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-jitmfi4m
+2015-02-12 18:14:36,812-0600 DEBUG swift JOB_INIT jobid=bash-mitmfi4m tr=bash
+2015-02-12 18:14:36,811-0600 DEBUG swift PROCEDURE line=3 thread=R-14-75-1 name=search
+2015-02-12 18:14:36,811-0600 DEBUG swift INTERNALPROC_START thread=R-14-46-0 name=tracef
+2015-02-12 18:14:36,812-0600 DEBUG swift PROCEDURE line=3 thread=R-14-34-1 name=search
+2015-02-12 18:14:36,812-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-litmfi4m
+2015-02-12 18:14:36,811-0600 DEBUG swift JOB_INIT jobid=bash-citmfi4m tr=bash
+2015-02-12 18:14:36,812-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-mitmfi4m
+2015-02-12 18:14:36,812-0600 DEBUG swift JOB_INIT jobid=bash-nitmfi4m tr=bash
+2015-02-12 18:14:36,812-0600 DEBUG swift JOB_INIT jobid=bash-oitmfi4m tr=bash
+2015-02-12 18:14:36,812-0600 DEBUG swift JOB_INIT jobid=bash-pitmfi4m tr=bash
+2015-02-12 18:14:36,811-0600 DEBUG swift PROCEDURE line=3 thread=R-14-74-1 name=search
+2015-02-12 18:14:36,812-0600 DEBUG swift PROCEDURE line=3 thread=R-14-98-1 name=search
+2015-02-12 18:14:36,812-0600 DEBUG swift JOB_INIT jobid=bash-qitmfi4m tr=bash
+2015-02-12 18:14:36,811-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-7itmfi4m
+2015-02-12 18:14:36,811-0600 DEBUG swift INTERNALPROC_START thread=R-14-74-0 name=tracef
+2015-02-12 18:14:36,815-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-qitmfi4m
+2015-02-12 18:14:36,811-0600 DEBUG swift PROCEDURE line=3 thread=R-14-55-1 name=search
+2015-02-12 18:14:36,811-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-6itmfi4m
+2015-02-12 18:14:36,815-0600 DEBUG swift INTERNALPROC_START thread=R-14-29-0 name=tracef
+2015-02-12 18:14:36,810-0600 DEBUG swift SCOPE thread=R-14-79
+2015-02-12 18:14:36,810-0600 DEBUG swift JOB_INIT jobid=bash-8itmfi4m tr=bash
+2015-02-12 18:14:36,815-0600 DEBUG swift PROCEDURE line=3 thread=R-14-29-1 name=search
+2015-02-12 18:14:36,810-0600 DEBUG swift JOB_INIT jobid=bash-5itmfi4m tr=bash
+2015-02-12 18:14:36,810-0600 DEBUG swift SCOPE thread=R-14-84
+2015-02-12 18:14:36,815-0600 INFO  Tracef @Filename  = output/miRNA_12.split 
+
+2015-02-12 18:14:36,810-0600 DEBUG swift SCOPE thread=R-14-85
+2015-02-12 18:14:36,815-0600 INFO  swift END_FAILURE thread=R-14-4-1 tr=bash
+2015-02-12 18:14:36,810-0600 DEBUG swift INTERNALPROC_START thread=R-14-55-0 name=tracef
+2015-02-12 18:14:36,815-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-8itmfi4m
+2015-02-12 18:14:36,810-0600 DEBUG swift INTERNALPROC_START thread=R-14-57-0 name=tracef
+2015-02-12 18:14:36,815-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-5itmfi4m
+2015-02-12 18:14:36,807-0600 DEBUG swift PROCEDURE line=3 thread=R-14-65-1 name=search
+2015-02-12 18:14:36,816-0600 DEBUG swift INTERNALPROC_START thread=R-14-99-0 name=tracef
+2015-02-12 18:14:36,807-0600 DEBUG swift JOB_INIT jobid=bash-3itmfi4m tr=bash
+2015-02-12 18:14:36,816-0600 DEBUG swift JOB_INIT jobid=bash-yitmfi4m tr=bash
+2015-02-12 18:14:36,816-0600 INFO  swift END_FAILURE thread=R-14-13-1 tr=bash
+2015-02-12 18:14:36,807-0600 DEBUG swift PROCEDURE line=3 thread=R-14-62-1 name=search
+2015-02-12 18:14:36,816-0600 INFO  Tracef @Filename  = output/miRNA_8.split 
+
+2015-02-12 18:14:36,816-0600 DEBUG swift PROCEDURE line=3 thread=R-14-99-1 name=search
+2015-02-12 18:14:36,816-0600 INFO  swift END_FAILURE thread=R-14-2-1 tr=bash
+2015-02-12 18:14:36,807-0600 DEBUG swift PROCEDURE line=3 thread=R-14-64-1 name=search
+2015-02-12 18:14:36,816-0600 DEBUG swift INTERNALPROC_END thread=R-14-8-0 name=tracef
+2015-02-12 18:14:36,816-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-3itmfi4m
+2015-02-12 18:14:36,816-0600 INFO  swift END_FAILURE thread=R-14-6-1 tr=bash
+2015-02-12 18:14:36,816-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-yitmfi4m
+2015-02-12 18:14:36,807-0600 DEBUG swift PROCEDURE line=3 thread=R-14-63-1 name=search
+2015-02-12 18:14:36,807-0600 DEBUG swift INTERNALPROC_START thread=R-14-65-0 name=tracef
+2015-02-12 18:14:36,816-0600 INFO  swift END_FAILURE thread=R-14-12-1 tr=bash
+2015-02-12 18:14:36,807-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-2itmfi4m
+2015-02-12 18:14:36,816-0600 DEBUG swift JOB_INIT jobid=bash-1jtmfi4m tr=bash
+2015-02-12 18:14:36,807-0600 DEBUG swift JOB_INIT jobid=bash-1itmfi4m tr=bash
+2015-02-12 18:14:36,807-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-yhtmfi4m
+2015-02-12 18:14:36,816-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-1jtmfi4m
+2015-02-12 18:14:36,806-0600 DEBUG swift PROCEDURE line=3 thread=R-14-22-1 name=search
+2015-02-12 18:14:36,816-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-1itmfi4m
+2015-02-12 18:14:36,806-0600 DEBUG swift INTERNALPROC_END thread=R-14x2-0 name=tracef
+2015-02-12 18:14:36,816-0600 INFO  Tracef @Filename  = output/miRNA_19.split 
+
+2015-02-12 18:14:36,806-0600 DEBUG swift JOB_INIT jobid=bash-uhtmfi4m tr=bash
+2015-02-12 18:14:36,816-0600 INFO  Tracef @Filename  = output/miRNA_34.split 
+
+2015-02-12 18:14:36,816-0600 DEBUG swift INTERNALPROC_END thread=R-14-18-0 name=tracef
+2015-02-12 18:14:36,816-0600 INFO  Tracef @Filename  = output/miRNA_35.split 
+
+2015-02-12 18:14:36,806-0600 INFO  Tracef @Filename  = output/miRNA_16.split 
+
+2015-02-12 18:14:36,816-0600 DEBUG swift JOB_INIT jobid=bash-4jtmfi4m tr=bash
+2015-02-12 18:14:36,816-0600 DEBUG swift INTERNALPROC_END thread=R-14-33-0 name=tracef
+2015-02-12 18:14:36,816-0600 DEBUG swift INTERNALPROC_END thread=R-14-17-0 name=tracef
+2015-02-12 18:14:36,816-0600 INFO  swift END_FAILURE thread=R-14-17-1 tr=bash
+2015-02-12 18:14:36,816-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-uhtmfi4m
+2015-02-12 18:14:36,806-0600 DEBUG swift INTERNALPROC_START thread=R-14-24-0 name=tracef
+2015-02-12 18:14:36,816-0600 DEBUG swift INTERNALPROC_START thread=R-14-95-0 name=tracef
+2015-02-12 18:14:36,806-0600 DEBUG swift SCOPE thread=R-14-100
+2015-02-12 18:14:36,816-0600 DEBUG swift INTERNALPROC_END thread=R-14-32-0 name=tracef
+2015-02-12 18:14:36,816-0600 INFO  swift END_FAILURE thread=R-14-11-1 tr=bash
+2015-02-12 18:14:36,817-0600 INFO  swift END_FAILURE thread=R-14-7-1 tr=bash
+2015-02-12 18:14:36,817-0600 INFO  swift END_FAILURE thread=R-14-24-1 tr=bash
+2015-02-12 18:14:36,817-0600 INFO  swift END_FAILURE thread=R-14-25-1 tr=bash
+2015-02-12 18:14:36,816-0600 DEBUG swift JOB_INIT jobid=bash-3jtmfi4m tr=bash
+2015-02-12 18:14:36,817-0600 DEBUG swift INTERNALPROC_START thread=R-14-93-0 name=tracef
+2015-02-12 18:14:36,816-0600 DEBUG swift JOB_INIT jobid=bash-2jtmfi4m tr=bash
+2015-02-12 18:14:36,817-0600 INFO  swift END_FAILURE thread=R-14-61-1 tr=bash
+2015-02-12 18:14:36,817-0600 DEBUG swift PROCEDURE line=3 thread=R-14-93-1 name=search
+2015-02-12 18:14:36,817-0600 DEBUG swift INTERNALPROC_START thread=R-14-91-0 name=tracef
+2015-02-12 18:14:36,817-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-3jtmfi4m
+2015-02-12 18:14:36,816-0600 DEBUG swift JOB_INIT jobid=bash-0jtmfi4m tr=bash
+2015-02-12 18:14:36,816-0600 DEBUG swift JOB_INIT jobid=bash-zitmfi4m tr=bash
+2015-02-12 18:14:36,817-0600 DEBUG swift PROCEDURE line=3 thread=R-14-91-1 name=search
+2015-02-12 18:14:36,817-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-0jtmfi4m
+2015-02-12 18:14:36,817-0600 DEBUG swift JOB_INIT jobid=bash-5jtmfi4m tr=bash
+2015-02-12 18:14:36,815-0600 DEBUG swift JOB_INIT jobid=bash-xitmfi4m tr=bash
+2015-02-12 18:14:36,817-0600 DEBUG swift PROCEDURE line=3 thread=R-14-87-1 name=search
+2015-02-12 18:14:36,817-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-zitmfi4m
+2015-02-12 18:14:36,815-0600 DEBUG swift INTERNALPROC_END thread=R-14-12-0 name=tracef
+2015-02-12 18:14:36,815-0600 INFO  Tracef @Filename  = output/miRNA_13.split 
+
+2015-02-12 18:14:36,817-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-5jtmfi4m
+2015-02-12 18:14:36,817-0600 DEBUG swift JOB_INIT jobid=bash-6jtmfi4m tr=bash
+2015-02-12 18:14:36,818-0600 DEBUG swift INTERNALPROC_START thread=R-14-90-0 name=tracef
+2015-02-12 18:14:36,818-0600 DEBUG swift INTERNALPROC_END thread=R-14-13-0 name=tracef
+2015-02-12 18:14:36,813-0600 INFO  swift END_FAILURE thread=R-14-19-1 tr=bash
+2015-02-12 18:14:36,818-0600 DEBUG swift JOB_INIT jobid=bash-7jtmfi4m tr=bash
+2015-02-12 18:14:36,818-0600 DEBUG swift INTERNALPROC_START thread=R-14-88-0 name=tracef
+2015-02-12 18:14:36,813-0600 INFO  swift END_FAILURE thread=R-14-10-1 tr=bash
+2015-02-12 18:14:36,818-0600 DEBUG swift PROCEDURE line=3 thread=R-14-90-1 name=search
+2015-02-12 18:14:36,818-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-6jtmfi4m
+2015-02-12 18:14:36,818-0600 INFO  Tracef @Filename  = output/miRNA_18.split 
+
+2015-02-12 18:14:36,813-0600 INFO  swift END_FAILURE thread=R-14-8-1 tr=bash
+2015-02-12 18:14:36,818-0600 DEBUG swift INTERNALPROC_START thread=R-14-82-0 name=tracef
+2015-02-12 18:14:36,818-0600 DEBUG swift PROCEDURE line=3 thread=R-14-88-1 name=search
+2015-02-12 18:14:36,818-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-7jtmfi4m
+2015-02-12 18:14:36,818-0600 DEBUG swift INTERNALPROC_START thread=R-14-81-0 name=tracef
+2015-02-12 18:14:36,813-0600 DEBUG swift JOB_INIT jobid=bash-vitmfi4m tr=bash
+2015-02-12 18:14:36,813-0600 DEBUG swift JOB_INIT jobid=bash-uitmfi4m tr=bash
+2015-02-12 18:14:36,818-0600 DEBUG swift JOB_INIT jobid=bash-8jtmfi4m tr=bash
+2015-02-12 18:14:36,813-0600 DEBUG swift JOB_INIT jobid=bash-titmfi4m tr=bash
+2015-02-12 18:14:36,818-0600 DEBUG swift INTERNALPROC_START thread=R-14-45-0 name=tracef
+2015-02-12 18:14:36,812-0600 DEBUG swift JOB_INIT jobid=bash-sitmfi4m tr=bash
+2015-02-12 18:14:36,818-0600 INFO  Tracef @Filename  = output/miRNA_39.split 
+
+2015-02-12 18:14:36,812-0600 DEBUG swift PROCEDURE line=3 thread=R-14-31-1 name=search
+2015-02-12 18:14:36,818-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-vitmfi4m
+2015-02-12 18:14:36,818-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-8jtmfi4m
+2015-02-12 18:14:36,818-0600 INFO  swift END_FAILURE thread=R-14-41-1 tr=bash
+2015-02-12 18:14:36,812-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-oitmfi4m
+2015-02-12 18:14:36,818-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-titmfi4m
+2015-02-12 18:14:36,818-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-sitmfi4m
+2015-02-12 18:14:36,812-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-pitmfi4m
+2015-02-12 18:14:36,812-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-citmfi4m
+2015-02-12 18:14:36,818-0600 DEBUG swift INTERNALPROC_START thread=R-14-78-0 name=tracef
+2015-02-12 18:14:36,818-0600 DEBUG swift INTERNALPROC_START thread=R-14-77-0 name=tracef
+2015-02-12 18:14:36,818-0600 DEBUG swift JOB_INIT jobid=bash-ajtmfi4m tr=bash
+2015-02-12 18:14:36,818-0600 INFO  Tracef @Filename  = output/miRNA_42.split 
+
+2015-02-12 18:14:36,812-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-nitmfi4m
+2015-02-12 18:14:36,818-0600 DEBUG swift INTERNALPROC_END thread=R-14-40-0 name=tracef
+2015-02-12 18:14:36,818-0600 INFO  swift END_FAILURE thread=R-14-53-1 tr=bash
+2015-02-12 18:14:36,812-0600 INFO  Tracef @Filename  = output/miRNA_11.split 
+
+2015-02-12 18:14:36,818-0600 DEBUG swift PROCEDURE line=3 thread=R-14-77-1 name=search
+2015-02-12 18:14:36,818-0600 DEBUG swift INTERNALPROC_START thread=R-14-76-0 name=tracef
+2015-02-12 18:14:36,812-0600 DEBUG swift JOB_INIT jobid=bash-ritmfi4m tr=bash
+2015-02-12 18:14:36,818-0600 DEBUG swift INTERNALPROC_END thread=R-14-11-0 name=tracef
+2015-02-12 18:14:36,812-0600 DEBUG swift INTERNALPROC_START thread=R-14-31-0 name=tracef
+2015-02-12 18:14:36,818-0600 DEBUG swift INTERNALPROC_START thread=R-14-73-0 name=tracef
+2015-02-12 18:14:36,818-0600 DEBUG swift INTERNALPROC_START thread=R-14-56-0 name=tracef
+2015-02-12 18:14:36,818-0600 INFO  swift END_FAILURE thread=R-14-68-1 tr=bash
+2015-02-12 18:14:36,812-0600 DEBUG swift INTERNALPROC_START thread=R-14-98-0 name=tracef
+2015-02-12 18:14:36,812-0600 DEBUG swift PROCEDURE line=3 thread=R-14-97-1 name=search
+2015-02-12 18:14:36,812-0600 DEBUG swift JOB_INIT jobid=bash-kitmfi4m tr=bash
+2015-02-12 18:14:36,812-0600 DEBUG swift INTERNALPROC_START thread=R-14-34-0 name=tracef
+2015-02-12 18:14:36,821-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-kitmfi4m
+2015-02-12 18:14:36,812-0600 DEBUG swift PROCEDURE line=3 thread=R-14-89-1 name=search
+2015-02-12 18:14:36,821-0600 INFO  Tracef @Filename  = output/miRNA_41.split 
+
+2015-02-12 18:14:36,812-0600 DEBUG swift PROCEDURE line=3 thread=R-14-86-1 name=search
+2015-02-12 18:14:36,821-0600 DEBUG swift INTERNALPROC_END thread=R-14-43-0 name=tracef
+2015-02-12 18:14:36,821-0600 DEBUG swift JOB_INIT jobid=bash-cjtmfi4m tr=bash
+2015-02-12 18:14:36,819-0600 INFO  swift END_FAILURE thread=R-14-1x2 tr=bash
+2015-02-12 18:14:36,821-0600 DEBUG swift INTERNALPROC_START thread=R-14-70-0 name=tracef
+2015-02-12 18:14:36,819-0600 DEBUG swift PROCEDURE line=3 thread=R-14-45-1 name=search
+2015-02-12 18:14:36,821-0600 INFO  swift END_FAILURE thread=R-14-71-1 tr=bash
+2015-02-12 18:14:36,819-0600 INFO  swift END_FAILURE thread=R-14-36-1 tr=bash
+2015-02-12 18:14:36,821-0600 INFO  Tracef @Filename  = output/miRNA_31.split 
+
+2015-02-12 18:14:36,821-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-cjtmfi4m
+2015-02-12 18:14:36,819-0600 DEBUG swift PROCEDURE line=3 thread=R-14-60-1 name=search
+2015-02-12 18:14:36,821-0600 DEBUG swift JOB_INIT jobid=bash-djtmfi4m tr=bash
+2015-02-12 18:14:36,821-0600 DEBUG swift INTERNALPROC_END thread=R-14-30-0 name=tracef
+2015-02-12 18:14:36,821-0600 DEBUG swift PROCEDURE line=3 thread=R-14-70-1 name=search
+2015-02-12 18:14:36,821-0600 DEBUG swift JOB_INIT jobid=bash-ejtmfi4m tr=bash
+2015-02-12 18:14:36,821-0600 DEBUG swift INTERNALPROC_START thread=R-14-69-0 name=tracef
+2015-02-12 18:14:36,819-0600 DEBUG swift PROCEDURE line=3 thread=R-14-82-1 name=search
+2015-02-12 18:14:36,819-0600 DEBUG swift PROCEDURE line=3 thread=R-14-56-1 name=search
+2015-02-12 18:14:36,821-0600 INFO  swift END_FAILURE thread=R-14-54-1 tr=bash
+2015-02-12 18:14:36,821-0600 INFO  swift END_FAILURE thread=R-14-37-1 tr=bash
+2015-02-12 18:14:36,821-0600 INFO  Tracef @Filename  = output/miRNA_54.split 
+
+2015-02-12 18:14:36,821-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-djtmfi4m
+2015-02-12 18:14:36,819-0600 INFO  Tracef @Filename  = output/miRNA_40.split 
+
+2015-02-12 18:14:36,821-0600 DEBUG swift INTERNALPROC_END thread=R-14-53-0 name=tracef
+2015-02-12 18:14:36,821-0600 DEBUG swift PROCEDURE line=3 thread=R-14-69-1 name=search
+2015-02-12 18:14:36,821-0600 DEBUG swift JOB_INIT jobid=bash-hjtmfi4m tr=bash
+2015-02-12 18:14:36,821-0600 DEBUG swift INTERNALPROC_END thread=R-14-42-0 name=tracef
+2015-02-12 18:14:36,821-0600 INFO  Tracef @Filename  = output/miRNA_29.split 
+
+2015-02-12 18:14:36,819-0600 DEBUG swift JOB_INIT jobid=bash-bjtmfi4m tr=bash
+2015-02-12 18:14:36,821-0600 DEBUG swift JOB_INIT jobid=bash-gjtmfi4m tr=bash
+2015-02-12 18:14:36,821-0600 INFO  Tracef @Filename  = output/miRNA_26.split 
+
+2015-02-12 18:14:36,821-0600 DEBUG swift INTERNALPROC_END thread=R-14-28-0 name=tracef
+2015-02-12 18:14:36,819-0600 INFO  swift END_FAILURE thread=R-14-57-1 tr=bash
+2015-02-12 18:14:36,819-0600 DEBUG swift PROCEDURE line=3 thread=R-14-73-1 name=search
+2015-02-12 18:14:36,822-0600 DEBUG swift JOB_INIT jobid=bash-ijtmfi4m tr=bash
+2015-02-12 18:14:36,822-0600 DEBUG swift JOB_INIT jobid=bash-jjtmfi4m tr=bash
+2015-02-12 18:14:36,819-0600 DEBUG swift INTERNALPROC_START thread=R-14-60-0 name=tracef
+2015-02-12 18:14:36,822-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-bjtmfi4m
+2015-02-12 18:14:36,822-0600 INFO  swift END_FAILURE thread=R-14-47-1 tr=bash
+2015-02-12 18:14:36,819-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-ritmfi4m
+2015-02-12 18:14:36,822-0600 INFO  swift END_FAILURE thread=R-14-32-1 tr=bash
+2015-02-12 18:14:36,822-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-ijtmfi4m
+2015-02-12 18:14:36,822-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-jjtmfi4m
+2015-02-12 18:14:36,818-0600 DEBUG swift PROCEDURE line=3 thread=R-14-76-1 name=search
+2015-02-12 18:14:36,818-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-ajtmfi4m
+2015-02-12 18:14:36,822-0600 DEBUG swift JOB_INIT jobid=bash-kjtmfi4m tr=bash
+2015-02-12 18:14:36,822-0600 INFO  swift END_FAILURE thread=R-14-51-1 tr=bash
+2015-02-12 18:14:36,822-0600 INFO  swift END_FAILURE thread=R-14-46-1 tr=bash
+2015-02-12 18:14:36,822-0600 INFO  swift END_FAILURE thread=R-14-52-1 tr=bash
+2015-02-12 18:14:36,822-0600 INFO  swift END_FAILURE thread=R-14-35-1 tr=bash
+2015-02-12 18:14:36,822-0600 DEBUG swift INTERNALPROC_START thread=R-14-79-0 name=tracef
+2015-02-12 18:14:36,822-0600 INFO  swift END_FAILURE thread=R-14-39-1 tr=bash
+2015-02-12 18:14:36,822-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-kjtmfi4m
+2015-02-12 18:14:36,822-0600 INFO  swift END_FAILURE thread=R-14-80-1 tr=bash
+2015-02-12 18:14:36,822-0600 INFO  Tracef @Filename  = output/miRNA_27.split 
+
+2015-02-12 18:14:36,822-0600 INFO  Tracef @Filename  = output/miRNA_24.split 
+
+2015-02-12 18:14:36,822-0600 DEBUG swift INTERNALPROC_START thread=R-14-84-0 name=tracef
+2015-02-12 18:14:36,822-0600 DEBUG swift INTERNALPROC_START thread=R-14-85-0 name=tracef
+2015-02-12 18:14:36,822-0600 DEBUG swift JOB_INIT jobid=bash-ljtmfi4m tr=bash
+2015-02-12 18:14:36,822-0600 INFO  swift END_FAILURE thread=R-14-38-1 tr=bash
+2015-02-12 18:14:36,822-0600 INFO  swift END_FAILURE thread=R-14-94-1 tr=bash
+2015-02-12 18:14:36,822-0600 DEBUG swift PROCEDURE line=3 thread=R-14-79-1 name=search
+2015-02-12 18:14:36,822-0600 INFO  swift END_FAILURE thread=R-14-43-1 tr=bash
+2015-02-12 18:14:36,822-0600 INFO  Tracef @Filename  = output/miRNA_57.split 
+
+2015-02-12 18:14:36,822-0600 INFO  Tracef @Filename  = output/miRNA_56.split 
+
+2015-02-12 18:14:36,822-0600 DEBUG swift INTERNALPROC_END thread=R-14-58-0 name=tracef
+2015-02-12 18:14:36,822-0600 INFO  swift END_FAILURE thread=R-14-67-1 tr=bash
+2015-02-12 18:14:36,822-0600 DEBUG swift PROCEDURE line=3 thread=R-14-85-1 name=search
+2015-02-12 18:14:36,822-0600 INFO  Tracef @Filename  = output/miRNA_62.split 
+
+2015-02-12 18:14:36,822-0600 DEBUG swift INTERNALPROC_END thread=R-14-61-0 name=tracef
+2015-02-12 18:14:36,822-0600 INFO  Tracef @Filename  = output/miRNA_23.split 
+
+2015-02-12 18:14:36,822-0600 INFO  Tracef @Filename  = output/miRNA_21.split 
+
+2015-02-12 18:14:36,822-0600 DEBUG swift JOB_INIT jobid=bash-mjtmfi4m tr=bash
+2015-02-12 18:14:36,822-0600 DEBUG swift INTERNALPROC_END thread=R-14-22-0 name=tracef
+2015-02-12 18:14:36,822-0600 DEBUG swift INTERNALPROC_END thread=R-14-20-0 name=tracef
+2015-02-12 18:14:36,822-0600 DEBUG swift JOB_INIT jobid=bash-njtmfi4m tr=bash
+2015-02-12 18:14:36,823-0600 INFO  swift END_FAILURE thread=R-14-66-1 tr=bash
+2015-02-12 18:14:36,823-0600 DEBUG swift INTERNALPROC_START thread=R-14-100-0 name=tracef
+2015-02-12 18:14:36,823-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-mjtmfi4m
+2015-02-12 18:14:36,823-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-njtmfi4m
+2015-02-12 18:14:36,823-0600 INFO  Tracef @Filename  = output/miRNA_20.split 
+
+2015-02-12 18:14:36,823-0600 INFO  Tracef @Filename  = output/miRNA_60.split 
+
+2015-02-12 18:14:36,823-0600 DEBUG swift INTERNALPROC_END thread=R-14-21-0 name=tracef
+2015-02-12 18:14:36,823-0600 DEBUG swift PROCEDURE line=3 thread=R-14-100-1 name=search
+2015-02-12 18:14:36,823-0600 DEBUG swift INTERNALPROC_END thread=R-14-63-0 name=tracef
+2015-02-12 18:14:36,818-0600 DEBUG swift PROCEDURE line=3 thread=R-14-78-1 name=search
+2015-02-12 18:14:36,823-0600 INFO  swift END_FAILURE thread=R-14-50-1 tr=bash
+2015-02-12 18:14:36,818-0600 DEBUG swift INTERNALPROC_END thread=R-14-37-0 name=tracef
+2015-02-12 18:14:36,818-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-uitmfi4m
+2015-02-12 18:14:36,823-0600 INFO  Tracef @Filename  = output/miRNA_61.split 
+
+2015-02-12 18:14:36,818-0600 DEBUG swift JOB_INIT jobid=bash-9jtmfi4m tr=bash
+2015-02-12 18:14:36,823-0600 DEBUG swift INTERNALPROC_END thread=R-14-62-0 name=tracef
+2015-02-12 18:14:36,823-0600 DEBUG swift JOB_INIT jobid=bash-pjtmfi4m tr=bash
+2015-02-12 18:14:36,823-0600 DEBUG swift JOB_INIT jobid=bash-ojtmfi4m tr=bash
+2015-02-12 18:14:36,823-0600 DEBUG swift JOB_INIT jobid=bash-qjtmfi4m tr=bash
+2015-02-12 18:14:36,818-0600 DEBUG swift PROCEDURE line=3 thread=R-14-81-1 name=search
+2015-02-12 18:14:36,823-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-9jtmfi4m
+2015-02-12 18:14:36,818-0600 DEBUG swift INTERNALPROC_END thread=R-14-19-0 name=tracef
+2015-02-12 18:14:36,818-0600 INFO  Tracef @Filename  = output/miRNA_33.split 
+
+2015-02-12 18:14:36,823-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-qjtmfi4m
+2015-02-12 18:14:36,823-0600 INFO  swift END_FAILURE thread=R-14-20-1 tr=bash
+2015-02-12 18:14:36,817-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-xitmfi4m
+2015-02-12 18:14:36,823-0600 INFO  Tracef @Filename  = output/miRNA_25.split 
+
+2015-02-12 18:14:36,823-0600 DEBUG swift INTERNALPROC_END thread=R-14-24-0 name=tracef
+2015-02-12 18:14:36,823-0600 INFO  swift END_FAILURE thread=R-14-21-1 tr=bash
+2015-02-12 18:14:36,817-0600 DEBUG swift INTERNALPROC_START thread=R-14-87-0 name=tracef
+2015-02-12 18:14:36,823-0600 DEBUG swift JOB_INIT jobid=bash-rjtmfi4m tr=bash
+2015-02-12 18:14:36,817-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-2jtmfi4m
+2015-02-12 18:14:36,823-0600 INFO  Tracef @Filename  = output/miRNA_70.split 
+
+2015-02-12 18:14:36,823-0600 INFO  swift END_FAILURE thread=R-14-62-1 tr=bash
+2015-02-12 18:14:36,817-0600 INFO  swift END_FAILURE thread=R-14-23-1 tr=bash
+2015-02-12 18:14:36,823-0600 DEBUG swift INTERNALPROC_END thread=R-14-66-0 name=tracef
+2015-02-12 18:14:36,817-0600 INFO  swift END_FAILURE thread=R-14-33-1 tr=bash
+2015-02-12 18:14:36,823-0600 INFO  swift END_FAILURE thread=R-14-58-1 tr=bash
+2015-02-12 18:14:36,823-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-rjtmfi4m
+2015-02-12 18:14:36,823-0600 INFO  Tracef @Filename  = output/miRNA_64.split 
+
+2015-02-12 18:14:36,824-0600 INFO  Tracef @Filename  = output/miRNA_67.split 
+
+2015-02-12 18:14:36,817-0600 INFO  swift END_FAILURE thread=R-14-26-1 tr=bash
+2015-02-12 18:14:36,824-0600 INFO  swift END_FAILURE thread=R-14-63-1 tr=bash
+2015-02-12 18:14:36,817-0600 INFO  swift END_FAILURE thread=R-14-18-1 tr=bash
+2015-02-12 18:14:36,824-0600 DEBUG swift INTERNALPROC_END thread=R-14-68-0 name=tracef
+2015-02-12 18:14:36,824-0600 INFO  Tracef @Filename  = output/miRNA_43.split 
+
+2015-02-12 18:14:36,817-0600 INFO  swift END_FAILURE thread=R-14-27-1 tr=bash
+2015-02-12 18:14:36,826-0600 DEBUG swift INTERNALPROC_END thread=R-14-41-0 name=tracef
+2015-02-12 18:14:36,826-0600 INFO  Tracef @Filename  = output/miRNA_48.split 
+
+2015-02-12 18:14:36,826-0600 DEBUG swift INTERNALPROC_END thread=R-14-51-0 name=tracef
+2015-02-12 18:14:36,817-0600 INFO  swift END_FAILURE thread=R-14-9-1 tr=bash
+2015-02-12 18:14:36,817-0600 INFO  swift END_FAILURE thread=R-14-28-1 tr=bash
+2015-02-12 18:14:36,817-0600 INFO  swift END_FAILURE thread=R-14-3-1 tr=bash
+2015-02-12 18:14:36,817-0600 INFO  swift END_FAILURE thread=R-14-15-1 tr=bash
+2015-02-12 18:14:36,826-0600 INFO  Tracef @Filename  = output/miRNA_79.split 
+
+2015-02-12 18:14:36,826-0600 INFO  Tracef @Filename  = output/miRNA_50.split 
+
+2015-02-12 18:14:36,826-0600 INFO  Tracef @Filename  = output/miRNA_45.split 
+
+2015-02-12 18:14:36,826-0600 DEBUG swift INTERNALPROC_END thread=R-14-49-0 name=tracef
+2015-02-12 18:14:36,817-0600 INFO  swift END_FAILURE thread=R-14-0-1 tr=bash
+2015-02-12 18:14:36,826-0600 INFO  Tracef @Filename  = output/miRNA_49.split 
+
+2015-02-12 18:14:36,826-0600 INFO  swift END_FAILURE thread=R-14-49-1 tr=bash
+2015-02-12 18:14:36,817-0600 INFO  swift END_FAILURE thread=R-14-30-1 tr=bash
+2015-02-12 18:14:36,817-0600 INFO  swift END_FAILURE thread=R-14-16-1 tr=bash
+2015-02-12 18:14:36,826-0600 INFO  Tracef @Filename  = output/miRNA_38.split 
+
+2015-02-12 18:14:36,817-0600 DEBUG swift PROCEDURE line=3 thread=R-14-95-1 name=search
+2015-02-12 18:14:36,827-0600 INFO  swift END_FAILURE thread=R-14-72-1 tr=bash
+2015-02-12 18:14:36,827-0600 DEBUG swift INTERNALPROC_END thread=R-14-36-0 name=tracef
+2015-02-12 18:14:36,827-0600 INFO  Tracef @Filename  = output/miRNA_85.split 
+
+2015-02-12 18:14:36,827-0600 DEBUG swift INTERNALPROC_END thread=R-14-80-0 name=tracef
+2015-02-12 18:14:36,817-0600 INFO  swift END_FAILURE thread=R-14-5-1 tr=bash
+2015-02-12 18:14:36,827-0600 INFO  Tracef @Filename  = output/miRNA_86.split 
+
+2015-02-12 18:14:36,827-0600 INFO  swift END_FAILURE thread=R-14-44-1 tr=bash
+2015-02-12 18:14:36,827-0600 DEBUG swift JOB_INIT jobid=bash-sjtmfi4m tr=bash
+2015-02-12 18:14:36,817-0600 INFO  swift END_FAILURE thread=R-14x2-1 tr=bash
+2015-02-12 18:14:36,827-0600 INFO  Tracef @Filename  = output/miRNA_37.split 
+
+2015-02-12 18:14:36,816-0600 INFO  swift END_FAILURE thread=R-14-40-1 tr=bash
+2015-02-12 18:14:36,827-0600 INFO  Tracef @Filename  = output/miRNA_92.split 
+
+2015-02-12 18:14:36,827-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-sjtmfi4m
+2015-02-12 18:14:36,827-0600 DEBUG swift INTERNALPROC_END thread=R-14-39-0 name=tracef
+2015-02-12 18:14:36,827-0600 INFO  Tracef @Filename  = output/miRNA_36.split 
+
+2015-02-12 18:14:36,827-0600 INFO  Tracef @Filename  = output/miRNA_83.split 
+
+2015-02-12 18:14:36,816-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-4jtmfi4m
+2015-02-12 18:14:36,827-0600 INFO  Tracef @Filename  = output/miRNA_91.split 
+
+2015-02-12 18:14:36,827-0600 INFO  Tracef @Filename  = output/miRNA_89.split 
+
+2015-02-12 18:14:36,827-0600 INFO  swift END_FAILURE thread=R-14-97-1 tr=bash
+2015-02-12 18:14:36,827-0600 DEBUG swift INTERNALPROC_END thread=R-14-94-0 name=tracef
+2015-02-12 18:14:36,827-0600 DEBUG swift INTERNALPROC_END thread=R-14-92-0 name=tracef
+2015-02-12 18:14:36,827-0600 INFO  Tracef @Filename  = output/miRNA_98.split 
+

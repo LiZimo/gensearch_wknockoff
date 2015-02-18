@@ -1,0 +1,317 @@
+checking for paramfile
+no paramfile: using command line arguments
+Progress  2015-02-12 19:23:28.113009715-0500  LOG_START
+
+_____________________________________________________________________________
+
+        Wrapper (_swiftwrap.staging)
+_____________________________________________________________________________
+
+/bin/bash -out results/search_0006.out -err results/search_0006.err -i -d data|results|output -if python_wrapper.sh|data/miRNA_samples.csv|classifier.py|gen_search.py|output/miRNA_6.split|data/miRNA_labels.csv -of results/search_0006.out|results/search_0006.err|results/search_0006.csv -cf -cdmfile -status provider -a python_wrapper.sh gen_search.py -i data/miRNA_samples.csv -l data/miRNA_labels.csv -p output/miRNA_6.split -n 2 -s 20 -k 5 -m 2 -o results/search_0006.csv
+PWD=/tmp/rcc_syracuse/rcc.0t8Sob2wss/execute.10.5.24.62-2705/dir_2869/gen_search-run008/jobs/b/bash-um9zfi4m
+EXEC=/bin/bash
+STDIN=
+STDOUT=results/search_0006.out
+STDERR=results/search_0006.err
+DIRS=data|results|output
+INF=python_wrapper.sh|data/miRNA_samples.csv|classifier.py|gen_search.py|output/miRNA_6.split|data/miRNA_labels.csv
+OUTF=results/search_0006.out|results/search_0006.err|results/search_0006.csv
+COLLECT=
+ARGS=python_wrapper.sh gen_search.py -i data/miRNA_samples.csv -l data/miRNA_labels.csv -p output/miRNA_6.split -n 2 -s 20 -k 5 -m 2 -o results/search_0006.csv
+ARGC=18
+Progress  2015-02-12 19:23:28.117010750-0500  CREATE_INPUTDIR
+Created output directory: data
+Created output directory: results
+Created output directory: output
+Progress  2015-02-12 19:23:28.121770625-0500  EXECUTE
+Application /bin/bash failed with an exit code of 1
+
+_____________________________________________________________________________
+
+        uname -a
+_____________________________________________________________________________
+
+Linux ITS-MHOC-K4-42-S6-its-u12-nfs-20141003 3.2.0-56-virtual #86-Ubuntu SMP Wed Oct 23 09:43:22 UTC 2013 x86_64 x86_64 x86_64 GNU/Linux
+
+_____________________________________________________________________________
+
+        id
+_____________________________________________________________________________
+
+uid=1066(osgconnect) gid=502(condoruser) groups=502(condoruser),108(fuse)
+
+_____________________________________________________________________________
+
+        env
+_____________________________________________________________________________
+
+cvmfsRepoGEANT4=geant4.cern.ch:url=http://cvmfs-stratum-one.cern.ch/opt/geant4;http://cernvmfs.gridpp.rl.ac.uk/opt/geant4;http://cvmfs.racf.bnl.gov/opt/geant4,pubkey=/tmp/rcc_syracuse/rcc.0t8Sob2wss/connect/cern.ch.pub,proxies=http://10.5.0.41:3128;DIRECT
+_condor_MimSlotLife=43200
+_condor_MaxSlotLife=86400
+_CONDOR_JOB_PIDS=
+connectCVMFSaceWNC=/cvmfs/osg.mwt2.org/osg/sw
+_RCC_MinSlotLife=720
+cvmfsRepoMWT2=osg.mwt2.org:url=http://uct2-cvmfs.mwt2.org/opt/osg;http://iut2-cvmfs.mwt2.org/opt/osg;http://mwt2-cvmfs.campuscluster.illinois.edu/opt/osg,pubkey=/tmp/rcc_syracuse/rcc.0t8Sob2wss/connect/osg.mwt2.org.pub,proxies=http://10.5.0.41:3128;DIRECT
+_RCC_CVMFSProxy=http://10.5.0.41:3128
+cvmfsMount=/cvmfs
+_condor_CONDOR_HOST=rccf-osg.ci-connect.net:11011?sock=collector
+_RCC_MaxIdleGlideins=10
+_RCC_BoscoVersion=1.2
+PARROT_HELPER=/tmp/rcc_syracuse/rcc.0t8Sob2wss/connect/$LIB/libparrot_helper.so
+_condor_BOSCOCluster="osgconnect@its-condor-submit.syr.edu/condor"
+_RCC_CVMFSQuota=25600
+aceCacheUserRoot=/tmp/aceCache.osgconnect
+TMPDIR=/tmp/tmpCache.L5Y/TMPDIR
+_RCC_ConnectScratch=/tmp
+_RCC_CVMFSMount=/cvmfs
+connectParrotVersion=4.1.4rc5-TRUNK
+_campusfactory_CAMPUSFACTORY_LOCATION=~/bosco/rccf-osg.ci-connect.net/syracuse/campus_factory
+_CONDOR_SCRATCH_DIR=/tmp/rcc_syracuse/rcc.0t8Sob2wss/execute.10.5.24.62-2705/dir_2869
+OSG_WN_TMP=/tmp/rcc_syracuse/rcc.0t8Sob2wss/scratch
+_condor_MAIL=/bin/mail
+connectCVMFSaceImage=/cvmfs/osg.mwt2.org/atlas/sw/ACE/current
+connectParrotCache=/tmp/connectCache.osgconnect/20150212/parrotCache
+connectUseParrotCVMFS=
+connectUseNativeONLY=
+USER=osgconnect
+_CHIRP_DELAYED_UPDATE_PREFIX=Chirp*
+_RCC_MaxQueuedJobs=10
+LD_LIBRARY_PATH=/tmp/rcc_syracuse/rcc.0t8Sob2wss/glideinExec:/tmp/rcc_syracuse/rcc.0t8Sob2wss/connect/lib64:/tmp/rcc_syracuse/rcc.0t8Sob2wss/connect/lib
+TEMP=/tmp/tmpCache.L5Y/TEMP
+CONDOR_PARENT_ID=ITS-MHOC-K4-42-S6-its-u12-nfs-20141003:2869:1423787004
+_RCC_Scratch=/tmp
+_RCC_MaxRunningJobs=100
+BATCH_SYSTEM=HTCondor
+_condor_SPOOL=/tmp/rcc_syracuse/rcc.0t8Sob2wss/spool.10.5.24.62-2705
+PARROT_VERSION=4.1.4rc5-TRUNK
+_condor_FILESYSTEM_DOMAIN=rccf-osg.ci-connect.net:11011?sock=collector
+_RCC_CVMFS=portable
+_CONDOR_CHIRP_CONFIG=/tmp/rcc_syracuse/rcc.0t8Sob2wss/execute.10.5.24.62-2705/dir_2869/.chirp_config
+_RCC_JobProbeInterval=1
+ATLAS_LOCAL_AREA=/tmp/rcc_syracuse/rcc.0t8Sob2wss/connect/OSG_APP/atlas_app/local
+_RCC_MinSlotNoClaim=20
+aceCacheDailyRoot=/tmp/aceCache.osgconnect/20150212
+connectCVMFSaceCA=/cvmfs/osg.mwt2.org/osg/CA
+_condor_LOCKFILE=/tmp/rcc_syracuse/rcc.0t8Sob2wss.lock
+_condor_LIB=/tmp/rcc_syracuse/rcc.0t8Sob2wss/glideinExec
+connectCacheUserRoot=/tmp/connectCache.osgconnect
+cvmfsType=portable
+_condor_START_DIR=/var/lib/condor/execute/dir_2416
+_condor_NUM_CPUS=1
+CONDOR_PROCD_ADDRESS_BASE=/tmp/rcc_syracuse/rcc.0t8Sob2wss/log.10.5.24.62-2705/procd_address
+_condor_UID_DOMAIN=rccf-osg.ci-connect.net:11011?sock=collector
+_RCC_MaxHeldJobs=40
+aceEtc=/tmp/aceCache.osgconnect/20150212/etc
+connectFrontierServerURL=(serverurl=http://frontier-atlas.lcg.triumf.ca:3128/ATLAS_frontier)(serverurl=http://frontier-atlas1.lcg.triumf.ca:3128/ATLAS_frontier)(serverurl=http://tier1nfs.triumf.ca:3128/ATLAS_frontier)(serverurl=http://frontier.triumf.ca:3128/ATLAS_frontier)(serverurl=http://ccfrontier.in2p3.fr:23128/ccin2p3-AtlasFrontier)(serverurl=http://ccsqfatlasli02.in2p3.fr:23128/ccin2p3-AtlasFrontier)(serverurl=http://ccsqfatlasli01.in2p3.fr:23128/ccin2p3-AtlasFrontier)
+CONDOR_CONFIG=/var/lib/condor/execute/dir_2416/glidein_condor_config
+_condor_LOCAL_DIR=/tmp/rcc_syracuse/rcc.0t8Sob2wss
+OSG_APP=/tmp/rcc_syracuse/rcc.0t8Sob2wss/connect/OSG_APP
+connectBIN=/tmp/rcc_syracuse/rcc.0t8Sob2wss/connect/bin
+cvmfsRepoList=osg.mwt2.org:url=http://uct2-cvmfs.mwt2.org/opt/osg;http://iut2-cvmfs.mwt2.org/opt/osg;http://mwt2-cvmfs.campuscluster.illinois.edu/opt/osg,pubkey=/tmp/rcc_syracuse/rcc.0t8Sob2wss/connect/osg.mwt2.org.pub,proxies=http://10.5.0.41:3128;DIRECT cernvm-prod.cern.ch:url=http://cvmfs-stratum-one.cern.ch/opt/cernvm-prod;http://cernvmfs.gridpp.rl.ac.uk/opt/cernvm-prod;http://cvmfs.racf.bnl.gov/opt/cernvm-prod,pubkey=/tmp/rcc_syracuse/rcc.0t8Sob2wss/connect/cern.ch.pub,proxies=http://10.5.0.41:3128;DIRECT geant4.cern.ch:url=http://cvmfs-stratum-one.cern.ch/opt/geant4;http://cernvmfs.gridpp.rl.ac.uk/opt/geant4;http://cvmfs.racf.bnl.gov/opt/geant4,pubkey=/tmp/rcc_syracuse/rcc.0t8Sob2wss/connect/cern.ch.pub,proxies=http://10.5.0.41:3128;DIRECT
+aceRoot=/tmp
+_CONDOR_ANCESTOR_2707=2869:1423787004:2716422162
+_CONDOR_ANCESTOR_817=819:1423769888:390557558
+PWD=/tmp/rcc_syracuse/rcc.0t8Sob2wss/execute.10.5.24.62-2705/dir_2869/gen_search-run008/jobs/b/bash-um9zfi4m
+_condor_SBIN=/tmp/rcc_syracuse/rcc.0t8Sob2wss/glideinExec
+_condor_COLLECTOR_HOST=rccf-osg.ci-connect.net:11011?sock=collector
+connectCMD=/usr/bin/perl cscript2378308226776631515.pl http://192.170.227.195:37142 0212-2206460-000006 NOLOGGING
+cvmfsQuota=25600
+connectHome=/tmp/rcc_syracuse/rcc.0t8Sob2wss/connect
+_CONDOR_ANCESTOR_2705=2707:1423786684:849720016
+IS_RCC_syracuse=True
+LANG=C
+cvmfsKeyMWT2=/tmp/rcc_syracuse/rcc.0t8Sob2wss/connect/osg.mwt2.org.pub
+_CONDOR_WRAPPER_ERROR_FILE=/tmp/rcc_syracuse/rcc.0t8Sob2wss/execute.10.5.24.62-2705/dir_2869/.job_wrapper_failure
+aceCA=/cvmfs/osg.mwt2.org/osg/CA
+aceCacheRoot=/tmp/aceCache
+cvmfsScratch=/tmp
+_condor_DaemonTTL=42900
+connectCacheTMP=/tmp/tmpCache.L5Y
+connectLIB=/tmp/rcc_syracuse/rcc.0t8Sob2wss/connect/lib64:/tmp/rcc_syracuse/rcc.0t8Sob2wss/connect/lib
+_CONDOR_SLOT=
+OSG_GRID=/cvmfs/osg.mwt2.org/osg/sw/osg-wn-client
+DAEMON_DEATHTIME=1423829584
+_campusfactory_wntmp=/tmp/rcc_syracuse
+_condor_GLIDEIN_Site="osgconnect@its-condor-submit.syr.edu/condor"
+_RCC_JobProbeRate=5
+connectCacheRoot=/tmp/connectCache
+_CONDOR_ANCESTOR_2416=2421:1423786671:1598783309
+_condor_CONDOR_ADMIN=condor@rccf-osg.ci-connect.net:11011?sock=collector
+_condor_EXECUTE=/tmp/rcc_syracuse/rcc.0t8Sob2wss/execute.10.5.24.62-2705
+_CONDOR_EXECUTE=/tmp/rcc_syracuse/rcc.0t8Sob2wss/execute.10.5.24.62-2705
+SHLVL=4
+HOME=/tmp/rcc_syracuse/rcc.0t8Sob2wss/execute.10.5.24.62-2705/dir_2869
+_RCC_Port=11011
+_CONDOR_ANCESTOR_2869=2873:1423787007:257337821
+_CONDOR_MACHINE_AD=/tmp/rcc_syracuse/rcc.0t8Sob2wss/execute.10.5.24.62-2705/dir_2869/.machine.ad
+_RCC_Factory=syracuse
+connectCacheDailyRoot=/tmp/connectCache.osgconnect/20150212
+cvmfsProxy=http://10.5.0.41:3128;DIRECT
+_CONDOR_ANCESTOR_819=2416:1423786668:1289539013
+_condor_LOG=/tmp/rcc_syracuse/rcc.0t8Sob2wss/log.10.5.24.62-2705
+_condor_STARTD_NAME=2705
+SWIFT_WORKER_PID=2921
+aceWNC=/cvmfs/osg.mwt2.org/osg/sw
+aceCache=/tmp/aceCache.osgconnect/20150212
+_condor_DaemonRetireTime=1423787399
+IS_RCC=True
+cvmfsRepoCERNVM=cernvm-prod.cern.ch:url=http://cvmfs-stratum-one.cern.ch/opt/cernvm-prod;http://cernvmfs.gridpp.rl.ac.uk/opt/cernvm-prod;http://cvmfs.racf.bnl.gov/opt/cernvm-prod,pubkey=/tmp/rcc_syracuse/rcc.0t8Sob2wss/connect/cern.ch.pub,proxies=http://10.5.0.41:3128;DIRECT
+connectParrotChirpBlocksize=2097152
+_condor_USER_JOB_WRAPPER=/tmp/rcc_syracuse/rcc.0t8Sob2wss/user_job_wrapper.sh
+PYTHONPATH=/tmp/rcc_syracuse/rcc.0t8Sob2wss/connect/python
+TMP=/tmp/tmpCache.L5Y/TMP
+SWIFT_JOB_SLOT=0
+_condor_GLIDEIN_HOST=rccf-osg.ci-connect.net:11011?sock=collector
+_RCC_MaxSlotLife=1440
+cvmfsKeyCERN=/tmp/rcc_syracuse/rcc.0t8Sob2wss/connect/cern.ch.pub
+connectRoot=/tmp
+_condor_DaemonStartTime=1423786684
+_RCC_IterationTime=30
+connectTRAP=EXIT HUP INT TERM QUIT ABRT ILL BUS FPE
+_CONDOR_JOB_AD=/tmp/rcc_syracuse/rcc.0t8Sob2wss/execute.10.5.24.62-2705/dir_2869/.job.ad
+connectWrapperVersion=3.0-9
+_RCC_CVMFSScratch=/tmp
+connectParrotProxy=http://uct2-squid.mwt2.org:3128
+FRONTIER_SERVER=(serverurl=http://frontier-atlas.lcg.triumf.ca:3128/ATLAS_frontier)(serverurl=http://frontier-atlas1.lcg.triumf.ca:3128/ATLAS_frontier)(serverurl=http://tier1nfs.triumf.ca:3128/ATLAS_frontier)(serverurl=http://frontier.triumf.ca:3128/ATLAS_frontier)(serverurl=http://ccfrontier.in2p3.fr:23128/ccin2p3-AtlasFrontier)(serverurl=http://ccsqfatlasli02.in2p3.fr:23128/ccin2p3-AtlasFrontier)(serverurl=http://ccsqfatlasli01.in2p3.fr:23128/ccin2p3-AtlasFrontier)(proxyurl=http://uct2-squid.mwt2.org:3128)
+aceVar=/tmp/aceCache.osgconnect/20150212/var
+aceImage=/cvmfs/osg.mwt2.org/atlas/sw/ACE/current
+connectPYTHONPATH=/tmp/rcc_syracuse/rcc.0t8Sob2wss/connect/python
+_CONDOR_JOB_IWD=/tmp/rcc_syracuse/rcc.0t8Sob2wss/execute.10.5.24.62-2705/dir_2869
+_RCC_FrontierServerURL=(serverurl=http://frontier-atlas.lcg.triumf.ca:3128/ATLAS_frontier)(serverurl=http://frontier-atlas1.lcg.triumf.ca:3128/ATLAS_frontier)(serverurl=http://tier1nfs.triumf.ca:3128/ATLAS_frontier)(serverurl=http://frontier.triumf.ca:3128/ATLAS_frontier)(serverurl=http://ccfrontier.in2p3.fr:23128/ccin2p3-AtlasFrontier)(serverurl=http://ccsqfatlasli02.in2p3.fr:23128/ccin2p3-AtlasFrontier)(serverurl=http://ccsqfatlasli01.in2p3.fr:23128/ccin2p3-AtlasFrontier)
+connectFrontierProxyURL=(proxyurl=http://uct2-squid.mwt2.org:3128)
+connectParrotChirpServer=uct2-int.mwt2.org
+connectUsePortableCVMFS=True
+connectUseNfsCVMFS=
+CONDOR_PROCD_ADDRESS=/tmp/rcc_syracuse/rcc.0t8Sob2wss/log.10.5.24.62-2705/procd_address
+_=/usr/bin/env
+
+_____________________________________________________________________________
+
+        df
+_____________________________________________________________________________
+
+Filesystem                     1K-blocks       Used  Available Use% Mounted on
+/dev/sda1                       40315256    2861748   35405560   8% /
+udev                              291764          4     291760   1% /dev
+tmpfs                             118300        228     118072   1% /run
+none                                5120          0       5120   0% /run/lock
+none                              295744          0     295744   0% /run/shm
+10.5.0.9:/u01/home/osgconnect 8667738112 4685945856 3541594112  57% /u01/home/osgconnect
+cvmfs2.osgconnect               26214400     244865   25969536   1% /cvmfs/oasis.opensciencegrid.org
+
+_____________________________________________________________________________
+
+        /proc/cpuinfo
+_____________________________________________________________________________
+
+processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 44
+model name	: Intel(R) Xeon(R) CPU           E5620  @ 2.40GHz
+stepping	: 2
+cpu MHz		: 2321.061
+cache size	: 6144 KB
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 syscall nx rdtscp lm constant_tsc up rep_good nopl pni monitor ssse3 lahf_lm
+bogomips	: 4642.12
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 40 bits physical, 48 bits virtual
+power management:
+
+
+_____________________________________________________________________________
+
+        /proc/meminfo
+_____________________________________________________________________________
+
+MemTotal:         591488 kB
+MemFree:           87116 kB
+Buffers:           24224 kB
+Cached:           371376 kB
+SwapCached:            0 kB
+Active:           176548 kB
+Inactive:         280252 kB
+Active(anon):      61288 kB
+Inactive(anon):      204 kB
+Active(file):     115260 kB
+Inactive(file):   280048 kB
+Unevictable:           0 kB
+Mlocked:               0 kB
+SwapTotal:             0 kB
+SwapFree:              0 kB
+Dirty:             12084 kB
+Writeback:             0 kB
+AnonPages:         61272 kB
+Mapped:            18212 kB
+Shmem:               232 kB
+Slab:              29644 kB
+SReclaimable:      20708 kB
+SUnreclaim:         8936 kB
+KernelStack:         736 kB
+PageTables:         3296 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:      295744 kB
+Committed_AS:     142168 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:        8516 kB
+VmallocChunk:   34359727420 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:         0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:       34752 kB
+DirectMap2M:      579584 kB
+
+_____________________________________________________________________________
+
+        command line
+_____________________________________________________________________________
+
+-e /bin/bash -out results/search_0006.out -err results/search_0006.err -i -d data results output -if python_wrapper.sh data/miRNA_samples.csv classifier.py gen_search.py output/miRNA_6.split data/miRNA_labels.csv -of results/search_0006.out results/search_0006.err results/search_0006.csv -cf -cdmfile -status provider -a python_wrapper.sh gen_search.py -i data/miRNA_samples.csv -l data/miRNA_labels.csv -p output/miRNA_6.split -n 2 -s 20 -k 5 -m 2 -o results/search_0006.csv
+
+_____________________________________________________________________________
+
+        stdout
+_____________________________________________________________________________
+
+total 40K
+-rw-r--r-- 1 osgconnect  239 Feb 12 19:23 python_wrapper.sh
+-rw-r--r-- 1 osgconnect 5.9K Feb 12 19:23 gen_search.py
+-rw-r--r-- 1 osgconnect   83 Feb 12 19:23 classifier.py
+-rw-r--r-- 1 osgconnect 6.2K Feb 12 19:23 _swiftwrap.staging
+drwxr-xr-x 2 osgconnect 4.0K Feb 12 19:23 data
+drwxr-xr-x 2 osgconnect 4.0K Feb 12 19:23 output
+-rw-r--r-- 1 osgconnect    0 Feb 12 19:23 3
+-rw-r--r-- 1 osgconnect 1.6K Feb 12 19:23 wrapper.log
+drwxr-xr-x 2 osgconnect 4.0K Feb 12 19:23 results
+Launching : python gen_search.py -i data/miRNA_samples.csv -l data/miRNA_labels.csv -p output/miRNA_6.split -n 2 -s 20 -k 5 -m 2 -o results/search_0006.csv
+
+_____________________________________________________________________________
+
+        stderr
+_____________________________________________________________________________
+
+/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/pandas/io/excel.py:626: UserWarning: Installed openpyxl is not supported at this time. Use >=1.6.1 and <2.0.0.
+  .format(openpyxl_compat.start_ver, openpyxl_compat.stop_ver))
+Traceback (most recent call last):
+  File "gen_search.py", line 23, in <module>
+    from matplotlib import pyplot as plt
+  File "/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/matplotlib/pyplot.py", line 98, in <module>
+    _backend_mod, new_figure_manager, draw_if_interactive, _show = pylab_setup()
+  File "/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/matplotlib/backends/__init__.py", line 28, in pylab_setup
+    globals(),locals(),[backend_name],0)
+  File "/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/matplotlib/backends/backend_tkagg.py", line 8, in <module>
+    import Tkinter as Tk, FileDialog
+  File "/cvmfs/oasis.opensciencegrid.org/osg/modules/python-2.7.7/lib/python2.7/lib-tk/Tkinter.py", line 39, in <module>
+    import _tkinter # If this fails your Python may not be configured for Tk
+ImportError: libtk8.5.so: cannot open shared object file: No such file or directory

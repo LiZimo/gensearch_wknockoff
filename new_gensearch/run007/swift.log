@@ -1,0 +1,119 @@
+2015-02-12 18:21:07,365-0600 INFO  Loader JAVA Oracle Corporation Java HotSpot(TM) 64-Bit Server VM 1.7.0_51
+2015-02-12 18:21:07,366-0600 INFO  Loader VERSION Swift trunk git-rev: 4ee10d1ecb417577f3eaae14606a10ac15b44b54 heads/master 6183 (modified locally)
+2015-02-12 18:21:07,366-0600 INFO  Loader RUN_ID run007
+2015-02-12 18:21:07,366-0600 INFO  Loader ARGUMENTS [-runid, run007, -logfile, /home/yadunand/zimo/run007/swift.log, gen_search.swift, -n=2, -nsteps=20, -kfold=5, -method=2, -folder=output, -prefix=miRNA, -sample=data/miRNA_samples.csv, -labels=data/miRNA_labels.csv]
+2015-02-12 18:21:07,367-0600 INFO  Loader MAX_HEAP 954728448
+2015-02-12 18:21:07,367-0600 INFO  Loader GLOBUS_HOSTNAME login01.osgconnect.net
+2015-02-12 18:21:07,367-0600 INFO  Loader CWD /home/yadunand/zimo/.
+2015-02-12 18:21:07,368-0600 DEBUG Loader SWIFT_CONFIGURATION 
+[D] /home/yadunand/bin/swift-k/dist/swift-svn/etc/swift.conf
+[R] swift.conf
+[C] <Command Line>
+{
+	TCPPortRange: "50000,51000"                                # [R] line 32
+	alwaysTransferWrapperLog: true                             # [R] line 37
+	executionRetries: 0                                        # [R] line 34
+	fileOperationsThrottle: 8                                  # [D] line 121
+	fileTransfersThrottle: 4                                   # [D] line 107
+	hostJobSubmitThrottle: 2                                   # [D] line 95
+	jobSubmitThrottle: 4                                       # [D] line 83
+	keepSiteDir: true                                          # [R] line 35
+	lazyErrors: false                                          # [R] line 33
+	logProvenance: false                                       # [D] line 200
+	maxForeachThreads: 16384                                   # [D] line 194
+	providerStagingPinSwiftFiles: false                        # [R] line 36
+	replicationEnabled: false                                  # [D] line 146
+	replicationLimit: 3                                        # [D] line 157
+	replicationMinQueueTime: 60                                # [D] line 153
+	site {
+		local {
+			app.ALL.executable: "*"                                  # [D] line 232
+			execution.type: "local"                                  # [D] line 223
+			filesystem.type: "local"                                 # [D] line 226
+			workDirectory: "swiftwork"                               # [D] line 229
+		}
+		osgc {
+			app.bash {
+				executable: "/bin/bash"                                 # [R] line 24
+				maxWallTime: "00:30:00"                                 # [R] line 25
+			}
+			execution {
+				URL: "login01.osgconnect.net"                           # [R] line 4
+				jobManager: "local:condor"                              # [R] line 5
+				options {
+					highOverallocation: 100                                # [R] line 11
+					jobOptions.condor.projectname: "Swift"                 # [R] line 14
+					lowOverallocation: 100                                 # [R] line 12
+					maxJobTime: "02:00:00"                                 # [R] line 10
+					maxJobs: 100                                           # [R] line 8
+					softImage: "/home/yadunand/genomics/common_data/fetch_common.tar.gz /tmp/yadunand/softimage"# [R] line 16
+					tasksPerNode: 1                                        # [R] line 9
+				}
+				type: "coaster"                                         # [R] line 3
+			}
+			initialParallelTasks: 999                                # [R] line 22
+			maxParallelTasks: 1001                                   # [R] line 21
+			staging: "local"                                         # [R] line 19
+			workDirectory: "."                                       # [R] line 20
+		}
+	}
+	sites: [osgc]                                              # [R] line 30
+	staging: "local"                                           # [R] line 38
+	tracingEnabled: false                                      # [D] line 51
+}
+
+2015-02-12 18:21:07,369-0600 DEBUG textfiles BEGIN SWIFTSCRIPT:
+type file;
+
+app (file out, file log, file err) search (file wrapper, file pyscript, file samples, file labels, file set, int n, int nsteps, int k, int method, file extra)
+{
+    bash @wrapper @pyscript "-i" @samples "-l" @labels "-p" @set "-n" n "-s" nsteps "-k" k "-m" method "-o" @out stdout=@log stderr=@err;
+}
+
+
+app (file result, file err) sort (file script, file parts[])
+{
+    bash @script @parts stdout=@result stderr=@err;
+}
+
+int n      = @toInt(@arg("n",       "2"));
+int nsteps = @toInt(@arg("nsteps",  "20"));
+int kval   = @toInt(@arg("kfold",   "5"));
+int method = @toInt(@arg("method",  "2"));
+
+file samples <single_file_mapper; file=@arg("sample", "data/miRNA_samples.csv")>;
+file labels  <single_file_mapper; file=@arg("labels", "data/miRNA_labels.csv" )>;
+
+string input_folder=@arg("folder", "test");
+string input_prefix=@arg("prefix", "miRNA");
+
+file splits[] <filesys_mapper; location=input_folder, prefix=input_prefix>;
+
+
+file wrapper  <"python_wrapper.sh">;
+file pyscript <"gen_search.py">;
+file extra    <"classifier.py">;
+
+file out[] <simple_mapper; prefix="results/search_", suffix=".csv">;
+file log[] <simple_mapper; prefix="results/search_", suffix=".out">;
+file err[] <simple_mapper; prefix="results/search_", suffix=".err">;
+
+//foreach split,index in splits{
+foreach f_split, index in splits
+{
+    tracef("@Filename  = %s \n", @filename(f_split));
+    (out[index], log[index], err[index]) = search(wrapper, pyscript, samples, labels, f_split, n,nsteps, kval, method, extra);
+}
+
+
+file final <"final.out">;
+file f_err <"final.err">;
+file postscript <"postprocess.sh">;
+(final, f_err) = sort (postscript, out);
+
+
+2015-02-12 18:21:07,369-0600 DEBUG textfiles END SWIFTSCRIPT:
+2015-02-12 18:21:07,370-0600 INFO  Loader gen_search.swift: source file is new. Recompiling.
+2015-02-12 18:21:08,025-0600 INFO  Warnings Warning: The @ syntax for function invocation is deprecated
+2015-02-12 18:21:08,720-0600 INFO  Loader RUN_START
+2015-02-12 18:21:08,723-0600 INFO  SwiftExecutor swift.home = /home/yadunand/bin/swift-k/dist/swift-svn

@@ -1,0 +1,26 @@
+total 52K
+-rw-r--r-- 1 osg 6.2K Feb 18 17:42 _swiftwrap.staging
+drwxr-xr-x 2 osg 4.0K Feb 18 17:42 data
+drwxr-xr-x 2 osg 4.0K Feb 18 17:42 output
+-rw-r--r-- 1 osg 5.2K Feb 18 17:42 knockoff.py
+-rw-r--r-- 1 osg  239 Feb 18 17:42 python_wrapper.sh
+-rw-r--r-- 1 osg  283 Feb 18 17:42 classifier.py
+-rw-r--r-- 1 osg  11K Feb 18 17:42 gen_search.py
+-rw-r--r-- 1 osg 1.6K Feb 18 17:42 wrapper.log
+drwxr-xr-x 2 osg 4.0K Feb 18 17:42 results
+Launching : python gen_search.py -i data/miRNA_samples.csv -l data/miRNA_labels.csv -p output/miRNA_2.split -n 2 -s 20 -k 5 -m 2 -o results/search_0002.csv
+
+----------------------------------------------Sanity Checks-----------------------------------------------
+
+Read file : data/miRNA_samples.csv
+Read file : data/miRNA_labels.csv
+Arg parameters : n = 2, nsteps = 20, k = 5, method = 2
+Consistency check : Indices match
+
+-----------------------------------Running for 50 Feature Combinations------------------------------------
+
+0%...0...1.0...2.0...3.0...4.0...5.0...6.0...7.0...8.0...9.0...10.0...11.0...12.0...13.0...14.0...15.0...16.0...17.0...18.0...19.0...20.0...21.0...22.0...23.0...24.0...25.0...26.0...27.0...28.0...29.0...30.0...31.0...32.0...33.0...34.0...35.0...36.0...37.0...38.0...39.0...40.0...41.0...42.0...43.0...44.0...45.0...46.0...47.0...48.0...49.0100%
+
+---------------------------------------------Writing Results----------------------------------------------
+
+Done!

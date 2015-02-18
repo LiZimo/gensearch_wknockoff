@@ -1,0 +1,139 @@
+2015-02-18 17:36:55,530-0600 INFO  Loader JAVA Oracle Corporation OpenJDK 64-Bit Server VM 1.7.0_65
+2015-02-18 17:36:55,532-0600 INFO  Loader VERSION Swift trunk git-rev: 4d31c0146552718190225c8027120d388e73097f heads/master 6280 (modified locally)
+2015-02-18 17:36:55,532-0600 INFO  Loader RUN_ID run015
+2015-02-18 17:36:55,532-0600 INFO  Loader ARGUMENTS [-runid, run015, -logfile, /home/zimo/work/new_gensearch/run015/swift.log, gen_search.swift, -n=2, -nsteps=20, -kfold=5, -method=2, -folder=output, -prefix=miRNA, -sample=data/miRNA_samples.csv, -labels=data/miRNA_labels.csv]
+2015-02-18 17:36:55,533-0600 INFO  Loader MAX_HEAP 954728448
+2015-02-18 17:36:55,533-0600 INFO  Loader GLOBUS_HOSTNAME login01.osgconnect.net
+2015-02-18 17:36:55,533-0600 INFO  Loader CWD /home/zimo/work/new_gensearch/.
+2015-02-18 17:36:55,535-0600 DEBUG Loader SWIFT_CONFIGURATION 
+[D] /home/zimo/swift-trunk/etc/swift.conf
+[R] swift.conf
+[C] <Command Line>
+{
+	TCPPortRange: "50000,51000"                                # [R] line 35
+	alwaysTransferWrapperLog: true                             # [R] line 40
+	executionRetries: 0                                        # [R] line 37
+	fileOperationsThrottle: 8                                  # [D] line 121
+	fileTransfersThrottle: 4                                   # [D] line 107
+	hostJobSubmitThrottle: 2                                   # [D] line 95
+	jobSubmitThrottle: 4                                       # [D] line 83
+	keepSiteDir: true                                          # [R] line 38
+	lazyErrors: false                                          # [R] line 36
+	logProvenance: false                                       # [D] line 200
+	maxForeachThreads: 16384                                   # [D] line 194
+	providerStagingPinSwiftFiles: false                        # [R] line 39
+	replicationEnabled: false                                  # [D] line 146
+	replicationLimit: 3                                        # [D] line 157
+	replicationMinQueueTime: 60                                # [D] line 153
+	site {
+		local {
+			app.ALL.executable: "*"                                  # [D] line 232
+			execution.type: "local"                                  # [D] line 223
+			filesystem.type: "local"                                 # [D] line 226
+			workDirectory: "swiftwork"                               # [D] line 229
+		}
+		osgc {
+			app.bash {
+				executable: "/bin/bash"                                 # [R] line 27
+				maxWallTime: "00:30:00"                                 # [R] line 28
+			}
+			execution {
+				URL: "login01.osgconnect.net"                           # [R] line 4
+				jobManager: "local:condor"                              # [R] line 5
+				options {
+					highOverallocation: 100                                # [R] line 11
+					jobOptions.condor {
+						projectname: "Swift"                                  # [R] line 15
+						requirements: "(HAS_CVMFS_oasis_opensciencegrid_org =?= TRUE)"# [R] line 17
+					}
+					lowOverallocation: 100                                 # [R] line 12
+					maxJobTime: "02:00:00"                                 # [R] line 10
+					maxJobs: 100                                           # [R] line 8
+					softImage: "/home/yadunand/genomics/common_data/fetch_common.tar.gz /tmp/yadunand/softimage"# [R] line 19
+					tasksPerNode: 1                                        # [R] line 9
+				}
+				type: "coaster"                                         # [R] line 3
+			}
+			initialParallelTasks: 999                                # [R] line 25
+			maxParallelTasks: 1001                                   # [R] line 24
+			staging: "local"                                         # [R] line 22
+			workDirectory: "."                                       # [R] line 23
+		}
+	}
+	sites: [osgc]                                              # [R] line 33
+	staging: "local"                                           # [R] line 41
+	tracingEnabled: false                                      # [D] line 51
+}
+
+2015-02-18 17:36:55,536-0600 DEBUG textfiles BEGIN SWIFTSCRIPT:
+type file;
+
+app (file out, file log, file err) search (file wrapper, file pyscript, file samples, file labels, file set, int n, int nsteps, int k, int method, file extra, file knockoff)
+{
+    bash @wrapper @pyscript "-i" @samples "-l" @labels "-p" @set "-n" n "-s" nsteps "-k" k "-m" method "-o" @out stdout=@log stderr=@err;
+}
+
+
+app (file result, file err) sort (file script, file parts[])
+{
+    bash @script @parts stdout=@result stderr=@err;
+}
+
+int n      = @toInt(@arg("n",       "2"));
+int nsteps = @toInt(@arg("nsteps",  "20"));
+int kval   = @toInt(@arg("kfold",   "5"));
+int method = @toInt(@arg("method",  "2"));
+
+file samples <single_file_mapper; file=@arg("sample", "data/miRNA_samples.csv")>;
+file labels  <single_file_mapper; file=@arg("labels", "data/miRNA_labels.csv" )>;
+
+string input_folder=@arg("folder", "test");
+string input_prefix=@arg("prefix", "miRNA");
+
+file splits[] <filesys_mapper; location=input_folder, prefix=input_prefix>;
+
+
+file wrapper  <"python_wrapper.sh">;
+file pyscript <"gen_search.py">;
+file extra    <"classifier.py">;
+file knockoff <"knockoff.py">;
+
+file out[] <simple_mapper; prefix="results/search_", suffix=".csv">;
+file log[] <simple_mapper; prefix="results/search_", suffix=".out">;
+file err[] <simple_mapper; prefix="results/search_", suffix=".err">;
+
+//foreach split,index in splits{
+foreach f_split, index in splits
+{
+    tracef("@Filename  = %s \n", @filename(f_split));
+    (out[index], log[index], err[index]) = search(wrapper, pyscript, samples, labels, f_split, n,nsteps, kval, method, extra);
+}
+
+
+file final <"final.out">;
+file f_err <"final.err">;
+file postscript <"postprocess.sh">;
+(final, f_err) = sort (postscript, out);
+
+
+2015-02-18 17:36:55,536-0600 DEBUG textfiles END SWIFTSCRIPT:
+2015-02-18 17:36:55,536-0600 INFO  Loader gen_search.swift: source file is new. Recompiling.
+2015-02-18 17:36:56,159-0600 INFO  Warnings Warning: The @ syntax for function invocation is deprecated
+2015-02-18 17:36:56,206-0600 DEBUG Loader Detailed exception:
+org.griphyn.vdl.karajan.CompilationException: Compile error in foreach statement at line 38
+	at org.griphyn.vdl.engine.Karajan.foreachStat(Karajan.java:1188)
+	at org.griphyn.vdl.engine.Karajan.statement(Karajan.java:810)
+	at org.griphyn.vdl.engine.Karajan.statements(Karajan.java:770)
+	at org.griphyn.vdl.engine.Karajan.program(Karajan.java:419)
+	at org.griphyn.vdl.engine.Karajan.compile(Karajan.java:169)
+	at org.griphyn.vdl.karajan.Loader.compile(Loader.java:491)
+	at org.griphyn.vdl.karajan.Loader.main(Loader.java:191)
+Caused by: org.griphyn.vdl.karajan.CompilationException: Compile error in procedure invocation at line 41
+	at org.griphyn.vdl.engine.Karajan.call(Karajan.java:1070)
+	at org.griphyn.vdl.engine.Karajan.statement(Karajan.java:807)
+	at org.griphyn.vdl.engine.Karajan.statements(Karajan.java:770)
+	at org.griphyn.vdl.engine.Karajan.foreachStat(Karajan.java:1180)
+	... 6 more
+Caused by: org.griphyn.vdl.karajan.CompilationException: Wrong number of procedure input arguments: specified 10 and should be 11
+	at org.griphyn.vdl.engine.Karajan.call(Karajan.java:881)
+	... 9 more

@@ -1,0 +1,7 @@
+Swift trunk git-rev: 4d31c0146552718190225c8027120d388e73097f heads/master 6280 (modified locally)
+RunID: run015
+Warning: The @ syntax for function invocation is deprecated
+Could not start execution:
+	Compile error in foreach statement at line 38:
+	Compile error in procedure invocation at line 41:
+	Wrong number of procedure input arguments: specified 10 and should be 11

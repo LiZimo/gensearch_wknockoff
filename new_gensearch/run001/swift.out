@@ -1,0 +1,31 @@
+Swift trunk git-rev: 4ee10d1ecb417577f3eaae14606a10ac15b44b54 heads/master 6183 (modified locally)
+RunID: run001
+Warning: The @ syntax for function invocation is deprecated
+Progress: Thu, 12 Feb 2015 18:03:26-0600
+
+Execution failed:
+java.lang.IllegalArgumentException: Directory not found: test
+	assignment @ gen_search, line: 25
+Caused by: java.lang.IllegalArgumentException: Directory not found: test
+	at org.griphyn.vdl.mapping.file.AbstractFileMapper.existing(AbstractFileMapper.java:236)
+	at org.griphyn.vdl.mapping.file.FileSystemArrayMapper.existing(FileSystemArrayMapper.java:44)
+	at org.griphyn.vdl.mapping.file.AbstractFileMapper.existing(AbstractFileMapper.java:218)
+	at org.griphyn.vdl.mapping.nodes.InitMapper.checkInputs(InitMapper.java:198)
+	at org.griphyn.vdl.mapping.nodes.InitMapper.initialize(InitMapper.java:144)
+	at org.griphyn.vdl.mapping.nodes.InitMapper.futureUpdated(InitMapper.java:154)
+	at org.griphyn.vdl.mapping.nodes.AbstractFutureDataNode.notifyListeners(AbstractFutureDataNode.java:71)
+	at org.griphyn.vdl.mapping.nodes.AbstractDataNode.postCloseActions(AbstractDataNode.java:285)
+	at org.griphyn.vdl.mapping.nodes.AbstractFutureNonCompositeDataNode.setValue(AbstractFutureNonCompositeDataNode.java:102)
+	at org.griphyn.vdl.karajan.lib.SetFieldValue.deepCopy(SetFieldValue.java:224)
+	at org.griphyn.vdl.karajan.lib.SetFieldValue.function(SetFieldValue.java:174)
+	at org.griphyn.vdl.karajan.lib.SwiftFunction.runBody(SwiftFunction.java:77)
+	at org.globus.cog.karajan.compiled.nodes.InternalFunction.run(InternalFunction.java:175)
+	at org.globus.cog.karajan.compiled.nodes.CompoundNode.runChild(CompoundNode.java:110)
+	at org.globus.cog.karajan.compiled.nodes.Sequential.run(Sequential.java:41)
+	at org.globus.cog.karajan.compiled.nodes.CompoundNode.runChild(CompoundNode.java:110)
+	at org.globus.cog.karajan.compiled.nodes.UParallel$1.run(UParallel.java:91)
+	at k.thr.LWThread.run(LWThread.java:247)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:744)
+

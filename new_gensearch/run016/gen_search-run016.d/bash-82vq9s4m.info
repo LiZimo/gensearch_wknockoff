@@ -1,0 +1,29 @@
+checking for paramfile
+no paramfile: using command line arguments
+Progress  2015-02-18 17:41:56.370568585-0600  LOG_START
+
+_____________________________________________________________________________
+
+        Wrapper (_swiftwrap.staging)
+_____________________________________________________________________________
+
+/bin/bash -out results/search_0095.out -err results/search_0095.err -i -d data|results|output -if output/miRNA_95.split|python_wrapper.sh|data/miRNA_samples.csv|knockoff.py|classifier.py|gen_search.py|data/miRNA_labels.csv -of results/search_0095.err|results/search_0095.csv|results/search_0095.out -cf -cdmfile -status provider -a python_wrapper.sh gen_search.py -i data/miRNA_samples.csv -l data/miRNA_labels.csv -p output/miRNA_95.split -n 2 -s 20 -k 5 -m 2 -o results/search_0095.csv
+PWD=/tmp/glide_3idjqE/execute/dir_84398/gen_search-run016/jobs/b/bash-82vq9s4m
+EXEC=/bin/bash
+STDIN=
+STDOUT=results/search_0095.out
+STDERR=results/search_0095.err
+DIRS=data|results|output
+INF=output/miRNA_95.split|python_wrapper.sh|data/miRNA_samples.csv|knockoff.py|classifier.py|gen_search.py|data/miRNA_labels.csv
+OUTF=results/search_0095.err|results/search_0095.csv|results/search_0095.out
+COLLECT=
+ARGS=python_wrapper.sh gen_search.py -i data/miRNA_samples.csv -l data/miRNA_labels.csv -p output/miRNA_95.split -n 2 -s 20 -k 5 -m 2 -o results/search_0095.csv
+ARGC=18
+Progress  2015-02-18 17:41:56.374350083-0600  CREATE_INPUTDIR
+Created output directory: data
+Created output directory: results
+Created output directory: output
+Progress  2015-02-18 17:41:56.378076635-0600  EXECUTE
+Progress  2015-02-18 17:42:00.566512273-0600  EXECUTE_DONE
+Job ran successfully
+Progress  2015-02-18 17:42:00.567555879-0600  END

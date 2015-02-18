@@ -1,0 +1,184 @@
+Swift trunk git-rev: 4ee10d1ecb417577f3eaae14606a10ac15b44b54 heads/master 6183 (modified locally)
+RunID: run008
+Warning: The @ syntax for function invocation is deprecated
+Progress: Thu, 12 Feb 2015 18:22:46-0600
+@Filename  = output/miRNA_4.split 
+@Filename  = output/miRNA_3.split 
+@Filename  = output/miRNA_5.split 
+@Filename  = output/miRNA_6.split 
+@Filename  = output/miRNA_1.split 
+@Filename  = output/miRNA_2.split 
+@Filename  = output/miRNA_0.split 
+@Filename  = output/miRNA_7.split 
+@Filename  = output/miRNA_8.split 
+@Filename  = output/miRNA_11.split 
+@Filename  = output/miRNA_9.split 
+@Filename  = output/miRNA_12.split 
+@Filename  = output/miRNA_14.split 
+@Filename  = output/miRNA_19.split 
+@Filename  = output/miRNA_23.split 
+@Filename  = output/miRNA_15.split 
+@Filename  = output/miRNA_20.split 
+@Filename  = output/miRNA_26.split 
+@Filename  = output/miRNA_28.split 
+@Filename  = output/miRNA_21.split 
+@Filename  = output/miRNA_16.split 
+@Filename  = output/miRNA_34.split 
+@Filename  = output/miRNA_32.split 
+@Filename  = output/miRNA_17.split 
+@Filename  = output/miRNA_13.split 
+@Filename  = output/miRNA_33.split 
+@Filename  = output/miRNA_37.split 
+@Filename  = output/miRNA_40.split 
+@Filename  = output/miRNA_41.split 
+@Filename  = output/miRNA_10.split 
+@Filename  = output/miRNA_38.split 
+@Filename  = output/miRNA_35.split 
+@Filename  = output/miRNA_39.split 
+@Filename  = output/miRNA_36.split 
+@Filename  = output/miRNA_18.split 
+@Filename  = output/miRNA_24.split 
+@Filename  = output/miRNA_54.split 
+@Filename  = output/miRNA_22.split 
+@Filename  = output/miRNA_52.split 
+@Filename  = output/miRNA_30.split 
+@Filename  = output/miRNA_55.split 
+@Filename  = output/miRNA_49.split 
+@Filename  = output/miRNA_27.split 
+@Filename  = output/miRNA_25.split 
+@Filename  = output/miRNA_43.split 
+@Filename  = output/miRNA_63.split 
+@Filename  = output/miRNA_62.split 
+@Filename  = output/miRNA_61.split 
+@Filename  = output/miRNA_31.split 
+@Filename  = output/miRNA_68.split 
+@Filename  = output/miRNA_69.split 
+@Filename  = output/miRNA_57.split 
+@Filename  = output/miRNA_47.split 
+@Filename  = output/miRNA_58.split 
+@Filename  = output/miRNA_77.split 
+@Filename  = output/miRNA_53.split 
+@Filename  = output/miRNA_48.split 
+@Filename  = output/miRNA_75.split 
+@Filename  = output/miRNA_85.split 
+@Filename  = output/miRNA_51.split 
+@Filename  = output/miRNA_50.split 
+@Filename  = output/miRNA_45.split 
+@Filename  = output/miRNA_86.split 
+@Filename  = output/miRNA_42.split 
+@Filename  = output/miRNA_95.split 
+@Filename  = output/miRNA_94.split 
+@Filename  = output/miRNA_92.split 
+@Filename  = output/miRNA_46.split 
+@Filename  = output/miRNA_91.split 
+@Filename  = output/miRNA_80.split 
+@Filename  = output/miRNA_87.split 
+@Filename  = output/miRNA_90.split 
+@Filename  = output/miRNA_73.split 
+@Filename  = output/miRNA_56.split 
+@Filename  = output/miRNA_98.split 
+@Filename  = output/miRNA_74.split 
+@Filename  = output/miRNA_72.split 
+@Filename  = output/miRNA_29.split 
+@Filename  = output/miRNA_66.split 
+@Filename  = output/miRNA_67.split 
+@Filename  = output/miRNA_70.split 
+@Filename  = output/miRNA_71.split 
+@Filename  = output/miRNA_60.split 
+@Filename  = output/miRNA_44.split 
+@Filename  = output/miRNA_96.split 
+@Filename  = output/miRNA_79.split 
+@Filename  = output/miRNA_89.split 
+@Filename  = output/miRNA_64.split 
+@Filename  = output/miRNA_88.split 
+@Filename  = output/miRNA_93.split 
+@Filename  = output/miRNA_82.split 
+@Filename  = output/miRNA_100.split 
+@Filename  = output/miRNA_59.split 
+@Filename  = output/miRNA_78.split 
+@Filename  = output/miRNA_84.split 
+@Filename  = output/miRNA_99.split 
+@Filename  = output/miRNA_97.split 
+@Filename  = output/miRNA_65.split 
+@Filename  = output/miRNA_76.split 
+@Filename  = output/miRNA_83.split 
+@Filename  = output/miRNA_81.split 
+Progress: Thu, 12 Feb 2015 18:22:47-0600  Submitted:101
+Progress: Thu, 12 Feb 2015 18:23:17-0600  Submitted:101
+Progress: Thu, 12 Feb 2015 18:23:27-0600  Stage in:1  Submitted:100
+Progress: Thu, 12 Feb 2015 18:23:28-0600  Submitted:97  Active:4
+Progress: Thu, 12 Feb 2015 18:23:29-0600  Submitted:96  Active:5
+Progress: Thu, 12 Feb 2015 18:23:30-0600  Stage in:1  Submitted:93  Active:7
+Progress: Thu, 12 Feb 2015 18:23:31-0600  Stage in:1  Submitted:91  Active:9
+Progress: Thu, 12 Feb 2015 18:23:32-0600  Submitted:91  Active:10
+Progress: Thu, 12 Feb 2015 18:23:33-0600  Submitted:90  Active:11
+Progress: Thu, 12 Feb 2015 18:24:03-0600  Stage in:4  Submitted:83  Active:14
+Progress: Thu, 12 Feb 2015 18:24:04-0600  Submitted:80  Active:21
+Progress: Thu, 12 Feb 2015 18:24:34-0600  Submitted:74  Active:21  Finished successfully:6
+Progress: Thu, 12 Feb 2015 18:24:39-0600  Submitted:73  Active:21  Finished successfully:7
+Progress: Thu, 12 Feb 2015 18:24:40-0600  Submitted:68  Active:21  Finished successfully:12
+Progress: Thu, 12 Feb 2015 18:24:44-0600  Stage in:1  Submitted:67  Active:20  Finished successfully:13
+Progress: Thu, 12 Feb 2015 18:24:45-0600  Submitted:66  Active:22  Finished successfully:13
+Progress: Thu, 12 Feb 2015 18:24:46-0600  Submitted:60  Active:23  Finished successfully:18
+Progress: Thu, 12 Feb 2015 18:24:49-0600  Submitted:60  Active:22  Stage out:1  Finished successfully:18
+Progress: Thu, 12 Feb 2015 18:24:50-0600  Submitted:59  Active:23  Finished successfully:19
+Progress: Thu, 12 Feb 2015 18:24:51-0600  Stage in:1  Submitted:58  Active:19  Finished successfully:23
+Progress: Thu, 12 Feb 2015 18:24:52-0600  Submitted:54  Active:23  Finished successfully:24
+Progress: Thu, 12 Feb 2015 18:24:53-0600  Submitted:54  Active:22  Stage out:1  Finished successfully:24
+
+Execution failed:
+Exception in bash:
+    Arguments: [python_wrapper.sh, gen_search.py, -i, data/miRNA_samples.csv, -l, data/miRNA_labels.csv, -p, output/miRNA_6.split, -n, 2, -s, 20, -k, 5, -m, 2, -o, results/search_0006.csv]
+    Host: osgc
+    Directory: gen_search-run008/jobs/b/bash-um9zfi4m
+	exception @ swift-int-staging.k, line: 165
+Caused by: Application /bin/bash failed with an exit code of 1
+
+------- Application STDERR --------
+/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/pandas/io/excel.py:626: UserWarning: Installed openpyxl is not supported at this time. Use >=1.6.1 and <2.0.0.
+  .format(openpyxl_compat.start_ver, openpyxl_compat.stop_ver))
+Traceback (most recent call last):
+  File "gen_search.py", line 23, in <module>
+    from matplotlib import pyplot as plt
+  File "/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/matplotlib/pyplot.py", line 98, in <module>
+    _backend_mod, new_figure_manager, draw_if_interactive, _show = pylab_setup()
+  File "/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/matplotlib/backends/__init__.py", line 28, in pylab_setup
+    globals(),locals(),[backend_name],0)
+  File "/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/matplotlib/backends/backend_tkagg.py", line 8, in <module>
+    import Tkinter as Tk, FileDialog
+  File "/cvmfs/oasis.opensciencegrid.org/osg/modules/python-2.7.7/lib/python2.7/lib-tk/Tkinter.py", line 39, in <module>
+    import _tkinter # If this fails your Python may not be configured for Tk
+ImportError: libtk8.5.so: cannot open shared object file: No such file or directory
+-----------------------------------
+
+	exception @ swift-int-staging.k, line: 160
+Caused by: Process completed with exit code 1
+
+	k:assign @ swift.k, line: 174
+Caused by: Exception in bash:
+    Arguments: [python_wrapper.sh, gen_search.py, -i, data/miRNA_samples.csv, -l, data/miRNA_labels.csv, -p, output/miRNA_6.split, -n, 2, -s, 20, -k, 5, -m, 2, -o, results/search_0006.csv]
+    Host: osgc
+    Directory: gen_search-run008/jobs/b/bash-um9zfi4m
+	exception @ swift-int-staging.k, line: 165
+Caused by: Application /bin/bash failed with an exit code of 1
+
+------- Application STDERR --------
+/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/pandas/io/excel.py:626: UserWarning: Installed openpyxl is not supported at this time. Use >=1.6.1 and <2.0.0.
+  .format(openpyxl_compat.start_ver, openpyxl_compat.stop_ver))
+Traceback (most recent call last):
+  File "gen_search.py", line 23, in <module>
+    from matplotlib import pyplot as plt
+  File "/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/matplotlib/pyplot.py", line 98, in <module>
+    _backend_mod, new_figure_manager, draw_if_interactive, _show = pylab_setup()
+  File "/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/matplotlib/backends/__init__.py", line 28, in pylab_setup
+    globals(),locals(),[backend_name],0)
+  File "/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/matplotlib/backends/backend_tkagg.py", line 8, in <module>
+    import Tkinter as Tk, FileDialog
+  File "/cvmfs/oasis.opensciencegrid.org/osg/modules/python-2.7.7/lib/python2.7/lib-tk/Tkinter.py", line 39, in <module>
+    import _tkinter # If this fails your Python may not be configured for Tk
+ImportError: libtk8.5.so: cannot open shared object file: No such file or directory
+-----------------------------------
+
+	exception @ swift-int-staging.k, line: 160
+Caused by: Process completed with exit code 1
+

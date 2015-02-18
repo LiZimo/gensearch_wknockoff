@@ -1,0 +1,2 @@
+send: Cannot determine peer address at cscript3032547463649284253.pl line 524
+_swiftwrap.staging: line 302:  2511 Killed                  "$EXEC" "${CMDARGS[@]}" > "$STDOUT" 2> "$STDERR"

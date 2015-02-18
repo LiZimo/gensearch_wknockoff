@@ -1,0 +1,925 @@
+checking for paramfile
+no paramfile: using command line arguments
+Progress  2015-02-18 16:15:51.814843568-0600  LOG_START
+
+_____________________________________________________________________________
+
+        Wrapper (_swiftwrap.staging)
+_____________________________________________________________________________
+
+/bin/bash -out results/search_0010.out -err results/search_0010.err -i -d data|results|output -if python_wrapper.sh|output/miRNA_10.split|data/miRNA_samples.csv|classifier.py|gen_search.py|data/miRNA_labels.csv -of results/search_0010.out|results/search_0010.err|results/search_0010.csv -cf -cdmfile -status provider -a python_wrapper.sh gen_search.py -i data/miRNA_samples.csv -l data/miRNA_labels.csv -p output/miRNA_10.split -n 2 -s 20 -k 5 -m 2 -o results/search_0010.csv
+PWD=/tmp/glide_HN9Wfx/execute/dir_55913/gen_search-run013/jobs/b/bash-8n9c6s4m
+EXEC=/bin/bash
+STDIN=
+STDOUT=results/search_0010.out
+STDERR=results/search_0010.err
+DIRS=data|results|output
+INF=python_wrapper.sh|output/miRNA_10.split|data/miRNA_samples.csv|classifier.py|gen_search.py|data/miRNA_labels.csv
+OUTF=results/search_0010.out|results/search_0010.err|results/search_0010.csv
+COLLECT=
+ARGS=python_wrapper.sh gen_search.py -i data/miRNA_samples.csv -l data/miRNA_labels.csv -p output/miRNA_10.split -n 2 -s 20 -k 5 -m 2 -o results/search_0010.csv
+ARGC=18
+Progress  2015-02-18 16:15:51.818917347-0600  CREATE_INPUTDIR
+Created output directory: data
+Created output directory: results
+Created output directory: output
+Progress  2015-02-18 16:15:51.823386247-0600  EXECUTE
+Application /bin/bash failed with an exit code of 1
+
+_____________________________________________________________________________
+
+        uname -a
+_____________________________________________________________________________
+
+Linux c0216.crane.hcc.unl.edu 2.6.32-431.40.2.el6.x86_64 #1 SMP Mon Dec 22 16:59:00 CST 2014 x86_64 x86_64 x86_64 GNU/Linux
+
+_____________________________________________________________________________
+
+        id
+_____________________________________________________________________________
+
+uid=32016(osg) gid=4001(grid) groups=4001(grid)
+
+_____________________________________________________________________________
+
+        env
+_____________________________________________________________________________
+
+SLURM_CHECKPOINT_IMAGE_DIR=/var/lib/globus/condor-ce/spool/1924/0/cluster641924.proc0.subproc0
+SLURM_NODELIST=c0216
+GLIDEIN_SEs=srm.unl.edu
+LCMAPS_DB_FILE=/etc/condor-ce/lcmaps.db
+GLIDEIN_ResourceName=Crane
+_CONDOR_JOB_PIDS=
+SLURM_JOB_NAME=bl_da8850e2ea82
+GRIDMAP=/tmp/glide_HN9Wfx/grid-mapfile
+SLURMD_NODENAME=c0216
+SLURM_TOPOLOGY_ADDR=core.s2.c0216
+GLIDEIN_REQUIRE_GLEXEC_USE=False
+HOSTNAME=c0216
+SLURM_PRIO_PROCESS=0
+OSG_GLEXEC_LOCATION=/usr/sbin/glexec
+SLURM_NODE_ALIASES=(null)
+CVMFS_atlas_cern_ch_REVISION=7547
+TERM=xterm
+HAS_FILE_usr_lib64_libgsl_so_0=True
+GLIDEIN_LOCAL_SITE_SE=srm://srm.unl.edu:8443/srm/v2/server?SFN=/mnt/hadoop/user//osg
+LCMAPS_POLICY_NAME=authorize_only
+TMPDIR=/tmp/glide_HN9Wfx/execute/dir_55913
+GLOBUS_LOCATION=/usr
+OSGVO_CMSSW_Revision=1119 - /cvmfs/oasis.opensciencegrid.org/cmssoft/cms//etc/cms-common/revision
+SLURM_TOPOLOGY_ADDR_PATTERN=switch.switch.node
+MODULEPATH_ROOT=/cvmfs/oasis.opensciencegrid.org/osg/modules/modulefiles/
+GLIDECLIENT_Signature=cbb94c2f5b50890d67749812968cbc7f88c1f12f
+GAHP_TEMP=/tmp/condor_g_scratch.0x7f21778f8980.8923
+LMOD_PACKAGE_PATH=/cvmfs/oasis.opensciencegrid.org/osg/modules/modulefiles/Core
+HAS_GLIB2_228=True
+_CONDOR_ANCESTOR_53194=55913:1424297748:979450795
+HAS_FILE_usr_lib64_libglib_2_0_so=False
+_CONDOR_SCRATCH_DIR=/tmp/glide_HN9Wfx/execute/dir_55913
+LMOD_PKG=/cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/lmod
+OSG_WN_TMP=/tmp
+X509_CERT_DIR=/etc/grid-security/certificates
+LLGT_VOMS_DISABLE_CREDENTIAL_CHECK=1
+_CONDOR_ANCESTOR_55913=55917:1424297751:3245370638
+_CONDOR_ANCESTOR_53191=53194:1424293518:3661004214
+SCHEDD_NAME=crane-gw1.unl.edu
+OSG_JOB_CONTACT=gw1.crane.hcc.unl.edu/jobmanager-pbs
+OSGVO_PILOT_DF=1800905412
+OSGVO_OS_VERSION=6
+OSG_SQUID_LOCATION=ff-squid.unl.edu:3128
+GLIDEIN_REQUIRE_VOMS=False
+OSG_SITE_WRITE=None
+SLURM_NNODES=1
+VOS_USING_SE_VONAME_LOWERCASE=CMS,Engage,GLOW,HCC,nanoHUB,NWICG,OSG
+_CHIRP_DELAYED_UPDATE_PREFIX=Chirp*
+TEMP=/tmp/glide_HN9Wfx/execute/dir_55913
+LD_LIBRARY_PATH=
+CONDOR_PARENT_ID=c0216:55913:1424297749
+GLIDEIN_Entry_Name=CMSHTPC_T3_US_Omaha_crane
+HAS_CVMFS_icecube_opensciencegrid_org=True
+OSGVO_Data_EIC_A1=False
+GLIDEIN_Name=gfactory_instance
+VO_CMS_SW_DIR=/cvmfs/cms.cern.ch
+BATCH_SYSTEM=HTCondor
+OSGVO_PROJECT_NAME=ExhaustiveSearch
+LLGT_LIFT_PRIVILEGED_PROTECTION=1
+_CONDOR_CHIRP_CONFIG=/tmp/glide_HN9Wfx/execute/dir_55913/.chirp_config
+CVMFS_oasis_opensciencegrid_org_TIMESTAMP=1423861861
+CVMFS_icecube_opensciencegrid_org_REVISION=37
+SLURM_JOBID=1363339
+HAS_R=False
+OSG_SITE_READ=None
+GLIDEIN_Entry_Signature=6b59b93b5ef83496c583e3a056c5ef0ff9b46c73
+OSGVO_BENCH_STATUS=Skipped
+SLURM_NTASKS=8
+LLGT_LOG_IDENT=htcondor-ce
+CONDOR_PROCD_ADDRESS_BASE=/tmp/glide_HN9Wfx/log/procd_address
+PYTHON_VERSION=2.6.6
+GLIDEIN_Site=Omaha
+GLIDECLIENT_Name=osg-flock-grid-iu-edu_OSG_gWMSFrontend.main_multicore
+PATH=/cvmfs/oasis.opensciencegrid.org/osg/modules/lua/bin:/sbin:/usr/sbin:/bin:/usr/bin:/bin:/usr/bin
+LCMAPS_DEBUG_LEVEL=2
+SLURM_TASKS_PER_NODE=8
+HAS_CVMFS_oasis_opensciencegrid_org=True
+LCMAPS_DIR=/etc
+HOLD_GRACE_TIME=0
+HAS_FILE_lib64_libglib_2_0_so_0=True
+SLURM_JOB_ID=1363339
+HAS_NUMPY=True
+OSG_DATA=UNAVAILABLE
+CONDOR_CONFIG=/tmp/glide_HN9Wfx/condor_config
+PWD=/tmp/glide_HN9Wfx/execute/dir_55913/gen_search-run013/jobs/b/bash-8n9c6s4m
+OSG_APP=/cvmfs/oasis.opensciencegrid.org
+HAS_TCSH=True
+CUDA_VISIBLE_DEVICES=NoDevFiles
+HAS_SQUID=True
+X509_USER_CERT=/tmp/glide_HN9Wfx/hostcert.pem
+HAS_BLAST=False
+LANG=C
+_CONDOR_WRAPPER_ERROR_FILE=/tmp/glide_HN9Wfx/execute/dir_55913/.job_wrapper_failure
+GLIDEIN_Country=US
+MODULEPATH=/cvmfs/oasis.opensciencegrid.org/osg/modules/modulefiles/Core
+GLIDEIN_Gatekeeper=crane-gw1.unl.edu crane-gw1.unl.edu:9619
+HAS_FILE_usr_lib64_libstdc___so_6=True
+GATEKEEPER_JM_ID=2015-02-09.21:22:15.0000008923.0000011361
+SLURM_NODEID=0
+_CONDOR_SLOT=slot1_6
+HAS_JAVA=True
+SLURM_SUBMIT_DIR=/var/lib/globus/condor-ce/spool/1924/0/cluster641924.proc0.subproc0
+OSG_GRID=/etc/osg/wn-client/
+GLIDEIN_Tmp_Dir=/tmp/glide_HN9Wfx/tmp
+SLURM_TASK_PID=46901
+GLIDEIN_Proxy_URL=ff-squid.unl.edu:3128
+GLIDEIN_GridType=condor
+SLURM_NPROCS=8
+GLIDEIN_Factory=SDSC
+LMOD_CMD=/cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/lmod/libexec/lmod
+GLIDEIN_SE_VONAME_LOWERCASE=srm://srm.unl.edu:8443/srm/v2/server?SFN=/mnt/hadoop/user/
+SLURM_CPUS_ON_NODE=8
+HAS_CVMFS_PALMS=True
+HAS_FILE_usr_lib64_libgfortran_so_3=True
+GLIDECLIENT_Group=main_multicore
+OSG_HOSTNAME=gw1.crane.hcc.unl.edu
+SLURM_PROCID=0
+ENVIRONMENT=BATCH
+WORKER_LOGGING_LEVEL=NONE
+PREEMPT_GRACE_TIME=10000000
+_CONDOR_EXECUTE=/tmp/glide_HN9Wfx/execute
+GLIDEIN_Expose_Grid_Env=True
+OSGVO_Data_EIC1=False
+SLURM_JOB_NODELIST=c0216
+HAS_CVMFS_cms_cern_ch=True
+GLIDECLIENT_Group_Signature=2b294f0c16c291b25c005201ed74d611f15ab1e9
+HOME=/tmp/glide_HN9Wfx/execute/dir_55913
+SHLVL=8
+OSGVO_OS_NAME=RHEL
+_CONDOR_MACHINE_AD=/tmp/glide_HN9Wfx/execute/dir_55913/.machine.ad
+OSG_STORAGE_ELEMENT=True
+SLURM_LOCALID=0
+OSGVO_OS_STRING=RHEL 6
+GSI_AUTHZ_CONF=/dev/null
+X509_USER_PROXY=/tmp/glide_HN9Wfx/ticket/myproxy
+SWIFT_WORKER_PID=55917
+SLOTS_LAYOUT=partitionable
+JOB_REPOSITORY_ID=2015-02-09.21:22:15.0000008923.0000011361
+SLURM_JOB_CPUS_PER_NODE=8
+CVMFS_oasis_opensciencegrid_org_REVISION=3371
+GLIDEIN_Signature=d08ef2cd89205249fd4b6f65fa48f9c044c6098f
+SLURM_SUBMIT_HOST=crane-gw1.unl.edu
+GLIDEIN_CMSSite=T3_US_Omaha
+SLURM_GTIDS=0
+OSGVO_CMSSW_Path=/cvmfs/oasis.opensciencegrid.org/cmssoft/cms/
+GLIDEIN_Schedd=schedd_glideins1@gfactory-1.t2.ucsd.edu
+OSG_DEFAULT_SE=srm.unl.edu
+TMP=/tmp/glide_HN9Wfx/execute/dir_55913
+GLIDEIN_Glexec_Use=NEVER
+OSG_GLIDEIN_VERSION=75
+OSGVO_Data_EIC_A40=False
+SWIFT_JOB_SLOT=0
+CVMFS_cms_cern_ch_REVISION=7356
+OSGVO_SUBMITTER=zimo@login01.osgconnect.net
+GPU_DEVICE_ORDINAL=NoDevFiles
+OSG_SITE_NAME=Crane
+GLIDEIN_Monitoring_Enabled=False
+HAS_PHSW=True
+GLIDEIN_ProcId=0
+SLURM_JOB_NUM_NODES=1
+GLIDEIN_ClusterId=2712092
+MODULESHOME=/cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/lmod
+HAS_TIMEOUT=True
+_CONDOR_JOB_AD=/tmp/glide_HN9Wfx/execute/dir_55913/.job.ad
+OSGVO_CPU_MODEL=Intel(R) Xeon(R) CPU E5-2670 0 @ 2.60GHz
+HAS_FILE_usr_lib64_libgslcblas_so_0=True
+HAS_CVMFS_atlas_cern_ch=True
+GLITE_LOCATION=/usr/libexec/condor/glite
+GLIDEIN_LOCAL_TMP_DIR=/tmp/glide_osg_1kil9i
+GLIDECLIENT_OSG_VO=OSG
+LMOD_DIR=/cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/lmod/libexec/
+_CONDOR_JOB_IWD=/tmp/glide_HN9Wfx/execute/dir_55913
+SLURM_MEM_PER_NODE=32000
+X509_USER_KEY=/tmp/glide_HN9Wfx/hostkey.pem
+CONDOR_PROCD_ADDRESS=/tmp/glide_HN9Wfx/log/procd_address
+BASH_FUNC__module_not_yet_loaded()=() {  comm -23 <(_module_avail|sort) <(_module_loaded_modules|sort)
+}
+BASH_FUNC__ml()=() {  local cur="$2" prev="$3" cmds opts found;
+ COMPREPLY=();
+ cmds="add avail delete help keyword list load purge rm restore save sl show spider swap unload         unuse update use whatis";
+ opts="-d -D -h -q -t -v -w --expert --quiet --help  --quiet --terse --version --default --Verbose --width -r --regexp --mt";
+ case "$prev" in 
+ spider)
+ COMPREPLY=($(compgen -W "$(_module_spider)" -- "$cur"))
+ ;;
+ rm | remove | unload | swap)
+ COMPREPLY=($(compgen -W "$(_module_loaded_modules)" -- "$cur"))
+ ;;
+ unuse)
+ COMPREPLY=($(IFS=: compgen -W "${MODULEPATH}" -- "$cur"))
+ ;;
+ use | *-a*)
+
+ ;;
+ help | show | whatis)
+ COMPREPLY=($(compgen -W "$(_module_avail)" -- "$cur"))
+ ;;
+ *)
+ case "$cur" in 
+ -*)
+ if [ $COMP_CWORD -eq 1 ]; then
+ COMPREPLY=($(compgen -W "$opts $(_module_loaded_modules_negated)" -- "$cur"));
+ else
+ COMPREPLY=($(compgen -W "      $(_module_loaded_modules_negated)" -- "$cur"));
+ fi
+ ;;
+ *)
+ if [ $COMP_CWORD -eq 1 ]; then
+ case "$cur" in 
+ ls)
+ COMPREPLY="list"
+ ;;
+ sw*)
+ COMPREPLY="swap"
+ ;;
+ *)
+ COMPREPLY=($(compgen -W "$cmds $(_module_avail)" -- "$cur"))
+ ;;
+ esac;
+ else
+ if [[ ${COMP_WORDS[COMP_CWORD-2]} == sw* ]]; then
+ COMPREPLY=($(compgen -W "$(_module_not_yet_loaded)" -- "$cur"));
+ else
+ for ((i = COMP_CWORD - 1; i > 0; i--))
+ do
+ case ${COMP_WORDS[$i]} in 
+ show | whatis)
+ COMPREPLY=($(compgen -W "$(_module_avail)" -- "$cur"));
+ found=1;
+ break
+ ;;
+ rm | remove | unload)
+ COMPREPLY=($(compgen -W "$(_module_loaded_modules)" -- "$cur"));
+ found=1;
+ break
+ ;;
+ spider)
+ COMPREPLY=($(compgen -W "$(_module_spider)" -- "$cur"));
+ found=1;
+ break
+ ;;
+ esac;
+ done;
+ if [ -z "$found" ]; then
+ COMPREPLY=($(compgen -W "$(_module_avail)" -- "$cur"));
+ fi;
+ fi;
+ fi
+ ;;
+ esac
+ ;;
+ esac
+}
+BASH_FUNC_module()=() {  eval $($LMOD_CMD bash "$@");
+ [ $? = 0 ] && eval $(${LMOD_SETTARG_CMD:-:} -s sh)
+}
+BASH_FUNC__module_loaded_modules()=() {  /cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/lmod/libexec/lmod bash -t list 2>&1 > /dev/null | sed ' /^ *$/d; /:$/d; s#/*$##g;'
+}
+BASH_FUNC__module_avail()=() {  /cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/lmod/libexec/lmod bash -t avail 2>&1 > /dev/null | sed ' /:$/d; s#/*$##g;'
+}
+BASH_FUNC__module_loaded_modules_negated()=() {  /cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/lmod/libexec/lmod bash -t list 2>&1 > /dev/null | sed ' /^ *$/d; /:$/d; s#/*$##g; s|^|-|g;'
+}
+BASH_FUNC__module_spider()=() {  /cvmfs/oasis.opensciencegrid.org/osg/modules/lmod/lmod/libexec/lmod bash -t spider 2>&1 > /dev/null
+}
+BASH_FUNC__module_long_arg_list()=() {  local cur="$1" i;
+ if [[ ${COMP_WORDS[COMP_CWORD-2]} == sw* ]]; then
+ COMPREPLY=($(compgen -W "$(_module_not_yet_loaded)" -- "$cur"));
+ return;
+ fi;
+ for ((i = COMP_CWORD - 1; i > 0; i--))
+ do
+ case ${COMP_WORDS[$i]} in 
+ add | load)
+ COMPREPLY=($(compgen -W "$(_module_not_yet_loaded)" -- "$cur"));
+ break
+ ;;
+ rm | remove | unload | switch | swap)
+ COMPREPLY=($(compgen -W "$(_module_loaded_modules)" -- "$cur"));
+ break
+ ;;
+ esac;
+ done
+}
+BASH_FUNC_clearMT()=() {  eval $($LMOD_DIR/clearMT_cmd bash)
+}
+BASH_FUNC__module()=() {  local cur="$2" prev="$3" cmds opts;
+ COMPREPLY=();
+ cmds="add avail delete help keyword list load purge rm restore save show spider swap 	      unload unuse update use whatis";
+ opts="-d -D -h -q -t -v -w --expert --quiet --help  --quiet --terse --version --default --width -r --regexp --mt";
+ case "$prev" in 
+ add | load | try-load)
+ COMPREPLY=($(compgen -W "$(_module_not_yet_loaded)" -- "$cur"))
+ ;;
+ spider)
+ COMPREPLY=($(compgen -W "$(_module_spider)" -- "$cur"))
+ ;;
+ rm | remove | unload | switch | swap)
+ COMPREPLY=($(      compgen -W "$(_module_loaded_modules)" -- "$cur"))
+ ;;
+ unuse)
+ COMPREPLY=($(IFS=: compgen -W "${MODULEPATH}" -- "$cur"))
+ ;;
+ use | *-a*)
+
+ ;;
+ help | show | whatis)
+ COMPREPLY=($(compgen -W "$(_module_avail)" -- "$cur"))
+ ;;
+ *)
+ if test $COMP_CWORD -gt 2; then
+ _module_long_arg_list "$cur";
+ else
+ case "$cur" in 
+ ls)
+ COMPREPLY="list"
+ ;;
+ sw*)
+ COMPREPLY="swap"
+ ;;
+ -*)
+ COMPREPLY=($(compgen -W "$opts" -- "$cur"))
+ ;;
+ *)
+ COMPREPLY=($(compgen -W "$cmds" -- "$cur"))
+ ;;
+ esac;
+ fi
+ ;;
+ esac
+}
+BASH_FUNC_ml()=() {  eval $($LMOD_DIR/ml_cmd "$@")
+}
+_=/bin/env
+
+_____________________________________________________________________________
+
+        df
+_____________________________________________________________________________
+
+Filesystem               1K-blocks         Used    Available Use% Mounted on
+/dev/mapper/vg0-lv_root
+                          20642428      3856024     15737828  20% /
+tmpfs                     32902828            4     32902824   1% /dev/shm
+/dev/md0                    507684       108240       373233  23% /boot
+/dev/mapper/vg0-lv_scratch
+                        1900931276      4455444   1799914068   1% /scratch
+10.138.17.27:/volumes/CraneZFS/crane-util
+                         204056560    146341712     57714848  72% /util
+10.137.17.16@o2ib0:10.137.17.18@o2ib0:/Crane
+                     1559421272400 764253120460 795166928332  50% /lustre
+10.138.1.208:/var/lib/globus
+                          20510720      9107456     10354688  47% /var/lib/globus
+10.138.17.27:/volumes/CraneZFS/grouphome/tadesse
+                          10590624      3106544      7484080  30% /home/tadesse
+10.138.17.27:/volumes/CraneZFS/grouphome/batelaan
+                          10590624          160     10590464   1% /home/batelaan
+10.138.17.27:/volumes/CraneZFS/grouphome/li508
+                          10590624       908576      9682048   9% /home/li508
+10.138.17.27:/volumes/CraneZFS/grouphome/zeng
+                          10590624      8505344      2085280  81% /home/zeng
+10.138.17.27:/volumes/CraneZFS/grouphome/swanson
+                         104962464     74609648     30352816  72% /home/swanson
+10.138.17.27:/volumes/CraneZFS/grouphome/jwang7
+                          10590624      3566016      7024608  34% /home/jwang7
+10.147.100.3:/aerosol/data
+                       64408489984  30421548032  33986941952  48% /shared/aerosol
+10.138.17.27:/volumes/CraneZFS/grouphome/tsymbal
+                          10590624      7078464      3512160  67% /home/tsymbal
+10.138.17.27:/volumes/CraneZFS/grouphome/sellmyer
+                          10590624      5669408      4921216  54% /home/sellmyer
+10.138.17.27:/volumes/CraneZFS/grouphome/starace
+                          10590624         4992     10585632   1% /home/starace
+10.138.17.27:/volumes/CraneZFS/grouphome/lovas
+                          10590624      1996784      8593840  19% /home/lovas
+10.138.17.27:/volumes/CraneZFS/grouphome/belashchenko
+                          10590624      6908688      3681936  66% /home/belashchenko
+10.138.17.27:/volumes/CraneZFS/grouphome/oglesby
+                          10590624        80880     10509744   1% /home/oglesby
+cvmfs2                     4096000      3567557       528444  88% /cvmfs/oasis.opensciencegrid.org
+cvmfs2                     4096000      3567557       528444  88% /cvmfs/cms.cern.ch
+cvmfs2                     4096000      3567557       528444  88% /cvmfs/icecube.opensciencegrid.org
+cvmfs2                     4096000      3567557       528444  88% /cvmfs/atlas.cern.ch
+10.138.17.27:/volumes/CraneZFS/grouphome/lorenz
+                          10590624      5931328      4659296  57% /home/lorenz
+10.138.17.27:/volumes/CraneZFS/grouphome/sabirianov
+                          10590624        14528     10576096   1% /home/sabirianov
+10.138.17.27:/volumes/CraneZFS/grouphome/larios
+                          10590624       183696     10406928   2% /home/larios
+
+_____________________________________________________________________________
+
+        /proc/cpuinfo
+_____________________________________________________________________________
+
+processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 45
+model name	: Intel(R) Xeon(R) CPU E5-2670 0 @ 2.60GHz
+stepping	: 7
+cpu MHz		: 2601.000
+cache size	: 20480 KB
+physical id	: 0
+siblings	: 8
+core id		: 0
+cpu cores	: 8
+apicid		: 0
+initial apicid	: 0
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx lahf_lm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5187.39
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 1
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 45
+model name	: Intel(R) Xeon(R) CPU E5-2670 0 @ 2.60GHz
+stepping	: 7
+cpu MHz		: 2601.000
+cache size	: 20480 KB
+physical id	: 0
+siblings	: 8
+core id		: 1
+cpu cores	: 8
+apicid		: 2
+initial apicid	: 2
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx lahf_lm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5187.39
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 2
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 45
+model name	: Intel(R) Xeon(R) CPU E5-2670 0 @ 2.60GHz
+stepping	: 7
+cpu MHz		: 2601.000
+cache size	: 20480 KB
+physical id	: 0
+siblings	: 8
+core id		: 2
+cpu cores	: 8
+apicid		: 4
+initial apicid	: 4
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx lahf_lm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5187.39
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 3
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 45
+model name	: Intel(R) Xeon(R) CPU E5-2670 0 @ 2.60GHz
+stepping	: 7
+cpu MHz		: 2601.000
+cache size	: 20480 KB
+physical id	: 0
+siblings	: 8
+core id		: 3
+cpu cores	: 8
+apicid		: 6
+initial apicid	: 6
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx lahf_lm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5187.39
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 4
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 45
+model name	: Intel(R) Xeon(R) CPU E5-2670 0 @ 2.60GHz
+stepping	: 7
+cpu MHz		: 2601.000
+cache size	: 20480 KB
+physical id	: 0
+siblings	: 8
+core id		: 4
+cpu cores	: 8
+apicid		: 8
+initial apicid	: 8
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx lahf_lm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5187.39
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 5
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 45
+model name	: Intel(R) Xeon(R) CPU E5-2670 0 @ 2.60GHz
+stepping	: 7
+cpu MHz		: 2601.000
+cache size	: 20480 KB
+physical id	: 0
+siblings	: 8
+core id		: 5
+cpu cores	: 8
+apicid		: 10
+initial apicid	: 10
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx lahf_lm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5187.39
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 6
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 45
+model name	: Intel(R) Xeon(R) CPU E5-2670 0 @ 2.60GHz
+stepping	: 7
+cpu MHz		: 2601.000
+cache size	: 20480 KB
+physical id	: 0
+siblings	: 8
+core id		: 6
+cpu cores	: 8
+apicid		: 12
+initial apicid	: 12
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx lahf_lm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5187.39
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 7
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 45
+model name	: Intel(R) Xeon(R) CPU E5-2670 0 @ 2.60GHz
+stepping	: 7
+cpu MHz		: 2601.000
+cache size	: 20480 KB
+physical id	: 0
+siblings	: 8
+core id		: 7
+cpu cores	: 8
+apicid		: 14
+initial apicid	: 14
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx lahf_lm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5187.39
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 8
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 45
+model name	: Intel(R) Xeon(R) CPU E5-2670 0 @ 2.60GHz
+stepping	: 7
+cpu MHz		: 2601.000
+cache size	: 20480 KB
+physical id	: 1
+siblings	: 8
+core id		: 0
+cpu cores	: 8
+apicid		: 32
+initial apicid	: 32
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx lahf_lm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5186.77
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 9
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 45
+model name	: Intel(R) Xeon(R) CPU E5-2670 0 @ 2.60GHz
+stepping	: 7
+cpu MHz		: 2601.000
+cache size	: 20480 KB
+physical id	: 1
+siblings	: 8
+core id		: 1
+cpu cores	: 8
+apicid		: 34
+initial apicid	: 34
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx lahf_lm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5186.77
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 10
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 45
+model name	: Intel(R) Xeon(R) CPU E5-2670 0 @ 2.60GHz
+stepping	: 7
+cpu MHz		: 2601.000
+cache size	: 20480 KB
+physical id	: 1
+siblings	: 8
+core id		: 2
+cpu cores	: 8
+apicid		: 36
+initial apicid	: 36
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx lahf_lm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5186.77
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 11
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 45
+model name	: Intel(R) Xeon(R) CPU E5-2670 0 @ 2.60GHz
+stepping	: 7
+cpu MHz		: 1200.000
+cache size	: 20480 KB
+physical id	: 1
+siblings	: 8
+core id		: 3
+cpu cores	: 8
+apicid		: 38
+initial apicid	: 38
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx lahf_lm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5186.77
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 12
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 45
+model name	: Intel(R) Xeon(R) CPU E5-2670 0 @ 2.60GHz
+stepping	: 7
+cpu MHz		: 2601.000
+cache size	: 20480 KB
+physical id	: 1
+siblings	: 8
+core id		: 4
+cpu cores	: 8
+apicid		: 40
+initial apicid	: 40
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx lahf_lm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5186.77
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 13
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 45
+model name	: Intel(R) Xeon(R) CPU E5-2670 0 @ 2.60GHz
+stepping	: 7
+cpu MHz		: 1200.000
+cache size	: 20480 KB
+physical id	: 1
+siblings	: 8
+core id		: 5
+cpu cores	: 8
+apicid		: 42
+initial apicid	: 42
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx lahf_lm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5186.77
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 14
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 45
+model name	: Intel(R) Xeon(R) CPU E5-2670 0 @ 2.60GHz
+stepping	: 7
+cpu MHz		: 1200.000
+cache size	: 20480 KB
+physical id	: 1
+siblings	: 8
+core id		: 6
+cpu cores	: 8
+apicid		: 44
+initial apicid	: 44
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx lahf_lm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5186.77
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 15
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 45
+model name	: Intel(R) Xeon(R) CPU E5-2670 0 @ 2.60GHz
+stepping	: 7
+cpu MHz		: 2601.000
+cache size	: 20480 KB
+physical id	: 1
+siblings	: 8
+core id		: 7
+cpu cores	: 8
+apicid		: 46
+initial apicid	: 46
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx lahf_lm ida arat epb xsaveopt pln pts dts tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5186.77
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+
+_____________________________________________________________________________
+
+        /proc/meminfo
+_____________________________________________________________________________
+
+MemTotal:       65805660 kB
+MemFree:        40925828 kB
+Buffers:          363832 kB
+Cached:         15163880 kB
+SwapCached:            0 kB
+Active:         15437496 kB
+Inactive:        7279080 kB
+Active(anon):    7188904 kB
+Inactive(anon):        4 kB
+Active(file):    8248592 kB
+Inactive(file):  7279076 kB
+Unevictable:           0 kB
+Mlocked:               0 kB
+SwapTotal:             0 kB
+SwapFree:              0 kB
+Dirty:              4920 kB
+Writeback:             0 kB
+AnonPages:       7187836 kB
+Mapped:            98668 kB
+Shmem:               204 kB
+Slab:            1351428 kB
+SReclaimable:     264204 kB
+SUnreclaim:      1087224 kB
+KernelStack:        5824 kB
+PageTables:        31656 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:    32902828 kB
+Committed_AS:    8768880 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:      729528 kB
+VmallocChunk:   34325094736 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:         0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:        4096 kB
+DirectMap2M:     2060288 kB
+DirectMap1G:    65011712 kB
+
+_____________________________________________________________________________
+
+        command line
+_____________________________________________________________________________
+
+-e /bin/bash -out results/search_0010.out -err results/search_0010.err -i -d data results output -if python_wrapper.sh output/miRNA_10.split data/miRNA_samples.csv classifier.py gen_search.py data/miRNA_labels.csv -of results/search_0010.out results/search_0010.err results/search_0010.csv -cf -cdmfile -status provider -a python_wrapper.sh gen_search.py -i data/miRNA_samples.csv -l data/miRNA_labels.csv -p output/miRNA_10.split -n 2 -s 20 -k 5 -m 2 -o results/search_0010.csv
+
+_____________________________________________________________________________
+
+        stdout
+_____________________________________________________________________________
+
+total 44K
+drwxr-xr-x 2 osg 4.0K Feb 18 16:15 output
+-rw-r--r-- 1 osg 6.2K Feb 18 16:15 _swiftwrap.staging
+drwxr-xr-x 2 osg 4.0K Feb 18 16:15 data
+-rw-r--r-- 1 osg  239 Feb 18 16:15 python_wrapper.sh
+-rw-r--r-- 1 osg  283 Feb 18 16:15 classifier.py
+-rw-r--r-- 1 osg  11K Feb 18 16:15 gen_search.py
+-rw-r--r-- 1 osg 1.6K Feb 18 16:15 wrapper.log
+drwxr-xr-x 2 osg 4.0K Feb 18 16:15 results
+Launching : python gen_search.py -i data/miRNA_samples.csv -l data/miRNA_labels.csv -p output/miRNA_10.split -n 2 -s 20 -k 5 -m 2 -o results/search_0010.csv
+
+_____________________________________________________________________________
+
+        stderr
+_____________________________________________________________________________
+
+/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/pandas/io/excel.py:626: UserWarning: Installed openpyxl is not supported at this time. Use >=1.6.1 and <2.0.0.
+  .format(openpyxl_compat.start_ver, openpyxl_compat.stop_ver))
+Traceback (most recent call last):
+  File "gen_search.py", line 31, in <module>
+    import knockoff
+ImportError: No module named knockoff

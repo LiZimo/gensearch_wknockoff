@@ -1,0 +1,233 @@
+2015-02-12 18:20:39,352-0600 INFO  Loader JAVA Oracle Corporation Java HotSpot(TM) 64-Bit Server VM 1.7.0_51
+2015-02-12 18:20:39,354-0600 INFO  Loader VERSION Swift trunk git-rev: 4ee10d1ecb417577f3eaae14606a10ac15b44b54 heads/master 6183 (modified locally)
+2015-02-12 18:20:39,354-0600 INFO  Loader RUN_ID run006
+2015-02-12 18:20:39,354-0600 INFO  Loader ARGUMENTS [-runid, run006, -logfile, /home/yadunand/zimo/run006/swift.log, gen_search.swift, -n=2, -nsteps=20, -kfold=5, -method=2, -folder=output, -prefix=miRNA, -sample=data/miRNA_samples.csv, -labels=data/miRNA_labels.csv]
+2015-02-12 18:20:39,354-0600 INFO  Loader MAX_HEAP 954728448
+2015-02-12 18:20:39,354-0600 INFO  Loader GLOBUS_HOSTNAME login01.osgconnect.net
+2015-02-12 18:20:39,354-0600 INFO  Loader CWD /home/yadunand/zimo/.
+2015-02-12 18:20:39,356-0600 DEBUG Loader SWIFT_CONFIGURATION 
+[D] /home/yadunand/bin/swift-k/dist/swift-svn/etc/swift.conf
+[R] swift.conf
+[C] <Command Line>
+{
+	TCPPortRange: "50000,51000"                                # [R] line 32
+	alwaysTransferWrapperLog: true                             # [R] line 37
+	executionRetries: 0                                        # [R] line 34
+	fileOperationsThrottle: 8                                  # [D] line 121
+	fileTransfersThrottle: 4                                   # [D] line 107
+	hostJobSubmitThrottle: 2                                   # [D] line 95
+	jobSubmitThrottle: 4                                       # [D] line 83
+	keepSiteDir: true                                          # [R] line 35
+	lazyErrors: false                                          # [R] line 33
+	logProvenance: false                                       # [D] line 200
+	maxForeachThreads: 16384                                   # [D] line 194
+	providerStagingPinSwiftFiles: false                        # [R] line 36
+	replicationEnabled: false                                  # [D] line 146
+	replicationLimit: 3                                        # [D] line 157
+	replicationMinQueueTime: 60                                # [D] line 153
+	site {
+		local {
+			app.ALL.executable: "*"                                  # [D] line 232
+			execution.type: "local"                                  # [D] line 223
+			filesystem.type: "local"                                 # [D] line 226
+			workDirectory: "swiftwork"                               # [D] line 229
+		}
+		osgc {
+			app.bash {
+				executable: "/bin/bash"                                 # [R] line 24
+				maxWallTime: "00:30:00"                                 # [R] line 25
+			}
+			execution {
+				URL: "login01.osgconnect.net"                           # [R] line 4
+				jobManager: "local:condor"                              # [R] line 5
+				options {
+					highOverallocation: 100                                # [R] line 11
+					jobOptions.condor.projectname: "Swift"                 # [R] line 14
+					lowOverallocation: 100                                 # [R] line 12
+					maxJobTime: "02:00:00"                                 # [R] line 10
+					maxJobs: 100                                           # [R] line 8
+					softImage: "/home/yadunand/genomics/common_data/fetch_common.tar.gz /tmp/yadunand/softimage"# [R] line 16
+					tasksPerNode: 1                                        # [R] line 9
+				}
+				type: "coaster"                                         # [R] line 3
+			}
+			initialParallelTasks: 999                                # [R] line 22
+			maxParallelTasks: 1001                                   # [R] line 21
+			staging: "local"                                         # [R] line 19
+			workDirectory: "."                                       # [R] line 20
+		}
+	}
+	sites: [osgc]                                              # [R] line 30
+	staging: "local"                                           # [R] line 38
+	tracingEnabled: false                                      # [D] line 51
+}
+
+2015-02-12 18:20:39,357-0600 DEBUG textfiles BEGIN SWIFTSCRIPT:
+type file;
+
+app (file out, file log, file err) search (file wrapper, file pyscript, file samples, file labels, file set, int n, int nsteps, int k, int method, file extra)
+{
+    bash @wrapper @pyscript "-i" @samples "-l" @labels "-p" @set "-n" n "-s" nsteps "-k" k "-m" method "-o" @out stdout=@log stderr=@err;
+}
+
+
+app (file result, file err) sort (file script, file parts[])
+{
+    bash @script @parts stdout=@result stderr=@err;
+}
+
+int n      = @toInt(@arg("n",       "2"));
+int nsteps = @toInt(@arg("nsteps",  "20"));
+int kval   = @toInt(@arg("kfold",   "5"));
+int method = @toInt(@arg("method",  "2"));
+
+file samples <single_file_mapper; file=@arg("sample", "data/miRNA_samples.csv")>;
+file labels  <single_file_mapper; file=@arg("labels", "data/miRNA_labels.csv" )>;
+
+string input_folder=@arg("folder", "test");
+string input_prefix=@arg("prefix", "miRNA");
+
+file splits[] <filesys_mapper; location=input_folder, prefix=input_prefix>;
+
+
+file wrapper  <"python_wrapper.sh">;
+file pyscript <"gen_search.py">;
+file extra    <"classifier.py">;
+
+file out[] <simple_mapper; prefix="results/search_", suffix=".csv">;
+file log[] <simple_mapper; prefix="results/search_", suffix=".out">;
+file err[] <simple_mapper; prefix="results/search_", suffix=".err">;
+
+//foreach split,index in splits{
+foreach f_split, index in splits
+{
+    tracef("@Filename  = %s \n", @filename(f_split));
+    (out[index], log[index], err[index]) = search(wrapper, pyscript, samples, labels, f_split, n,nsteps, kval, method, extra);
+}
+
+
+file final <"final.out">;
+file f_err <"final.err">;
+file postscript <"postprocess.sh">;
+(final, f_err) = sort (postscript, out);
+
+
+2015-02-12 18:20:39,357-0600 DEBUG textfiles END SWIFTSCRIPT:
+2015-02-12 18:20:39,358-0600 INFO  Loader gen_search.swift: source file is new. Recompiling.
+2015-02-12 18:20:40,068-0600 INFO  Warnings Warning: The @ syntax for function invocation is deprecated
+2015-02-12 18:20:40,829-0600 INFO  Loader RUN_START
+2015-02-12 18:20:40,832-0600 INFO  SwiftExecutor swift.home = /home/yadunand/bin/swift-k/dist/swift-svn
+2015-02-12 18:20:40,858-0600 INFO  AbstractScheduler Setting resources to: {osgc=osgc}
+2015-02-12 18:20:40,866-0600 INFO  GlobalSubmitQueue No global submit throttle set. Using default (1024)
+2015-02-12 18:20:40,891-0600 INFO  LateBindingScheduler jobs queued: 0
+2015-02-12 18:20:40,906-0600 INFO  LateBindingScheduler jobs queued: 0
+2015-02-12 18:20:40,908-0600 INFO  LateBindingScheduler jobs queued: 0
+2015-02-12 18:20:40,940-0600 INFO  RuntimeStats$ProgressTicker HeapMax: 954728448, CrtHeap: 759693312, UsedHeap: 114955816, JVMThreads: 16
+2015-02-12 18:20:40,941-0600 INFO  RuntimeStats$ProgressTicker 
+2015-02-12 18:20:40,952-0600 DEBUG swift PROCEDURE line=9 thread=R-15 name=sort
+2015-02-12 18:20:40,956-0600 DEBUG swift JOB_INIT jobid=bash-bybvfi4m tr=bash
+2015-02-12 18:20:40,957-0600 DEBUG swift JOB_SITE_SELECT jobid=bash-bybvfi4m
+2015-02-12 18:20:40,961-0600 DEBUG swift THREAD_ASSOCIATION jobid=bash-bybvfi4m thread=R-15 host=osgc replicationGroup=null
+2015-02-12 18:20:40,962-0600 DEBUG swift JOB_START jobid=bash-bybvfi4m tr=bash arguments=[postprocess.sh, ] tmpdir=gen_search-run006/jobs/b/bash-bybvfi4m host=osgc
+2015-02-12 18:20:40,967-0600 INFO  Execute JOB_TASK jobid=bash-bybvfi4m taskid=urn:R-15-1423786839334 exec=/bin/bash dir=gen_search-run006/jobs/b/bash-bybvfi4m args=_swiftwrap.staging -e /bin/bash -out final.out -err final.err -i -d  -if postprocess.sh -of final.out|final.err -cf  -cdmfile  -status provider -a postprocess.sh 
+2015-02-12 18:20:40,974-0600 INFO  Execute TASK_STATUS_CHANGE taskid=urn:R-15-1423786839334 status=8
+2015-02-12 18:20:40,998-0600 INFO  LocalService Started local service: 192.170.227.195:44354
+2015-02-12 18:20:41,002-0600 INFO  BootstrapService Socket bound. URL is http://login01.osgconnect.net:60661
+2015-02-12 18:20:41,047-0600 INFO  CoasterService Started local service: http://192.170.227.195:60092
+2015-02-12 18:20:41,047-0600 INFO  CoasterService Reserving channel for registration
+2015-02-12 18:20:41,055-0600 INFO  AbstractCoasterChannel null setting name to spipe://1
+2015-02-12 18:20:41,056-0600 INFO  AbstractCoasterChannel null setting name to cpipe://1
+2015-02-12 18:20:41,058-0600 INFO  CoasterService Sending registration
+2015-02-12 18:20:41,066-0600 INFO  Settings Local contacts: [http://192.170.227.195:60092]
+2015-02-12 18:20:41,069-0600 INFO  CoasterService Registration complete
+2015-02-12 18:20:41,069-0600 INFO  CoasterService Started coaster service: http://192.170.227.195:51684
+2015-02-12 18:20:41,075-0600 INFO  TaskNotifier Task id mapping: cpipe://1:1423786839334 -> urn:1423786839334-1423786839337-1423786839338
+2015-02-12 18:20:41,081-0600 INFO  BlockQueueProcessor Starting... id=0212-2006410
+2015-02-12 18:20:41,083-0600 INFO  Execute TASK_STATUS_CHANGE taskid=urn:R-15-1423786839334 status=1
+2015-02-12 18:20:41,102-0600 INFO  BlockQueueProcessor 
+Settings {
+	slots = 100
+	jobsPerNode = 1
+	workersPerNode = 1
+	nodeGranularity = 1
+	allocationStepSize = 0.1
+	maxNodes = 2097151
+	lowOverallocation = 100.0
+	highOverallocation = 100.0
+	overallocationDecayFactor = 0.001
+	spread = 0.9
+	reserve = 60.000s
+	maxtime = 7200.000s
+	remoteMonitorEnabled = false
+	internalHostname = 192.170.227.195
+	hookClass = null
+	workerManager = block
+	workerLoggingLevel = NONE
+	workerLoggingDirectory = DEFAULT
+	ldLibraryPath = null
+	workerCopies = null
+	directory = null
+	useHashBang = null
+	parallelism = 0.01
+	coresPerNode = 1
+	perfTraceWorker = false
+	perfTraceInterval = -1
+	attributes = {condor.projectname=Swift, coaster-url=https://192.170.227.195:51684, softImage=/home/yadunand/genomics/common_data/fetch_common.tar.gz /tmp/yadunand/softimage}
+	callbackURIs = [http://192.170.227.195:60092]
+}
+
+2015-02-12 18:20:41,102-0600 INFO  BlockQueueProcessor Jobs in holding queue: 1
+2015-02-12 18:20:41,102-0600 INFO  BlockQueueProcessor Time estimate for holding queue (seconds): 1
+2015-02-12 18:20:41,102-0600 INFO  BlockQueueProcessor Allocating blocks for a total walltime of: 1s
+2015-02-12 18:20:41,102-0600 INFO  BlockQueueProcessor 	 Considering: Job(id:0 1800.000s)
+2015-02-12 18:20:41,102-0600 INFO  BlockQueueProcessor 	  Max Walltime (seconds):   1800
+2015-02-12 18:20:41,102-0600 INFO  BlockQueueProcessor 	  Time estimate (seconds):  7140
+2015-02-12 18:20:41,102-0600 INFO  BlockQueueProcessor 	  Total for this new Block (est. seconds): 0
+2015-02-12 18:20:41,105-0600 INFO  BlockQueueProcessor index: 0, last: 0, holding.size(): 1
+2015-02-12 18:20:41,105-0600 INFO  BlockQueueProcessor Queued: 1 jobs to new Block
+2015-02-12 18:20:41,105-0600 INFO  BlockQueueProcessor index: 0, last: 0, ii: 1, holding.size(): 1
+2015-02-12 18:20:41,105-0600 INFO  Block Starting block: workers=1, walltime=7140.000s
+2015-02-12 18:20:41,106-0600 INFO  RemoteLogHandler BLOCK_REQUESTED id=0212-2006410-000000, cores=1, coresPerWorker=1, walltime=7140
+2015-02-12 18:20:41,109-0600 INFO  BlockTaskSubmitter Queuing block Block 0212-2006410-000000 (1x7140.000s) for submission
+2015-02-12 18:20:41,109-0600 INFO  BlockQueueProcessor Added 1 jobs to new blocks
+2015-02-12 18:20:41,109-0600 INFO  BlockTaskSubmitter Submitting block Block 0212-2006410-000000 (1x7140.000s)
+2015-02-12 18:20:41,112-0600 INFO  Block Block task status changed: Submitting
+2015-02-12 18:20:41,128-0600 DEBUG AbstractExecutor Writing Condor script to /home/yadunand/zimo/run006/scripts/Condor2232392087976791412.submit
+2015-02-12 18:20:41,130-0600 DEBUG AbstractExecutor Wrote Condor script to /home/yadunand/zimo/run006/scripts/Condor2232392087976791412.submit
+2015-02-12 18:20:41,131-0600 DEBUG AbstractExecutor Command line: condor_submit /home/yadunand/zimo/run006/scripts/Condor2232392087976791412.submit
+2015-02-12 18:20:41,373-0600 DEBUG AbstractExecutor condor_submit done (exit code 0)
+2015-02-12 18:20:41,374-0600 DEBUG AbstractExecutor Waiting for output from condor_submit
+2015-02-12 18:20:41,374-0600 DEBUG AbstractExecutor Output from condor_submit is: "Submitting job(s).1 job(s) submitted to cluster 2433754.WARNING: the line `projectname = Swift' was unused by condor_submit. Is it a typo?"
+2015-02-12 18:20:41,374-0600 DEBUG AbstractExecutor Submitted job with id 'typo?'
+2015-02-12 18:20:41,376-0600 INFO  Block Block task status changed: Submitted
+2015-02-12 18:20:41,625-0600 INFO  AbstractQueuePoller Actively monitored: 0, New: 1, Done: 0
+2015-02-12 18:20:41,943-0600 INFO  RuntimeStats$ProgressTicker HeapMax: 954728448, CrtHeap: 759693312, UsedHeap: 31934952, JVMThreads: 50
+2015-02-12 18:20:41,943-0600 INFO  RuntimeStats$ProgressTicker   Submitted:1
+2015-02-12 18:20:42,083-0600 INFO  ServiceManager Cleaning up...
+2015-02-12 18:20:42,083-0600 INFO  ServiceManager Shutting down service at https://192.170.227.195:51684
+2015-02-12 18:20:42,084-0600 INFO  CoasterService Starting shutdown
+2015-02-12 18:20:42,084-0600 INFO  BlockQueueProcessor Shutting down blocks
+2015-02-12 18:20:42,085-0600 INFO  Block Shutting down block Block 0212-2006410-000000 (1x7140.000s)
+2015-02-12 18:20:42,085-0600 INFO  Block Block Block 0212-2006410-000000 (1x7140.000s) not running. Cancelling job.
+2015-02-12 18:20:42,085-0600 INFO  RemoteLogHandler BLOCK_SHUTDOWN id=0212-2006410-000000
+2015-02-12 18:20:42,085-0600 DEBUG Block Failed to shut down block: Block 0212-2006410-000000 (1x7140.000s)
+java.lang.NullPointerException: Null provider requested
+	at org.globus.cog.abstraction.impl.common.AbstractionFactory.newExecutionTaskHandler(AbstractionFactory.java:67)
+	at org.globus.cog.abstraction.coaster.service.job.manager.BlockTaskSubmitter.getHandler(BlockTaskSubmitter.java:134)
+	at org.globus.cog.abstraction.coaster.service.job.manager.BlockTaskSubmitter.cancel(BlockTaskSubmitter.java:70)
+	at org.globus.cog.abstraction.coaster.service.job.manager.Block.forceShutdown(Block.java:364)
+	at org.globus.cog.abstraction.coaster.service.job.manager.Block.shutdown(Block.java:344)
+	at org.globus.cog.abstraction.coaster.service.job.manager.BlockQueueProcessor.shutdownBlocks(BlockQueueProcessor.java:855)
+	at org.globus.cog.abstraction.coaster.service.job.manager.BlockQueueProcessor.startShutdown(BlockQueueProcessor.java:844)
+	at org.globus.cog.abstraction.coaster.service.job.manager.JobQueue.startShutdown(JobQueue.java:145)
+	at org.globus.cog.abstraction.coaster.service.CoasterService.shutdown(CoasterService.java:399)
+	at org.globus.cog.abstraction.coaster.service.CoasterService.clientRequestedShutdown(CoasterService.java:373)
+	at org.globus.cog.abstraction.coaster.service.ServiceShutdownHandler.requestComplete(ServiceShutdownHandler.java:46)
+	at org.globus.cog.coaster.handlers.RequestHandler.receiveCompleted(RequestHandler.java:112)
+	at org.globus.cog.coaster.channels.AbstractCoasterChannel.handleRequest(AbstractCoasterChannel.java:590)
+	at org.globus.cog.coaster.channels.AbstractPipedChannel.actualSend(AbstractPipedChannel.java:101)
+	at org.globus.cog.coaster.channels.AbstractPipedChannel$Sender.run(AbstractPipedChannel.java:130)
+2015-02-12 18:20:42,087-0600 INFO  BlockQueueProcessor Removing block Block 0212-2006410-000000 (1x7140.000s). Blocks active: 1
+2015-02-12 18:20:42,087-0600 INFO  CoasterService Shutdown started
+2015-02-12 18:20:42,087-0600 INFO  CoasterService Waiting for queue JobQueue0 to shut down
+2015-02-12 18:20:42,090-0600 INFO  CoasterService Shutdown completed

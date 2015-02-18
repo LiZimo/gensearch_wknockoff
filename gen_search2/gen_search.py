@@ -23,7 +23,7 @@ from pandas import DataFrame, Series
 import numpy as np
 import itertools as it
 import math
-from matplotlib import pyplot as plt
+## from matplotlib import pyplot as plt
 import sklearn
 from sklearn import cross_validation, metrics
 import classifier
@@ -144,8 +144,8 @@ if __name__ == '__main__':
     check_consistency (inputs, labels)
 
     #List of possible k-combinations
-    sets = list(it.combinations(range(inputs.shape[1]), int(n)))
-    #sets = pickle.load(open(param,"rb"))
+    #sets = list(it.combinations(range(inputs.shape[1]), int(n)))
+    sets = pickle.load(open(param,"rb"))
     numSets = len(sets)
     print '\n{s:{c}^{n}}\n'.format(s='Running for %d Feature Combinations' % numSets,n=106,c='-')
 

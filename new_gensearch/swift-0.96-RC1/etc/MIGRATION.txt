@@ -1,0 +1,28 @@
+Stage 1: Test Migration (DONE)
+==============================
+* Develop scripts to automate conversion of SVN history to git and merge of
+  two repositories. (DONE)
+* Develop scripts to apply new changes from SVN to Git (DONE)
+* Build and run Swift from merged Git repo (DONE)
+
+Stage 2: Repo Cleanup (IN PROGRESS)
+===================================
+* Make Swift primary build target from root build file (DONE)
+* Cleanup root directory of repository (DONE)
+* Remove any defunct or unneeded CoG-related files (DONE)
+* Licensing:
+  - License information in root of repo (DONE)
+  - Modification notice in head of CoG files (DONE)
+  - Headers of Swift java files (DONE)
+* Good-quality README for repository (IN PROGRESS)
+* Automatically merge commits from SVN to Github with cron script (DONE)
+
+Stage 3: Public Mirror (NOT STARTED)
+====================================
+* Make Github repo public
+* Link to repo from swift-lang.org
+
+Stage 4: Final Switch (NOT STARTED)
+===================================
+* Setup email commit notifications
+* Switch development to Github

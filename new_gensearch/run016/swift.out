@@ -1,0 +1,341 @@
+Swift trunk git-rev: 4d31c0146552718190225c8027120d388e73097f heads/master 6280 (modified locally)
+RunID: run016
+Warning: The @ syntax for function invocation is deprecated
+Progress: Wed, 18 Feb 2015 17:41:04-0600
+@Filename  = output/miRNA_3.split 
+@Filename  = output/miRNA_2.split 
+@Filename  = output/miRNA_7.split 
+@Filename  = output/miRNA_6.split 
+@Filename  = output/miRNA_5.split 
+@Filename  = output/miRNA_1.split 
+@Filename  = output/miRNA_0.split 
+@Filename  = output/miRNA_4.split 
+@Filename  = output/miRNA_9.split 
+@Filename  = output/miRNA_8.split 
+@Filename  = output/miRNA_10.split 
+@Filename  = output/miRNA_11.split 
+@Filename  = output/miRNA_12.split 
+@Filename  = output/miRNA_14.split 
+@Filename  = output/miRNA_16.split 
+@Filename  = output/miRNA_18.split 
+@Filename  = output/miRNA_24.split 
+@Filename  = output/miRNA_19.split 
+@Filename  = output/miRNA_28.split 
+@Filename  = output/miRNA_15.split 
+@Filename  = output/miRNA_30.split 
+@Filename  = output/miRNA_32.split 
+@Filename  = output/miRNA_39.split 
+@Filename  = output/miRNA_37.split 
+@Filename  = output/miRNA_42.split 
+@Filename  = output/miRNA_34.split 
+@Filename  = output/miRNA_48.split 
+@Filename  = output/miRNA_53.split 
+@Filename  = output/miRNA_17.split 
+@Filename  = output/miRNA_55.split 
+@Filename  = output/miRNA_44.split 
+@Filename  = output/miRNA_58.split 
+@Filename  = output/miRNA_57.split 
+@Filename  = output/miRNA_56.split 
+@Filename  = output/miRNA_41.split 
+@Filename  = output/miRNA_43.split 
+@Filename  = output/miRNA_36.split 
+@Filename  = output/miRNA_38.split 
+@Filename  = output/miRNA_35.split 
+@Filename  = output/miRNA_21.split 
+@Filename  = output/miRNA_70.split 
+@Filename  = output/miRNA_65.split 
+@Filename  = output/miRNA_66.split 
+@Filename  = output/miRNA_49.split 
+@Filename  = output/miRNA_50.split 
+@Filename  = output/miRNA_31.split 
+@Filename  = output/miRNA_47.split 
+@Filename  = output/miRNA_61.split 
+@Filename  = output/miRNA_92.split 
+@Filename  = output/miRNA_95.split 
+@Filename  = output/miRNA_89.split 
+@Filename  = output/miRNA_63.split 
+@Filename  = output/miRNA_51.split 
+@Filename  = output/miRNA_25.split 
+@Filename  = output/miRNA_90.split 
+@Filename  = output/miRNA_100.split 
+@Filename  = output/miRNA_91.split 
+@Filename  = output/miRNA_40.split 
+@Filename  = output/miRNA_45.split 
+@Filename  = output/miRNA_52.split 
+@Filename  = output/miRNA_93.split 
+@Filename  = output/miRNA_96.split 
+@Filename  = output/miRNA_87.split 
+@Filename  = output/miRNA_88.split 
+@Filename  = output/miRNA_81.split 
+@Filename  = output/miRNA_75.split 
+@Filename  = output/miRNA_77.split 
+@Filename  = output/miRNA_79.split 
+@Filename  = output/miRNA_83.split 
+@Filename  = output/miRNA_97.split 
+@Filename  = output/miRNA_82.split 
+@Filename  = output/miRNA_99.split 
+@Filename  = output/miRNA_60.split 
+@Filename  = output/miRNA_67.split 
+@Filename  = output/miRNA_98.split 
+@Filename  = output/miRNA_74.split 
+@Filename  = output/miRNA_13.split 
+@Filename  = output/miRNA_76.split 
+@Filename  = output/miRNA_80.split 
+@Filename  = output/miRNA_29.split 
+@Filename  = output/miRNA_72.split 
+@Filename  = output/miRNA_71.split 
+@Filename  = output/miRNA_59.split 
+@Filename  = output/miRNA_84.split 
+@Filename  = output/miRNA_64.split 
+@Filename  = output/miRNA_62.split 
+@Filename  = output/miRNA_86.split 
+@Filename  = output/miRNA_26.split 
+@Filename  = output/miRNA_27.split 
+@Filename  = output/miRNA_20.split 
+@Filename  = output/miRNA_23.split 
+@Filename  = output/miRNA_73.split 
+@Filename  = output/miRNA_22.split 
+@Filename  = output/miRNA_78.split 
+@Filename  = output/miRNA_69.split 
+@Filename  = output/miRNA_68.split 
+@Filename  = output/miRNA_33.split 
+@Filename  = output/miRNA_46.split 
+@Filename  = output/miRNA_85.split 
+@Filename  = output/miRNA_94.split 
+@Filename  = output/miRNA_54.split 
+Progress: Wed, 18 Feb 2015 17:41:05-0600  Submitted:101
+Progress: Wed, 18 Feb 2015 17:41:21-0600  Stage in:3  Submitted:90  Active:8
+Progress: Wed, 18 Feb 2015 17:41:22-0600  Submitted:89  Active:12
+Progress: Wed, 18 Feb 2015 17:41:23-0600  Stage in:2  Submitted:85  Active:14
+Progress: Wed, 18 Feb 2015 17:41:24-0600  Submitted:84  Active:17
+Progress: Wed, 18 Feb 2015 17:41:52-0600  Submitted:81  Active:20
+Progress: Wed, 18 Feb 2015 17:41:56-0600  Submitted:79  Active:20  Finished successfully:2
+Progress: Wed, 18 Feb 2015 17:41:57-0600  Stage in:1  Submitted:77  Active:19  Finished successfully:4
+Progress: Wed, 18 Feb 2015 17:41:58-0600  Submitted:76  Active:20  Finished successfully:5
+Progress: Wed, 18 Feb 2015 17:42:00-0600  Submitted:72  Active:20  Finished successfully:9
+Progress: Wed, 18 Feb 2015 17:42:01-0600  Submitted:71  Active:20  Finished successfully:10
+Progress: Wed, 18 Feb 2015 17:42:04-0600  Stage in:3  Submitted:66  Active:16  Stage out:1  Finished successfully:15
+Progress: Wed, 18 Feb 2015 17:42:05-0600  Stage in:1  Submitted:63  Active:19  Finished successfully:18
+Progress: Wed, 18 Feb 2015 17:42:06-0600  Submitted:63  Active:20  Finished successfully:18
+Progress: Wed, 18 Feb 2015 17:42:08-0600  Submitted:61  Active:20  Finished successfully:20
+Progress: Wed, 18 Feb 2015 17:42:09-0600  Submitted:58  Active:20  Finished successfully:23
+Progress: Wed, 18 Feb 2015 17:42:11-0600  Stage in:1  Submitted:57  Active:19  Finished successfully:24
+Progress: Wed, 18 Feb 2015 17:42:12-0600  Submitted:54  Active:20  Finished successfully:27
+Progress: Wed, 18 Feb 2015 17:42:13-0600  Submitted:50  Active:20  Finished successfully:31
+Progress: Wed, 18 Feb 2015 17:42:16-0600  Submitted:48  Active:20  Finished successfully:33
+Progress: Wed, 18 Feb 2015 17:42:17-0600  Stage in:1  Submitted:45  Active:19  Finished successfully:36
+Progress: Wed, 18 Feb 2015 17:42:18-0600  Submitted:45  Active:20  Finished successfully:36
+Progress: Wed, 18 Feb 2015 17:42:19-0600  Submitted:43  Active:20  Finished successfully:38
+Progress: Wed, 18 Feb 2015 17:42:20-0600  Submitted:40  Active:20  Finished successfully:41
+Progress: Wed, 18 Feb 2015 17:42:21-0600  Submitted:38  Active:19  Stage out:1  Finished successfully:43
+Progress: Wed, 18 Feb 2015 17:42:22-0600  Submitted:37  Active:20  Finished successfully:44
+Progress: Wed, 18 Feb 2015 17:42:24-0600  Stage in:1  Submitted:35  Active:19  Finished successfully:46
+Progress: Wed, 18 Feb 2015 17:42:25-0600  Submitted:35  Active:19  Finished successfully:47
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Progress: Wed, 18 Feb 2015 17:42:26-0600  Submitted:30  Active:20  Finished successfully:51
+Progress: Wed, 18 Feb 2015 17:42:28-0600  Stage in:1  Submitted:28  Active:18  Stage out:1  Finished successfully:53
+Progress: Wed, 18 Feb 2015 17:42:29-0600  Submitted:27  Active:20  Finished successfully:54
+Progress: Wed, 18 Feb 2015 17:42:30-0600  Submitted:24  Active:20  Finished successfully:57
+Progress: Wed, 18 Feb 2015 17:42:33-0600  Submitted:22  Active:20  Finished successfully:59
+Progress: Wed, 18 Feb 2015 17:42:34-0600  Stage in:2  Submitted:17  Active:18  Finished successfully:64
+Progress: Wed, 18 Feb 2015 17:42:35-0600  Submitted:16  Active:20  Finished successfully:65
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Progress: Wed, 18 Feb 2015 17:42:37-0600  Submitted:14  Active:20  Finished successfully:67
+Progress: Wed, 18 Feb 2015 17:42:38-0600  Submitted:13  Active:19  Stage out:1  Finished successfully:68
+Progress: Wed, 18 Feb 2015 17:42:39-0600  Submitted:11  Active:20  Finished successfully:70
+Progress: Wed, 18 Feb 2015 17:42:41-0600  Submitted:8  Active:19  Stage out:1  Finished successfully:73
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Progress: Wed, 18 Feb 2015 17:42:42-0600  Stage in:1  Submitted:6  Active:18  Stage out:1  Finished successfully:75
+Progress: Wed, 18 Feb 2015 17:42:43-0600  Submitted:3  Active:20  Finished successfully:78
+Progress: Wed, 18 Feb 2015 17:42:45-0600  Submitted:1  Active:20  Finished successfully:80
+Progress: Wed, 18 Feb 2015 17:42:46-0600  Active:21  Finished successfully:80
+Progress: Wed, 18 Feb 2015 17:42:47-0600  Active:18  Finished successfully:83
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Progress: Wed, 18 Feb 2015 17:42:48-0600  Active:17  Stage out:1  Finished successfully:83
+Progress: Wed, 18 Feb 2015 17:42:49-0600  Active:13  Stage out:1  Finished successfully:87
+
+Execution failed:
+Exception in bash:
+    Arguments: [python_wrapper.sh, gen_search.py, -i, data/miRNA_samples.csv, -l, data/miRNA_labels.csv, -p, output/miRNA_42.split, -n, 2, -s, 20, -k, 5, -m, 2, -o, results/search_0042.csv]
+    Host: osgc
+    Directory: gen_search-run016/jobs/b/bash-x0vq9s4m
+	exception @ swift-int-staging.k, line: 165
+Caused by: Application /bin/bash failed with an exit code of 1
+
+------- Application STDERR --------
+/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/pandas/io/excel.py:626: UserWarning: Installed openpyxl is not supported at this time. Use >=1.6.1 and <2.0.0.
+  .format(openpyxl_compat.start_ver, openpyxl_compat.stop_ver))
+Traceback (most recent call last):
+  File "gen_search.py", line 31, in <module>
+    import knockoff
+  File "/tmp/rcc_syracuse/rcc.ODfiHmEBis/execute.10.5.128.76-5523/dir_5917/gen_search-run016/jobs/b/bash-x0vq9s4m/knockoff.py", line 24, in <module>
+    import matplotlib.pylab as plt;
+  File "/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/matplotlib/pylab.py", line 269, in <module>
+    from matplotlib.pyplot import *
+  File "/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/matplotlib/pyplot.py", line 98, in <module>
+    _backend_mod, new_figure_manager, draw_if_interactive, _show = pylab_setup()
+  File "/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/matplotlib/backends/__init__.py", line 28, in pylab_setup
+    globals(),locals(),[backend_name],0)
+  File "/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/matplotlib/backends/backend_tkagg.py", line 8, in <module>
+    import Tkinter as Tk, FileDialog
+  File "/cvmfs/oasis.opensciencegrid.org/osg/modules/python-2.7.7/lib/python2.7/lib-tk/Tkinter.py", line 39, in <module>
+    import _tkinter # If this fails your Python may not be configured for Tk
+ImportError: libtk8.5.so: cannot open shared object file: No such file or directory
+-----------------------------------
+
+	exception @ swift-int-staging.k, line: 160
+Caused by: Process completed with exit code 1
+
+	k:assign @ swift.k, line: 174
+Caused by: Exception in bash:
+    Arguments: [python_wrapper.sh, gen_search.py, -i, data/miRNA_samples.csv, -l, data/miRNA_labels.csv, -p, output/miRNA_42.split, -n, 2, -s, 20, -k, 5, -m, 2, -o, results/search_0042.csv]
+    Host: osgc
+    Directory: gen_search-run016/jobs/b/bash-x0vq9s4m
+	exception @ swift-int-staging.k, line: 165
+Caused by: Application /bin/bash failed with an exit code of 1
+
+------- Application STDERR --------
+/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/pandas/io/excel.py:626: UserWarning: Installed openpyxl is not supported at this time. Use >=1.6.1 and <2.0.0.
+  .format(openpyxl_compat.start_ver, openpyxl_compat.stop_ver))
+Traceback (most recent call last):
+  File "gen_search.py", line 31, in <module>
+    import knockoff
+  File "/tmp/rcc_syracuse/rcc.ODfiHmEBis/execute.10.5.128.76-5523/dir_5917/gen_search-run016/jobs/b/bash-x0vq9s4m/knockoff.py", line 24, in <module>
+    import matplotlib.pylab as plt;
+  File "/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/matplotlib/pylab.py", line 269, in <module>
+    from matplotlib.pyplot import *
+  File "/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/matplotlib/pyplot.py", line 98, in <module>
+    _backend_mod, new_figure_manager, draw_if_interactive, _show = pylab_setup()
+  File "/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/matplotlib/backends/__init__.py", line 28, in pylab_setup
+    globals(),locals(),[backend_name],0)
+  File "/cvmfs/oasis.opensciencegrid.org/osg/modules/virtualenv-2.7/all/lib/python2.7/site-packages/matplotlib/backends/backend_tkagg.py", line 8, in <module>
+    import Tkinter as Tk, FileDialog
+  File "/cvmfs/oasis.opensciencegrid.org/osg/modules/python-2.7.7/lib/python2.7/lib-tk/Tkinter.py", line 39, in <module>
+    import _tkinter # If this fails your Python may not be configured for Tk
+ImportError: libtk8.5.so: cannot open shared object file: No such file or directory
+-----------------------------------
+
+	exception @ swift-int-staging.k, line: 160
+Caused by: Process completed with exit code 1
+
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Failed to mark job typo? as removable from queue: 
+
+Progress: Wed, 18 Feb 2015 17:42:50-0600  Active:9  Stage out:4  Failed:1  Finished successfully:87
+Failed to cancel job typo?: 
+
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+
+Failed to mark job typo? as removable from queue: 
+
+Failed to cancel job typo?: 
+

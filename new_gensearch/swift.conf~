@@ -1,0 +1,40 @@
+site.osgc {
+    execution {
+        type: "coaster"
+        URL: "login01.osgconnect.net"
+        jobManager: "local:condor"
+        options {
+            # Option ignored: globus:jobtype = nonshared
+            maxJobs           : 100
+            tasksPerNode      : 1
+            maxJobTime        : "02:00:00"
+            highOverallocation: 100
+            lowOverallocation : 100
+            jobOptions.condor{
+                projectname = "Swift"
+                # Only use sites with cvmfs and modules
+                requirements: "(HAS_CVMFS_oasis_opensciencegrid_org =?= TRUE)"
+            }
+            softImage="/home/yadunand/genomics/common_data/fetch_common.tar.gz /tmp/yadunand/softimage"
+        }
+    }
+    staging: "local"
+    workDirectory: "."
+    maxParallelTasks    : 1001
+    initialParallelTasks: 999
+    app.bash {
+        executable: "/bin/bash"
+        maxWallTime: "00:30:00"
+    }
+
+}
+
+sites: osgc
+
+TCPPortRange: "50000,51000"
+lazyErrors: false
+executionRetries: 0
+keepSiteDir: true
+providerStagingPinSwiftFiles: false
+alwaysTransferWrapperLog: true
+staging: "local"

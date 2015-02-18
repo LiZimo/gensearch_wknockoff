@@ -1,0 +1,2 @@
+Use of uninitialized value $logname in concatenation (.) or string at cscript2378308226776631515.pl line 338.
+send: Cannot determine peer address at cscript2378308226776631515.pl line 527

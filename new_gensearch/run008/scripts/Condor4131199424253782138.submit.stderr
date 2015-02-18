@@ -1,0 +1,3 @@
+Use of uninitialized value $logname in concatenation (.) or string at cscript2378308226776631515.pl line 338.
+send: Cannot determine peer address at cscript2378308226776631515.pl line 527
+_swiftwrap.staging: line 302: 20831 Killed                  "$EXEC" "${CMDARGS[@]}" > "$STDOUT" 2> "$STDERR"

@@ -1,0 +1,14 @@
+universe = vanilla
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT_OR_EVICT
+Transfer_Executable = false
+transfer_input_files = /home/yadunand/.globus/coasters/cscript8424306448629904562.pl
+machine_count = 1
+output = /home/yadunand/zimo/run004/scripts/Condor6105169742392614412.submit.stdout
+error = /home/yadunand/zimo/run004/scripts/Condor6105169742392614412.submit.stderr
+executable = /usr/bin/perl
+arguments = cscript8424306448629904562.pl http://192.170.227.195:55191 0212-1506250-000000 NOLOGGING
+projectname = Swift
+notification = Never
+leave_in_queue = TRUE
+queue

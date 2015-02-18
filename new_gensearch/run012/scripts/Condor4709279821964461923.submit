@@ -1,0 +1,16 @@
+universe = vanilla
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT_OR_EVICT
+Transfer_Executable = false
+transfer_input_files = /home/zimo/.globus/coasters/cscript2786123923133079383.pl
+machine_count = 1
+output = /home/zimo/work/new_gensearch/run012/scripts/Condor4709279821964461923.submit.stdout
+error = /home/zimo/work/new_gensearch/run012/scripts/Condor4709279821964461923.submit.stderr
+environment = WORKER_LOGGING_LEVEL=NONE;
+executable = /usr/bin/perl
+arguments = cscript2786123923133079383.pl http://192.170.227.195:51023 0218-0804480-000027 NOLOGGING
+requirements = (HAS_CVMFS_oasis_opensciencegrid_org =?= TRUE)
+projectname = Swift
+notification = Never
+leave_in_queue = TRUE
+queue

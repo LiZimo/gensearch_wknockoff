@@ -1,0 +1,142 @@
+Swift trunk git-rev: 4ee10d1ecb417577f3eaae14606a10ac15b44b54 heads/master 6183 (modified locally)
+RunID: run004
+Warning: The @ syntax for function invocation is deprecated
+Progress: Thu, 12 Feb 2015 18:15:25-0600
+@Filename  = output/miRNA_4.split 
+@Filename  = output/miRNA_3.split 
+@Filename  = output/miRNA_2.split 
+@Filename  = output/miRNA_1.split 
+@Filename  = output/miRNA_6.split 
+@Filename  = output/miRNA_9.split 
+@Filename  = output/miRNA_5.split 
+@Filename  = output/miRNA_10.split 
+@Filename  = output/miRNA_13.split 
+@Filename  = output/miRNA_0.split 
+@Filename  = output/miRNA_17.split 
+@Filename  = output/miRNA_12.split 
+@Filename  = output/miRNA_16.split 
+@Filename  = output/miRNA_22.split 
+@Filename  = output/miRNA_23.split 
+@Filename  = output/miRNA_14.split 
+@Filename  = output/miRNA_20.split 
+@Filename  = output/miRNA_8.split 
+@Filename  = output/miRNA_7.split 
+@Filename  = output/miRNA_11.split 
+@Filename  = output/miRNA_31.split 
+@Filename  = output/miRNA_18.split 
+@Filename  = output/miRNA_21.split 
+@Filename  = output/miRNA_19.split 
+@Filename  = output/miRNA_33.split 
+@Filename  = output/miRNA_30.split 
+@Filename  = output/miRNA_43.split 
+@Filename  = output/miRNA_29.split 
+@Filename  = output/miRNA_15.split 
+@Filename  = output/miRNA_46.split 
+@Filename  = output/miRNA_28.split 
+@Filename  = output/miRNA_44.split 
+@Filename  = output/miRNA_45.split 
+@Filename  = output/miRNA_63.split 
+@Filename  = output/miRNA_61.split 
+@Filename  = output/miRNA_57.split 
+@Filename  = output/miRNA_58.split 
+@Filename  = output/miRNA_27.split 
+@Filename  = output/miRNA_54.split 
+@Filename  = output/miRNA_68.split 
+@Filename  = output/miRNA_69.split 
+@Filename  = output/miRNA_48.split 
+@Filename  = output/miRNA_49.split 
+@Filename  = output/miRNA_24.split 
+@Filename  = output/miRNA_65.split 
+@Filename  = output/miRNA_50.split 
+@Filename  = output/miRNA_67.split 
+@Filename  = output/miRNA_76.split 
+@Filename  = output/miRNA_78.split 
+@Filename  = output/miRNA_41.split 
+@Filename  = output/miRNA_79.split 
+@Filename  = output/miRNA_71.split 
+@Filename  = output/miRNA_34.split 
+@Filename  = output/miRNA_62.split 
+@Filename  = output/miRNA_26.split 
+@Filename  = output/miRNA_56.split 
+@Filename  = output/miRNA_80.split 
+@Filename  = output/miRNA_83.split 
+@Filename  = output/miRNA_39.split 
+@Filename  = output/miRNA_82.split 
+@Filename  = output/miRNA_95.split 
+@Filename  = output/miRNA_55.split 
+@Filename  = output/miRNA_51.split 
+@Filename  = output/miRNA_98.split 
+@Filename  = output/miRNA_99.split 
+@Filename  = output/miRNA_47.split 
+@Filename  = output/miRNA_53.split 
+@Filename  = output/miRNA_93.split 
+@Filename  = output/miRNA_64.split 
+@Filename  = output/miRNA_32.split 
+@Filename  = output/miRNA_92.split 
+@Filename  = output/miRNA_77.split 
+@Filename  = output/miRNA_81.split 
+@Filename  = output/miRNA_84.split 
+@Filename  = output/miRNA_42.split 
+@Filename  = output/miRNA_97.split 
+@Filename  = output/miRNA_89.split 
+@Filename  = output/miRNA_36.split 
+@Filename  = output/miRNA_100.split 
+@Filename  = output/miRNA_90.split 
+@Filename  = output/miRNA_88.split 
+@Filename  = output/miRNA_91.split 
+@Filename  = output/miRNA_59.split 
+@Filename  = output/miRNA_87.split 
+@Filename  = output/miRNA_75.split 
+@Filename  = output/miRNA_74.split 
+@Filename  = output/miRNA_40.split 
+@Filename  = output/miRNA_72.split 
+@Filename  = output/miRNA_86.split 
+@Filename  = output/miRNA_94.split 
+@Filename  = output/miRNA_85.split 
+@Filename  = output/miRNA_70.split 
+@Filename  = output/miRNA_37.split 
+@Filename  = output/miRNA_66.split 
+@Filename  = output/miRNA_25.split 
+@Filename  = output/miRNA_60.split 
+@Filename  = output/miRNA_73.split 
+@Filename  = output/miRNA_96.split 
+@Filename  = output/miRNA_35.split 
+@Filename  = output/miRNA_38.split 
+@Filename  = output/miRNA_52.split 
+Progress: Thu, 12 Feb 2015 18:15:26-0600  Submitted:101
+Progress: Thu, 12 Feb 2015 18:15:56-0600  Submitted:101
+Progress: Thu, 12 Feb 2015 18:16:26-0600  Submitted:101
+Progress: Thu, 12 Feb 2015 18:16:56-0600  Submitted:101
+Progress: Thu, 12 Feb 2015 18:17:25-0600  Submitted:100  Active:1
+Progress: Thu, 12 Feb 2015 18:17:51-0600  Submitted:100  Stage out:1
+
+Execution failed:
+Exception in bash:
+    Arguments: [python_wrapper.sh, gen_search.py, -i, data/miRNA_samples.csv, -l, data/miRNA_labels.csv, -p, output/miRNA_41.split, -n, 2, -s, 20, -k, 5, -m, 2, -o, results/search_0041.csv]
+    Host: osgc
+    Directory: gen_search-run004/jobs/b/bash-3gznfi4m
+	exception @ swift-int-staging.k, line: 165
+Caused by: The following output files were not created by the application: results/search_0041.csv
+
+------- Application STDERR --------
+
+-----------------------------------
+
+	exception @ swift-int-staging.k, line: 160
+Caused by: Process completed with exit code 254
+
+	k:assign @ swift.k, line: 174
+Caused by: Exception in bash:
+    Arguments: [python_wrapper.sh, gen_search.py, -i, data/miRNA_samples.csv, -l, data/miRNA_labels.csv, -p, output/miRNA_41.split, -n, 2, -s, 20, -k, 5, -m, 2, -o, results/search_0041.csv]
+    Host: osgc
+    Directory: gen_search-run004/jobs/b/bash-3gznfi4m
+	exception @ swift-int-staging.k, line: 165
+Caused by: The following output files were not created by the application: results/search_0041.csv
+
+------- Application STDERR --------
+
+-----------------------------------
+
+	exception @ swift-int-staging.k, line: 160
+Caused by: Process completed with exit code 254
+

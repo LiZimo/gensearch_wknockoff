@@ -1,0 +1,32 @@
+#!/bin/bash
+
+LIBEXEC=$(dirname $0)
+
+hereversion() {
+  if [ -d ".svn" ] && [ -x "$(which svn)" ]; then
+    R=$(svn info 2>/dev/null | grep '^Revision' | sed "s/Revision: /$1-r/")
+    M=$(svn status 2>/dev/null | grep --invert-match '^\?' > /dev/null && echo "(modified locally)")
+  elif git rev-parse --git-dir &> /dev/null ; then
+    local git_sha1=$(git rev-parse HEAD)
+    
+    # git 1.7.1 does not support rev-list --count
+    # local git_rev_desc="git-rev: ${git_sha1} $(git describe --all) $(git rev-list --count HEAD)"
+    local git_rev_desc="git-rev: ${git_sha1} $(git describe --all) $(git rev-list HEAD|wc|awk '{print $1}')"
+    # Regular git
+    R="${git_rev_desc}"
+    if ! git diff-index --exit-code HEAD >/dev/null ; then
+      M="(modified locally)"
+    fi 
+  else
+    R="$1-unknown"
+  fi
+  echo $R $M
+}
+
+# Determine Swift revision
+RELEASE=$(cat "${LIBEXEC}/release.txt")
+
+SWIFTVER=$(hereversion swift)
+
+echo $RELEASE $SWIFTVER $COGVER
+
